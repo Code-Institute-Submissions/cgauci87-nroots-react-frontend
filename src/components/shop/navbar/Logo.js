@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-// Logo component
+// Logo Component
 
 function Logo() {
   return (

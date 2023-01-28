@@ -12,16 +12,17 @@ function NavbarShop({ options }) {
         id="navbar"
         className={
           "navbar-collapse collapse navigation-holder " +
-          (options.mobileNav ? "slideInn" : "")
+          (options.mobileNav ? "slideInn" : "") // show mobile nav on mobile/portable devices
         }
       >
-        <button onClick={options.onMobileNavClick} className="close-navbar">
+        {/* on click handle mobile nav status / options App.js */}
+        <button onClick={options.onMobileNavClick} className="close-navbar"> 
           <i className="ti-close" />
         </button>
         <ul className="nav navbar-nav">
           <li>
             <NavLink
-              to="/home"
+              to="/home" // navigate to home page
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
@@ -31,7 +32,7 @@ function NavbarShop({ options }) {
           </li>
           <li>
             <NavLink
-              to="/about"
+              to="/about" // navigate to about page
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
@@ -44,7 +45,7 @@ function NavbarShop({ options }) {
 
           <li>
             <NavLink
-              to="/shop"
+              to="/shop" // navigate to shop page
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
@@ -55,7 +56,7 @@ function NavbarShop({ options }) {
 
           <li>
             <NavLink
-              to="/contact"
+              to="/contact" // navigate to contact page
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
