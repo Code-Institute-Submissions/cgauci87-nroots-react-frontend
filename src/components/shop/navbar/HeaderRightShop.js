@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./navbarRight.css";
+import "../../global/style/navbarRight.css"
 import { Link } from "react-router-dom";
 import { CartState } from "../../contexts/CartContext";
 import useLogout from "../../hooks/useLogout";
@@ -8,8 +8,8 @@ import useLogout from "../../hooks/useLogout";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-// HeaderRight Component
-function HeaderRight({ options }) {
+// HeaderRightShop Component
+function HeaderRightShop({ options }) {
   const { user, setUser } = useAuth();
   const axiosPrivate = useAxiosPrivate();
 
@@ -220,4 +220,4 @@ function HeaderRight({ options }) {
   );
 }
 
-export default HeaderRight;
+export default HeaderRightShop;

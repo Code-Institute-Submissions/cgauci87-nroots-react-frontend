@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { authAxios, axiosReq } from "../../api/axiosDefaults";
 import Logo from "./Logo";
-import "./navBar.css";
+import "../../global/style/navBar.css";
 
 /**
  * nav bar component
