@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "img": "/assets/images/slider/slide-1-1920x800.webp",
+        "title": "Greenify your space",
+        "text": "nRoots"
+    },
+    {
+        "id": 2,
+        "img": "/assets/images/slider/slide-2-1920x800.webp",
+        "title": "Easy care houseplants",
+        "text": "nRoots"
+    },
+    {
+        "id": 3,
+        "img": "/assets/images/slider/slide-3-1920x800.webp",
+        "title": "Same day delivery",
+        "text": "nRoots"
+    }
+]
