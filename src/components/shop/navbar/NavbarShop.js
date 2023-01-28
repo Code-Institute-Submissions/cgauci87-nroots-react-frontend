@@ -1,15 +1,9 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { authAxios, axiosReq } from "../../api/axiosDefaults";
 import Logo from "./Logo";
 import "../../global/style/navBar.css";
 
-/**
- * nav bar component
- * @param options
- * @returns {*}
- * @constructor
- */
+// NavbarShop Component
 
 function NavbarShop({ options }) {
   return (
