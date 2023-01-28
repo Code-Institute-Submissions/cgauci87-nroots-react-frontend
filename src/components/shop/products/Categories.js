@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
-
 //  import Categories data content for icons
 import categoriesData from '../../../data/categories.json';
 import {NavLink} from "react-router-dom";
 
+// Categories Component
 function Categories() {
 
     return (
