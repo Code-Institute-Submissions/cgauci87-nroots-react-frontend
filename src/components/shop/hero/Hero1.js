@@ -29,7 +29,7 @@ function Hero1() {
         <Fragment>
             <section className="hero-1">
                 <Slider {...settings}>
-                    {
+                    {   // load hero data
                         heroData.map((item, index) => (
                             <div key={index} className="swiper-slide">
                                 <div className="slide-inner slide-bg-image"
@@ -43,6 +43,7 @@ function Hero1() {
                                         </div>
                                         <div className="clearfix"/>
                                         <div className="slide-btns">
+                                            {/* navigate to shop */}
                                             <NavLink to="/shop" className="theme-btn-s7">Shop Now</NavLink>
                                         </div>
                                     </div>
