@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom';
 
 import HeaderRight from './HeaderRightShop';
-import HeaderLeft from './HeaderLeft';
 import Navbar from './NavbarShop';
 
 import data from '../../data/topbar-text.json';
