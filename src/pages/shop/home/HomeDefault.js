@@ -12,7 +12,7 @@ import Footer from "../../../components/shop/footer/Footer";
 function HomeDefault({ options }) {
   return (
     <Fragment>
-      {/* HeaderShop component with options props*/}
+      {/* HeaderShop component with options */}
       <HeaderShop options={options} />
       {/* Hero1 component */}
       <Hero1 />
