@@ -2,13 +2,13 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./navbarRight.css";
 import { Link } from "react-router-dom";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { CartState } from "../../contexts/CartContext";
 import useLogout from "../../hooks/useLogout";
 
 import useAuth from "../../hooks/useAuth";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
+// HeaderRight Component
 function HeaderRight({ options }) {
   const { user, setUser } = useAuth();
   const axiosPrivate = useAxiosPrivate();
@@ -19,10 +19,14 @@ function HeaderRight({ options }) {
       setUser(data);
     }
 
-    getUser();
+    getUser(); // Get user to perform conditional rendering
   }, []);
 
-  let timeOfDay;
+  {
+    /* ################################################################################################*/
+  }
+
+  let timeOfDay; /* Greeting to be displayed according the time of the day */
   const date = new Date();
   const hours = date.getHours();
 
@@ -36,139 +40,148 @@ function HeaderRight({ options }) {
     timeOfDay = "night";
   }
 
-  const {
-    state: { cart },
-  } = CartState();
-
-  const [total, setTotal] = useState(null);
-  useEffect(() => {
-    setTotal(cart.reduce((acc, curr) => acc + curr.price * curr.qty, 0));
-  }, [cart]);
-
-  const logout = useLogout();
-  const navigate = useNavigate()
-
-
-  async function onLogout() {
-    await logout()
-    navigate('/')
-}
-
-  // const navigate = useNavigate();
-  // async function onLogout() {
-  //   await logout();
-  //   localStorage.clear();
-  //   window.location.reload();
-  //   navigate("/");
-  //   options.onLogoutClick() // <-- check where you can put it
-  // }
-
-  const loggedOutLinks = (
-    <>
-      <Link
-        className="view-cart-btn"
-        to="/auth/login"
-        onClick={options.onLoginClick}
-      >
-        Login
-      </Link>
-      <Link
-        className="view-cart-btn"
-        to="/auth/register"
-        onClick={options.onRegisterClick}
-      >
-        Register
-      </Link>
-    </>
-  );
-  const loggedInLinks = (
-    <>
-      <Link
-        className="view-cart-btn"
-        to="/auth/my-account"
-        onClick={options.onMyAccountClick}
-      >
-        My Account
-      </Link>
-      <Link
-        className="view-cart-btn"
-        onClick= {onLogout}
-        // onClick={() => {
-        //   onLogout();
-        //   options.'onLogoutClick'();
-        // }}
-      >
-        Logout
-      </Link>
-      {user && user.is_staff ? (
-        <Link className="checkout-btn" to="/cms" onClick={options.onCmsClick}>
-          CMS
-        </Link>
-      ) : (
-        <span></span>
-      )}
-    </>
-  );
-  let goodMorning = <span></span>;
+  let showGreeting = <span></span>;
   if (user && user.first_name) {
-    goodMorning = (
+    /* Display greeting if user is logged in, display first name to enhance personalization */
+    showGreeting = (
       <span>
         Good {timeOfDay}, {user.first_name}!
       </span>
     );
   }
 
-  // let cartInUse = "";
-  // if ((cartInUse = cart.length === null)) {
-  //   onclick = options.onMiniCartClick(false);
-  // }
+  {
+    /* ################################################################################################*/
+  }
+
+  const {
+    state: { cart },
+  } = CartState(); // Check Cart State
+
+  const [total, setTotal] = useState(null);
+  useEffect(() => {
+    setTotal(cart.reduce((acc, curr) => acc + curr.price * curr.qty, 0)); // Set cart total according to the state
+  }, [cart]);
+
+  {
+    /* ################################################################################################*/
+  }
+
+  const logout = useLogout();
+  const navigate = useNavigate();
+
+  async function onLogout() {
+    // call this function when user clicks logout
+    await logout();
+    navigate("/");
+  }
+
+  /* ################################################################################################*/
+
+  const loggedOutLinks = // Logged out links defined to display links according if user is logged in or out
+    (
+      <>
+        <Link
+          className="view-btn"
+          to="/auth/login"
+          onClick={options.onLoginClick}
+        >
+          Login
+        </Link>
+        <Link
+          className="view-btn"
+          to="/auth/register"
+          onClick={options.onRegisterClick}
+        >
+          Register
+        </Link>
+      </>
+    );
+
+  /* ################################################################################################*/
+  const loggedInLinks = // Logged in links defined to display links according if user is logged in or out
+    (
+      <>
+        <Link
+          className="view-btn"
+          to="/auth/my-account"
+          onClick={options.onMyAccountClick}
+        >
+          My Account
+        </Link>
+        <Link className="view-btn" onClick={onLogout}>
+          Logout
+        </Link>
+        {user && user.is_staff ? (
+          <Link className="checkout-btn" to="/cms" onClick={options.onCmsClick}>
+            CMS
+          </Link>
+        ) : (
+          <span></span>
+        )}
+      </>
+    );
+
+  /* ################################################################################################*/
 
   return (
     <Fragment>
       <div className="header-right">
         <div className="greeting-loggedin-user">
-          <h4> {goodMorning}</h4>
+          {/* display the greeting message */}
+          <h4> {showGreeting}</h4>
         </div>
 
         {/* ################################################################################################*/}
 
         <div className="my-account-link">
+          {/* USER */}
           <button
-            className="cart-toggle-btn"
+            className="toggle-btn"
+            // on click display options for user
             onClick={options.onUsrAccountClick}
           >
+            {/* display icon of user */}
             <i className="icon-user" />
           </button>
           <div
             className={
-              "mini-cart-content " +
-              (options.usrAccount ? "mini-cart-content-toggle" : "")
+              "mini-content " +
+              (options.usrAccount ? "mini-content-toggle" : "")
             }
           >
+            {/* display options for user depends if user is logged in.
+          If user is logged in, display loggedInLinks - otherwise display loggedOutLinks */}
             {user && user.first_name ? loggedInLinks : loggedOutLinks}
           </div>
         </div>
 
-        {/* ############################################################################wip####################*/}
+        {/* ################################################################################################*/}
 
         <div className="mini-cart">
-          <button className="cart-toggle-btn" onClick={e => cart.length == 0 ? null : options.onMiniCartClick()}>
+          {/* MINI CART */}
+          <button
+            className="toggle-btn"
+            // on click - call options.onMiniCartClick() function to display items in cart
+            // on click -  if cart is empty -  do not call options.onMiniCartClick() function
+            onClick={(e) =>
+              cart.length == 0 ? null : options.onMiniCartClick()
+            }
+          >
             <i className="icon-large-paper-bag" />
             <span className="cart-count">{cart.length}</span>
           </button>
           <div
             className={
-              "mini-cart-content " +
-              (options.miniCart ? "mini-cart-content-toggle" : "")
+              "mini-content " + (options.miniCart ? "mini-content-toggle" : "")
             }
           >
             <div className="mini-cart-items">
+              {/* display an array of items in cart  */}
               {cart.map((item, index) => (
                 <div key={index} className="mini-cart-item clearfix">
                   <div className="mini-cart-item-image">
-                    {/* <NavLink to={item.link}> */}
                     <img src={item.uploadedImg} alt="" />
-                    {/* </NavLink> */}
                   </div>
                   <div className="mini-cart-item-des">
                     {item.title}
@@ -181,25 +194,25 @@ function HeaderRight({ options }) {
               ))}
             </div>
             <div className="mini-cart-action clearfix">
-              <span className="mini-checkout-price">
-                Subtotal: € {total}
-                {/* {miniCartData.subtotal} */}
-              </span>
+              <span className="mini-checkout-price">Subtotal: € {total}</span>
               <Link
-                className="view-cart-btn"
+                className="view-btn"
                 to="/cart"
+                // on click - it will handle overlay status which is defined in options in App.js
                 onClick={options.onViewCartClick}
               >
                 View Cart
               </Link>
               <Link
                 className="checkout-btn"
-                to="/checkout"
+                to="/checkout" // navigate to checkout page
+                // on click - it will handle overlay status which is defined in options in App.js
                 onClick={options.onCheckoutClick}
               >
                 Checkout
               </Link>
             </div>
+            {/* ################################################################################################*/}
           </div>
         </div>
       </div>

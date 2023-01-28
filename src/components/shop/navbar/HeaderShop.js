@@ -5,6 +5,8 @@ import HeaderRight from './HeaderRightShop';
 import Navbar from './NavbarShop';
 import data from '../../../../src/data/topbar-text.json';
 
+// HeaderShop Component
+
 function HeaderShop({ options }) {
 
     return (
