@@ -62,16 +62,8 @@ margin-left: 20px;
 .flaticon-shopping-cart:before { content: "\f11c"; }
 .flaticon-view:before { content: "\f11d"; }
 .flaticon-search-1:before { content: "\f11e"; }
-.flaticon-nylon-jacket:before { content: "\f11f"; }
-.flaticon-pants:before { content: "\f120"; }
-.flaticon-jacket:before { content: "\f121"; }
-.flaticon-coat:before { content: "\f122"; }
-.flaticon-suit:before { content: "\f123"; }
-.flaticon-jacket-1:before { content: "\f124"; }
-.flaticon-jacket-2:before { content: "\f125"; }
-.flaticon-dress:before { content: "\f126"; }
-.flaticon-dress-1:before { content: "\f127"; }
-.flaticon-bride-dress:before { content: "\f128"; }
-.flaticon-skirt:before { content: "\f129"; }
-.flaticon-skirt-1:before { content: "\f12a"; }
-.flaticon-polo-shirt:before { content: "\f12b"; }
+
+.flaticon-plant:before { content: "\f124"; }
+.flaticon-big-plant-like-a-small-tree:before { content: "\f125"; }
+.flaticon-pot:before { content: "\f126"; }
+.flaticon-fertilization:before { content: "\f127"; }

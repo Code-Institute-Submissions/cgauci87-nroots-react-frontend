@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Tiny Plants",
+        "icon": "flaticon-plant",
+        "link": "/categories"
+    },
+    {
+        "id": 2,
+        "name": "Large Plants",
+        "icon": "flaticon-big-plant-like-a-small-tree",
+        "link": "/categories"
+    },
+    {
+        "id": 3,
+        "name": "Planters",
+        "icon": "flaticon-pot",
+        "link": "/categories"
+    },
+    {
+        "id": 4,
+        "name": "Accessories & Plant Care",
+        "icon": "flaticon-fertilization",
+        "link": "/categories"
+    }
+]
