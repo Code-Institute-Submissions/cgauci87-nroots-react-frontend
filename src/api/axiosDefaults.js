@@ -11,7 +11,7 @@ export const axiosReq = axios.create({
   baseURL: baseUrl,
   withCredentials: true,
   headers: {
-    "content-type": "multipart/form-data",
+    "content-type": "multipart/form-data", // content-type need to be multipart/form-data if the content include an image
   },
 });
 
