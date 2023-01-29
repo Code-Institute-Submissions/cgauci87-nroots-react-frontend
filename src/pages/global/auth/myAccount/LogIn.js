@@ -5,7 +5,7 @@ import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
 // import LoginForm
 import LoginForm from "../../../../components/global/forms/LoginForm"
 // ===================================================================================================
-
+// Login Page
 function Login({ options }) {
   return (
     <Fragment>

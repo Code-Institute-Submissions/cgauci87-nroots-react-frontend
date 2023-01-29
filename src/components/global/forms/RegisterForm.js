@@ -56,7 +56,7 @@ const rules = {
 // ===============================================================================
 // RegistrationForm component
 function RegisterForm() {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm(); // built-in useForm method of ant design for validation
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -75,10 +75,10 @@ function RegisterForm() {
   };
 
   const onSignUp = async () => {
-    setLoading(true); // set loading to true
+    setLoading(true); // set loading to true as soon as the onSignUp is invoked
     try {
       await axiosInstance.post(
-        "auth/register", // API path
+        "auth/register", // API
         JSON.stringify({
           ...data, // using spread syntax to be included
         })
