@@ -21,6 +21,7 @@ const { Option } = Select;
 const categories = [];
 const tags = [];
 
+// ProductList Page
 function ProductList({ options }) {
   // ====================================================================
   // get product list data from API

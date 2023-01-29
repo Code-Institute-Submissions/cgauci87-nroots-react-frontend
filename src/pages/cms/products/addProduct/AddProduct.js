@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import ProductForm from "../ProductForm";
 
+// import components
+import ProductForm from "../../../../components/cms/forms/ProductForm";
 import HeaderCms from "../../../../../components/header/HeaderCms";
 
 
