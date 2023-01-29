@@ -2,10 +2,10 @@ import React, { Fragment, useState, useEffect } from "react";
 
 
 // import components
-import HeaderShop from "../../../components/shop/navbar/HeaderShop";
-import PageTitle from "../../../components/shop/pageTitle/PageTitle";
-import ShippingAddresses from "../../../components/global/addresses/ShippingAddresses";
-import Footer from "../../../components/shop/footer/Footer";
+import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
+import ShippingAddresses from "../../../../components/global/addresses/ShippingAddresses";
+import Footer from "../../../../components/shop/footer/Footer";
 
 // import hooks
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
