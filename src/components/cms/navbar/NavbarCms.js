@@ -1,67 +1,69 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
+
+// import Logo
 import Logo from "../../global/logo/Logo";
+
+// import style
 import "../../global/style/navBar.css";
 
-// NavbarShop Component
-
-function NavbarShop({ options }) {
+// NavbarCms component
+function NavbarCms({ options }) {
   return (
     <Fragment>
       <div
         id="navbar"
         className={
           "navbar-collapse collapse navigation-holder " +
-          (options.mobileNav ? "slideInn" : "") // show mobile nav on mobile/portable devices
+          (options.mobileNav ? "slideInn" : "")
         }
       >
-        {/* on click handle mobile nav status / options App.js */}
-        <button onClick={options.onMobileNavClick} className="close-navbar"> 
+        <button onClick={options.onMobileNavClick} className="close-navbar">
           <i className="ti-close" />
         </button>
         <ul className="nav navbar-nav">
           <li>
             <NavLink
-              to="/home" // navigate to home page
+              to="/cms/product-list"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
             >
-              Home
+              Product List
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/about" // navigate to about page
+              to="/cms/add-product"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
             >
-              About
+              Add
             </NavLink>
           </li>
 
-        <Logo />
+          <Logo />
 
           <li>
             <NavLink
-              to="/shop" // navigate to shop page
+              to="/cms/orders"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
             >
-              Shop
+              Orders
             </NavLink>
           </li>
 
           <li>
             <NavLink
-              to="/contact" // navigate to contact page
+              to="/"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
             >
-              Contact
+              Mailbox
             </NavLink>
           </li>
         </ul>
@@ -71,4 +73,4 @@ function NavbarShop({ options }) {
   );
 }
 
-export default NavbarShop;
+export default NavbarCms;

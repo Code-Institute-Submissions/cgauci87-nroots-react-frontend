@@ -1,18 +1,17 @@
 import React, { Fragment, useState, useEffect } from "react";
-
+import { Button, Modal } from "antd";
 
 // import components
-import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
-import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
-import ShippingAddresses from "../../../../components/global/addresses/ShippingAddresses";
-import Footer from "../../../../components/shop/footer/Footer";
+import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../components/shop/pageTitle/PageTitle";
+import Footer from "../../../components/shop/footer/Footer";
 
 // import hooks
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // import ShippingAddresses
+import ShippingAddresses from "../../../components/global/addresses/ShippingAddresses";
 
-import { Button, Modal } from "antd";
 
 // MyAccount Page (This page is accessible only for a logged-in user)
 function MyAccount({ options }) {

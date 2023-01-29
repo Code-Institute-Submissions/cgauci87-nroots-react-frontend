@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 // import components
-import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
-import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
+import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../components/shop/pageTitle/PageTitle";
 // import LoginForm
-import LoginForm from "../../../../components/global/forms/LoginForm"
+import LoginForm from "../../../components/global/forms/LoginForm"
 // ===================================================================================================
 // Login Page
 function Login({ options }) {

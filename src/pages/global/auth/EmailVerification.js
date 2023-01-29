@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 
 // import components
-import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
-import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
+import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../components/shop/pageTitle/PageTitle";
 
 // Email Verification Page (once user submit ForgotPasswordForm - this page will be rentered)
 
