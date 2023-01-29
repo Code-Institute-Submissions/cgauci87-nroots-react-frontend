@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
-import { CartState, useCartContext } from "../../contexts/CartContext";
 import { toast } from "react-toastify";
 
+// import context
+import { axiosReq } from "../../../api/axiosDefaults"
+import { CartState, useCartContext } from "../../../contexts/CartContext";
 
 function Products({ ordering }) {
-
+  // ===============================================================
   const { products, setProducts } = useCartContext();
-  console.log("products", products);
 
   const getProducts = async () => {
     const response = await axiosReq.get("/products");
@@ -17,24 +17,25 @@ function Products({ ordering }) {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, []); // Get products from API
 
   const {
     state: { cart },
     dispatch,
-  } = CartState();
+  } = CartState(); // CartState
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-  console.log("cart", cart);
+
+  // ===============================================================
 
   return (
     <Fragment>
       <ul
         className={
           "products " +
-          (ordering == 1
+          (ordering == 1     // ordering defined
             ? "default-column"
             : ordering == 2
             ? "three-column"
@@ -46,7 +47,8 @@ function Products({ ordering }) {
         {products.map((item, index) => (
           <li key={index} className="product">
             <div className="product-holder">
-              <Link to={`/shop/product-details/${item.id}`}>
+              {/* link to product details of the selected product */}
+              <Link to={`/shop/product-details/${item.id}`}> 
                 <img
                   loading="lazy"
                   src={item.uploadedImg}
@@ -68,9 +70,9 @@ function Products({ ordering }) {
                   </li>
                   {cart.some((p) => p.id === item.id) ? (
                     <li
-                      onClick={() =>
+                      onClick={() => // on click remove item from cart
                         dispatch(
-                          { type: "REMOVE_FROM_CART", payload: item },
+                          { type: "REMOVE_FROM_CART", payload: item }, // case is defined in CartReducer.js
                           toast.info("Item has been removed from the cart")
                         )
                       }
@@ -85,9 +87,9 @@ function Products({ ordering }) {
                     </li>
                   ) : (
                     <li
-                      onClick={() =>
+                      onClick={() => // on click add item to cart
                         dispatch(
-                          { type: "ADD_TO_CART", payload: item },
+                          { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
                           toast.info("Item has been added to the cart")
                         )
                       }
@@ -115,7 +117,7 @@ function Products({ ordering }) {
                     </bdi>
                   </span>
                 </ins>
-                {parseInt(item.price) < parseInt(item.comparePrice) ? (
+                {parseInt(item.price) < parseInt(item.comparePrice) ? ( // parses a value as a string and returns the first integer. 
                   <del>
                     <span className="ecom-Price-amount amount">
                       <bdi>
