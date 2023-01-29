@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from "react";
-import PageHeaderAlt from "../../../../../components/layout-components/PageHeaderAlt";
 import { Tabs, Form, Button, message } from "antd";
-import Flex from "../../../../../shared-components/Flex";
-import GeneralField from "./GeneralField";
-import VariationField from "./VariationField";
-import ShippingField from "./ShippingField";
-
 import { useParams } from "react-router";
 import { axiosReq } from "../../../../../api/axiosDefaults";
 
+// import components
+import PageHeaderAlt from "../../../../src/components/cms/pageHeader/PageHeaderAlt";
+import Flex from "../../../../src/components/cms/utils/Flex";
+import GeneralField from "./GeneralField";
+
+// declare add/edit for mode
 const ADD = "ADD";
 const EDIT = "EDIT";
 
+// ======================================================================
+
+// ProductForm component (for ADD & EDIT)
 function ProductForm(props) {
-  const { mode = ADD } = props;
+  const { mode = ADD } = props; // props passed are for add product
 
-  const { id } = useParams();
-  console.log("id to edit", id);
+  const { id } = useParams(); // using this hook to return the id of a selected product
 
+  // declare states
   const [form] = Form.useForm();
   const [uploadedImg, setImage] = useState([]);
-  const [uploadLoading, setUploadLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-  /*const [data, setData] = useState({
-    title: "",
-    description: "",
-    price: "",
-    comparePrice: "",
-    category: "",
-    tag: "",
-    uploadedImg: [],
-  });*/
+
+// ======================================================================
+// Category & Tags API
 
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -38,12 +34,9 @@ function ProductForm(props) {
   useEffect(() => {
     axiosReq.get("/categories").then((response) => {
       let _categories = response.data.categories;
-      console.log("Current Categories");
-      console.log(_categories);
       if (_categories.length > 0) {
         let data = {};
         data.category = _categories[0][0];
-        // setData(_data);
         form.setFieldsValue(data);
       }
       setCategories(_categories);
@@ -53,68 +46,62 @@ function ProductForm(props) {
   useEffect(() => {
     axiosReq.get("/tags").then((response) => {
       let _tags = response.data.tags;
-      console.log("Current Tags");
-      console.log(_tags);
       if (_tags.length > 0) {
         let data = {};
         data.tag = _tags[0][0];
-        //setData(_data);
         form.setFieldsValue(data);
       }
       setTags(_tags);
     });
   }, []);
 
+  // ======================================================================
+
+
   const getProductList = async () => {
     try {
       const response = await axiosReq.get("/products");
       let data = response.data;
       const productData = data.find((product) => product.id === +id);
-      console.log("productData", productData);
       if (productData) {
-        form.setFieldsValue(productData);
-        setImage(productData.uploadedImg);
+        form.setFieldsValue(productData); // set values of product data
+        setImage(productData.uploadedImg); // set image 
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+    // ======================================================================
+
+
   useEffect(() => {
     if (mode === EDIT) {
-      getProductList();
+      getProductList(); // Fetch data if edit is clicked
     }
   }, []);
 
-  // const handleUploadChange = (info) => {
-  //   console.log(info.file);
-  //   let _data = {data};
-  //   _data.uploadedImg = info.file;
-  //   setImage(info.file);
-  // };
-
-  const updateData = (_data) => {
-    console.log("updateData Triggered");
-    console.log(_data);
-    //setData(_data);
-  };
+    // ======================================================================
 
   const onFinish = async () => {
-    setSubmitLoading(true);
-    var formData;
+    setSubmitLoading(true); // if user add an image
 
+    // ======================================================================
+
+
+    var formData;
     let results = form.getFieldsValue();
     formData = results;
 
     results.uploadedImg = uploadedImg;
-    // if uploadedImg has not been updated in the edit-product form; then delete response of the uploadedImg to prevent triggering validation.
+    // if uploadedImg has not been updated in the edit-product form; then delete results.uploadedImg
     if (results.uploadedImg && results.uploadedImg.includes("http")) {
       delete results.uploadedImg;
     }
 
-    console.log("Results: ", results);
-
-    if (mode === ADD) {
+// =======================================================================================
+// Dual API requests based on condiontional rendering
+    if (mode === ADD) { // if admin/is_staff adding a product
       axiosReq({
         method: "post",
         url: "/products/",
@@ -135,22 +122,20 @@ function ProductForm(props) {
           //handle error
           console.log(response);
         });
-    } else {
+    } else { // referring to mode === EDIT, if admin/is_staff edit a product
       axiosReq({
         method: "patch",
-        url: `/products/${id}/`,
+        url: `/products/${id}/`, // update the specific product by id
         data: {
           ...results,
         },
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "multipart/form-data" }, // The content-type is mulipart/form-data due to image
       })
         .then(function (response) {
           setTimeout(() => {
             setSubmitLoading(false);
-
             message.success(`Product saved`);
           }, 1500);
-          //handle success
           console.log(response);
         })
         .catch(function (response) {
@@ -160,6 +145,9 @@ function ProductForm(props) {
         });
     }
   };
+
+  // =======================================================================================
+
 
   return (
     <>
@@ -182,8 +170,9 @@ function ProductForm(props) {
               justifyContent="between"
               alignItems="center"
             >
-              <h2 className="mb-3">
-                {mode === "ADD" ? "Add New Product" : `Edit Product`}{" "}
+               {/* conditional rendering depends on the mode */}
+              <h2 className="mb-3"> 
+                {mode === "ADD" ? "Add New Product" : `Edit Product`}{" "} 
               </h2>
               <div className="mb-3">
                 <Button
@@ -210,25 +199,12 @@ function ProductForm(props) {
                   <GeneralField
                     setImage={setImage}
                     imageUrl={uploadedImg}
-                    uploadLoading={uploadLoading}
-                    // handleUploadChange={handleUploadChange}
                     categories={categories}
                     tags={tags}
                     data={form}
-                    updateData={updateData}
                   />
                 ),
-              },
-              {
-                label: "Variation",
-                key: "2",
-                children: <VariationField />,
-              },
-              {
-                label: "Shipping",
-                key: "3",
-                children: <ShippingField />,
-              },
+              }
             ]}
           />
         </div>

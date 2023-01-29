@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import ProductForm from "../ProductForm";
 import { useParams } from "react-router-dom";
 
 // import components
-import HeaderCms from "../../../../../components/header/HeaderCms";
+import ProductForm from "../../../../components/cms/forms/ProductForm";
+import HeaderCms from "../../../../components/cms/navbar/HeaderCms";
+
 
 
 function EditProduct(options) {

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 // import components
 import ProductForm from "../../../../components/cms/forms/ProductForm";
-import HeaderCms from "../../../../../components/header/HeaderCms";
+import HeaderCms from "../../../../components/cms/navbar/HeaderCms";
 
 
 function AddProduct(options) {
