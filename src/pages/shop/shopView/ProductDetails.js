@@ -13,8 +13,8 @@ import QuickView from "../../../components/shop/products/QuickView";
 import RecentSingleProducts from "../../../components/shop/products/RecentSingleProducts";
 
 //import contexts
-import { axiosReq } from "../../api/axiosDefaults";
-import { CartState } from "../../contexts/CartContext";
+import { axiosReq } from "../../../api/axiosDefaults";
+import { CartState } from "../../../contexts/CartContext";
 
 // import style
 import "./shop.css";
