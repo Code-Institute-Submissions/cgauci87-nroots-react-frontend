@@ -1,7 +1,4 @@
 import React, { useState, useEffect, Fragment } from "react";
-import HeaderCms from "../../../../components/";
-
-import { axiosReq } from "../../../../../api/axiosDefaults";
 import { Layout, Card, Table, Select, Input, Button, Menu } from "antd";
 import {
   EyeOutlined,
@@ -9,18 +6,15 @@ import {
   SearchOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { NumericFormat } from 'react-number-format';
-import AvatarStatus from "../../../../../shared-components/AvatarStatus";
-import EllipsisDropdown from "../../../../../shared-components/EllipsisDropdown";
-import Flex from "../../../../../shared-components/Flex";
 import { useNavigate } from "react-router-dom";
-import utils from "../../../../../utils";
+import { NumericFormat } from 'react-number-format';
 
-// const [filter, setFilter] = useState('')
-/*
-to set filter, add a button or a link that has the following onclick
-onclick={e => setFilter('categories=Muschroom Kit')}
-*/
+// import utils
+import utils from "../../../../components/cms/utils/Table";
+import AvatarStatus from "../../../../components/cms/utils/AvatarStatus"
+import EllipsisDropdown from "../../../../components/cms/utils/EllipsisDropdown";
+import Flex from "../../../../components/cms/utils/Flex";
+
 
 const { Content } = Layout;
 
