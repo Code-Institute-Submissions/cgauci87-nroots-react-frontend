@@ -31,8 +31,6 @@ function Login({ options }) {
         </div>
       </section>
       {/* end log-in-layout */}
-
-      <Instagram />
       <Footer />
     </Fragment>
   );

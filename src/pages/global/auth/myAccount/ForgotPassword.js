@@ -1,15 +1,16 @@
 import React, { Fragment } from "react";
 
-import Footer from "../../components/global/Footer";
-import Instagram from "../../components/global/Instagram";
-import Header from "../../components/header/HeaderShop";
-import PageTitle from "../../components/global/PageTitle";
-import ForgotPasswordForm from "../../components/forms/ForgotPasswordForm";
-
+// import components
+import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
+// import LoginForm
+import ForgotPasswordForm from "../../../../components/global/forms/ForgotPasswordForm";
+// ===================================================================================================
+// Forgot Password Page
 export default function ForgotPassword({ options }) {
   return (
     <Fragment>
-      <Header options={options} />
+      <HeaderShop options={options} />
 
       <PageTitle name="Forgot Password" />
 
@@ -31,8 +32,6 @@ export default function ForgotPassword({ options }) {
         </div>
       </section>
       {/* end forgotpassword-layout */}
-
-      <Instagram />
       <Footer />
     </Fragment>
   );
