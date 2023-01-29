@@ -1,11 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { authAxios } from "../../api/axiosDefaults";
-
 import { LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 
+// import hooks
+import { authAxios } from "../../../api/axiosDefaults";
 
+// ===============================================================================
+// Validation rules - antd form
 
 const rules = {
   new_password: [
@@ -22,6 +24,7 @@ const rules = {
     ({ getFieldValue }) => ({
       validator(_, value) {
         if (!value || getFieldValue("new_password") === value) {
+          // Check if new_password and confirm_password are equal - otherwise return password do not match
           return Promise.resolve();
         }
         return Promise.reject("Passwords do not match!");
@@ -29,12 +32,14 @@ const rules = {
     }),
   ],
 };
-
+// ===============================================================================
+// ResetPasswordForm component
 function ResetPasswordForm() {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm(); // built-in useForm method of ant design for validation
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // saving input values inside of state
   const [data, setData] = useState({
     new_password: "",
     confirm_password: "",
@@ -46,41 +51,36 @@ function ResetPasswordForm() {
     setData(regData);
   };
 
-
   const onSend = async () => {
-    setLoading(true);
+    setLoading(true); // set loading to true as soon as the onSend is invoked
     try {
       const response = await authAxios.patch(
-        "/auth/forgot-password",
+        "/auth/forgot-password", // API
         JSON.stringify({
-          ...data,
+          ...data, // using spread syntax to be included
         })
       );
       setTimeout(() => {
-        setLoading(false);
-        navigate("/auth/login");
+        // set timeout to call after 1500 milliseconds --> on success:
+        setLoading(false); // set loading to false
+        navigate("/auth/login"); // navigate to /auth/login
       }, 1500);
-      //handle success
-      console.log(response);
     } catch (error) {
       setLoading(false);
       console.log(error);
-      // TODO: handle errors
     }
   };
-  //   To retrieve the reset_token
+
+  // ===========================================================================================
+  //To retrieve the reset_token
   useEffect(() => {
     let reset_token = window.location.search.split("reset_token=")[1];
     document.getElementById("reset_token").value = reset_token;
-      console.log (reset_token, "<< This is the Reset Token inside the useEffect")
-    setData(
-      {
-        // ...data,
-        reset_token: reset_token
-      }
-    )
+    setData({
+      reset_token: reset_token,
+    });
   }, []);
-
+  // ===========================================================================================
 
   return (
     <Fragment>
@@ -100,7 +100,7 @@ function ResetPasswordForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.new_password = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
@@ -115,22 +115,25 @@ function ResetPasswordForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.confirm_password = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
         </Form.Item>
-        {/* <Form.Item hidden id="reset_token" name="token" value=""></Form.Item> */}
-
-        <Input type="hidden" id="reset_token" name="token" value={data.reset_token}></Input>
+        <Input
+          type="hidden" // this input field will be hidden as we require the reset_token to be retrieved from the url and save it inside of state
+          id="reset_token"
+          name="token"
+          value={data.reset_token}
+        ></Input>
 
         <Form.Item className="container-1210">
           <Button
             className="ecom-Button ecom-button button ecom-form-register__submit"
             type="Submit"
             htmlType="submit"
-            loading={loading}
-            onClick={() => onSend()}
+            loading={loading} // set loading
+            onClick={() => onSend()} // onSend function
           >
             Submit
           </Button>
