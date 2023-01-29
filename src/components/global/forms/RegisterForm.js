@@ -5,9 +5,10 @@ import { Button, Form, Input } from "antd";
 import { toast } from "react-toastify";
 
 // import Interceptor
-import axiosInstance from "../../utils/apiInterceptor";
+import axiosInstance from "../../../utils/apiInterceptor";
 
-
+// ===============================================================================
+// Validation rules - antd form
 const rules = {
   first_name: [
     {
@@ -28,7 +29,7 @@ const rules = {
     },
     {
       type: "email",
-      message: "Please enter a valid email!",
+      message: "Please enter a valid email",
     },
   ],
   password: [
@@ -52,13 +53,15 @@ const rules = {
     }),
   ],
 };
-
+// ===============================================================================
+// RegistrationForm component
 function RegisterForm() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const [data, setData] = useState({
+    // saving input values inside of state
     first_name: "",
     last_name: "",
     email: "",
@@ -72,24 +75,27 @@ function RegisterForm() {
   };
 
   const onSignUp = async () => {
-    setLoading(true);
+    setLoading(true); // set loading to true
     try {
       await axiosInstance.post(
-        "auth/register",
+        "auth/register", // API path
         JSON.stringify({
-          ...data,
+          ...data, // using spread syntax to be included
         })
       );
       setTimeout(() => {
-        setLoading(false);
+        // set timeout to call after 1500 milliseconds
+        setLoading(false); // set loading to false on success
         toast.success("Your account has been created successfully.", {
+          // display toast message on success
         });
-        navigate("/auth/login");
+        navigate("/auth/login"); // navigate to login page once successful
       }, 1500);
     } catch (error) {
+      // Error Handling
       if (error.response.status === 400) {
-        toast.error("account with this email already exists.");
-        setLoading(false);
+        toast.error("Account with this email already exists."); // display toast message on error 400
+        setLoading(false); // set loading to false
       }
     }
   };
@@ -112,7 +118,7 @@ function RegisterForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.first_name = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input />
@@ -126,7 +132,7 @@ function RegisterForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.last_name = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input />
@@ -141,7 +147,7 @@ function RegisterForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.email = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input prefix={<MailOutlined className="text-primary" />} />
@@ -155,7 +161,7 @@ function RegisterForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.password = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
@@ -170,7 +176,7 @@ function RegisterForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.password2 = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
@@ -182,24 +188,13 @@ function RegisterForm() {
             address.
           </p>
         </Form.Item>
-        <Form.Item className="ecom-text-box ecom-privacy-policy-text">
-          <p>
-            Your personal data will be used to support your experience
-            throughout this website, to manage access to your account, and for
-            other purposes described in our{" "}
-            <a href="#" className="ecom-privacy-policy-link">
-              privacy policy
-            </a>
-            .
-          </p>
-        </Form.Item>
         <Form.Item className="container-1210">
           <Button
             className="ecom-Button ecom-button button ecom-form-register__submit"
             type="Submit"
             htmlType="submit"
-            loading={loading}
-            onClick={() => onSignUp()}
+            loading={loading} // set loading
+            onClick={() => onSignUp()} // onSignup function
           >
             Register
           </Button>
