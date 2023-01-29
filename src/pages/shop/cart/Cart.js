@@ -11,7 +11,7 @@ import PageTitle from ".././../../components/shop/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 
 // import Context API for cart state
-import { CartState } from "../../contexts/CartContext";
+import { CartState } from "../../../contexts/CartContext";
 
 // Cart Page
 function Cart({ options }) {
