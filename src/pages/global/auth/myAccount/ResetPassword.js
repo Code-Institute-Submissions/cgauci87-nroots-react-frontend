@@ -3,18 +3,19 @@ import React, { Fragment } from "react";
 // import components
 import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
 import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
-// import ForgotPasswordForm
-import ForgotPasswordForm from "../../../../components/global/forms/ForgotPasswordForm";
+// import ResetPasswordForm
+import ResetPasswordForm from "../../../../components/global/forms/ResetPasswordForm";
 // ===================================================================================================
-// Forgot Password Page
-export default function ForgotPassword({ options }) {
+
+// Reset Password Page (once user has received the forgot password email and proceed with the link - this page will be rentered)
+export default function ResetPassword({ options }) {
   return (
     <Fragment>
       <HeaderShop options={options} />
 
-      <PageTitle name="Forgot Password" />
+      <PageTitle name="Reset Password" />
 
-      {/* start forgotpassword-layout */}
+      {/* start resetpassword-layout */}
       <section className="forgot-password-section">
         <div className="container-1310">
           <div className="row">
@@ -23,7 +24,7 @@ export default function ForgotPassword({ options }) {
                 <div className="ecom-notices-wrapper" />
                 <div className="u-columns col2-set">
                   <div className="u-column2 col-2">
-                    <ForgotPasswordForm />
+                    <ResetPasswordForm />
                   </div>
                 </div>
               </div>
@@ -31,7 +32,7 @@ export default function ForgotPassword({ options }) {
           </div>
         </div>
       </section>
-      {/* end forgotpassword-layout */}
+      {/* end resetpassword-layout */}
       <Footer />
     </Fragment>
   );
