@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 
-import Footer from "../../components/global/Footer";
-import Instagram from "../../components/global/Instagram";
-import Header from "../../components/header/HeaderShop";
-import PageTitle from "../../components/global/PageTitle";
+// import components
+import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
+
+// Email Verification Page (once user submit ForgotPasswordForm - this page will be rentered)
 
 export default function EmailVerification({ options }) {
   return (
     <Fragment>
-      <Header options={options} />
+      <HeaderShop options={options} />
 
       <PageTitle name="Email Verification" />
 
@@ -33,7 +34,6 @@ export default function EmailVerification({ options }) {
       </section>
       {/* end emailverification-layout */}
 
-      <Instagram />
       <Footer />
     </Fragment>
   );
