@@ -1,4 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
+import { axiosReq } from "../../../../api/axiosDefaults";
+
+// import antD components
+import { NumericFormat } from "react-number-format";
 import { Layout, Card, Table, Select, Input, Button, Menu } from "antd";
 import {
   EyeOutlined,
@@ -6,8 +11,10 @@ import {
   SearchOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import { NumericFormat } from "react-number-format";
+
+
+// import components
+import HeaderCms from "../../../../components/cms/navbar/HeaderCms"
 
 // import utils
 import utils from "../../../../components/cms/utils/Table";
@@ -109,7 +116,7 @@ function ProductList({ options }) {
   };
 
   /*==========================================================================*/
-  /*define table columns*/
+  // define table columns and set sorting with utils
   const tableColumns = [
     {
       title: "Date Created",

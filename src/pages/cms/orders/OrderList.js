@@ -1,37 +1,27 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, Fragment, useEffect } from "react";
-import { Card, Table, Select, Input, Button, Menu } from "antd";
-import HeaderCms from "../../../../../components/header/HeaderCms";
-
-import utils from "../../../../../utils";
 import { useNavigate } from "react-router-dom";
-
-import {
-  EyeOutlined,
-  FileExcelOutlined,
-  SearchOutlined,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
 import { NumericFormat } from "react-number-format";
+import { axiosReq } from "../../../api/axiosDefaults";
 
-import EllipsisDropdown from "../../../../../shared-components/EllipsisDropdown";
-import Flex from "../../../../../shared-components/Flex";
+// import antD components
+import { Card, Table, Input, Button, Menu } from "antd";
+import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 
-import { axiosReq } from "../../../../../api/axiosDefaults";
+// import components
+import HeaderCms from "../../../../components/cms/navbar/HeaderCms";
 
-const { Option } = Select;
+// import utils
+import utils from "../../../components/cms/utils/Table";
+import EllipsisDropdown from "../../../components/cms/utils/EllipsisDropdown";
+import Flex from "../../../components/cms/utils/Flex";
 
-const paymentStatusList = ["Paid", "Pending", "Expired"];
-
+// OrderList page
 function OrderList(options) {
   const [OrderListData, setOrders] = useState([]);
-  console.log("OrderListData", OrderListData);
-
   const getOrderList = async () => {
     try {
-      const response = await axiosReq.get("/order");
+      const response = await axiosReq.get("/order"); // API
       let data = response.data;
-      console.log(data);
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -39,26 +29,20 @@ function OrderList(options) {
   };
 
   useEffect(() => {
-    getOrderList();
+    getOrderList(); // Fetch list upon update
   }, []);
+
+  // ==========================================================================
 
   const [list, setList] = useState(OrderListData);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  const handleShowStatus = (value) => {
-    if (value !== "All") {
-      const key = "paymentStatus";
-      const data = utils.filterArray(list, key, value);
-      setList(data);
-    } else {
-      setList([]);
-    }
-  };
-
   const navigate = useNavigate();
   const viewDetails = (row) => {
-    navigate(`${row.id}`);
+    navigate(`${row.id}`); // navigate to order details of that specific order, once button of viewDetails is clicked
   };
+
+  // ==========================================================================
 
   const dropdownMenu = (row) => (
     <Menu>
@@ -68,15 +52,13 @@ function OrderList(options) {
           <span className="ml-2">View Details</span>
         </Flex>
       </Menu.Item>
-      <Menu.Item>
-        <Flex alignItems="center">
-          <PlusCircleOutlined />
-          <span className="ml-2">Add to remark</span>
-        </Flex>
-      </Menu.Item>
     </Menu>
   );
 
+  // ==========================================================================
+
+  // ==========================================================================
+  // define table columns and set sorting with utils
   const tableColumns = [
     {
       title: "Date Ordered",
@@ -124,12 +106,9 @@ function OrderList(options) {
     },
   ];
 
-  const rowSelection = {
-    onChange: (key, rows) => {
-      setSelectedRowKeys(key);
-    },
-  };
 
+  // ==========================================================================
+  // onSearch using utils.wildCardSearch
   const onSearch = (e) => {
     const value = e.currentTarget.value;
     const searchArray = e.currentTarget.value ? list : OrderListData;
@@ -151,40 +130,13 @@ function OrderList(options) {
                 onChange={(e) => onSearch(e)}
               />
             </div>
-            <div className="mb-3">
-              <Select
-                defaultValue="All"
-                className="w-100"
-                style={{ minWidth: 180 }}
-                // onChange={handleShowStatus}
-                placeholder="Status"
-              >
-                <Option value="All">All payment </Option>
-                {paymentStatusList.map((elm) => (
-                  <Option key={elm} value={elm}>
-                    {elm}
-                  </Option>
-                ))}
-              </Select>
-            </div>
           </Flex>
-          <div>
-            <Button type="primary" icon={<FileExcelOutlined />} block>
-              Export All
-            </Button>
-          </div>
         </Flex>
         <div className="table-responsive" style={{ marginLeft: 250 }}>
           <Table
             columns={tableColumns}
             dataSource={OrderListData}
             rowKey="id"
-            rowSelection={{
-              selectedRowKeys: selectedRowKeys,
-              type: "checkbox",
-              preserveSelectedRowKeys: false,
-              ...rowSelection,
-            }}
           />
         </div>
       </Card>
