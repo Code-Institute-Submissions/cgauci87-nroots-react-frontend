@@ -1,19 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Modal, Form, Input, Select } from "antd";
-import ShippingAddresses from "../../components/user/ShippingAddresses";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useAuth from "../../hooks/useAuth";
-
 import {
   UserOutlined,
   MailOutlined,
   PhoneOutlined,
   ApartmentOutlined,
-  ConsoleSqlOutlined,
 } from "@ant-design/icons";
 
-const { Option } = Select;
+// import ShippingAddresses to get/save a user shipping
+import ShippingAddresses from "../../../components/global/addresses/ShippingAddresses";
 
+// import hooks
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useAuth from "../../../hooks/useAuth";
+
+const { Option } = Select;
+// Validation Rules - antd form
 const rules = {
   first_name: [
     {
@@ -63,53 +65,38 @@ const rules = {
     },
   ],
 };
-
+// Shipping Fields Page
 function ShippingFields({ shippingData }) {
-  const form = shippingData;
-  const { user } = useAuth();
+  const form = shippingData; // Form will get data from shippingData
+  const { user } = useAuth(); // Get user from useAuth function
+
+  // =Modal handling======================================================
 
   const [open, setOpen] = useState(false);
   const showModal = () => {
+    // Show Modal if "My Addresses" button is clicks
     setOpen(true);
   };
-  const handleOk = (e) => {
-    console.log(e);
-    setOpen(false);
-  };
   const handleCancel = (e) => {
+    // Close Modal if user clicks Cancel
     console.log(e);
     setOpen(false);
   };
+
+  // =Get Address data=============================================================
 
   const axiosPrivate = useAxiosPrivate();
   const setFormValues = (values) => {
-
-    form.setFieldsValue(values);
-    /*
-        currentDefault = {first_name: 'Stefan,
-          last_name: Georg
-          street
-          city
-          ....
-        }
-        */
-        /*Object.keys(values).forEach(key => {
-          //key will be first_name, then lat_name, then street... (include  vleft side of dict)
-          const obj = {}
-          obj[key] = values[key];
-          form.setFieldsValue(obj)
-        })*/
-        
-  }
+    form.setFieldsValue(values); // set dynamic field values
+  };
 
   const getAddressInfo = async () => {
     try {
       const response = await axiosPrivate.get("/auth/user/profile/addresses/");
       const currentDefault = response.data.find((i) => i.default);
-      // 
-      if (currentDefault){
-
-        setFormValues(currentDefault)
+      //
+      if (currentDefault) {
+        setFormValues(currentDefault); // set default address
       }
     } catch (error) {
       console.log(error);
@@ -117,7 +104,7 @@ function ShippingFields({ shippingData }) {
   };
 
   const getAddress = (payload) => {
-    setFormValues(payload)
+    setFormValues(payload); // get address from payload newly updated data
   };
 
   useEffect(() => {
@@ -125,11 +112,13 @@ function ShippingFields({ shippingData }) {
       console.log("No Address is found");
     } else getAddressInfo();
   }, []);
+  // =============================================================================
 
-
+  // = 'My Addresses' button ===================================================
 
   let showButton = <h4></h4>;
   if (user.is_active) {
+    // Show button only if user is logged in
     showButton = (
       <h4>
         Input your shipping address or pick one from
@@ -140,8 +129,10 @@ function ShippingFields({ shippingData }) {
     );
   }
   if (user.is_staff) {
+    // Disable button if user.is_staff
     showButton = <h4></h4>;
   }
+  // =============================================================================
 
   return (
     <Fragment>
@@ -153,8 +144,7 @@ function ShippingFields({ shippingData }) {
             bodyStyle={{ overflowY: "auto", maxHeight: "calc(100vh - 200px)" }}
             title="My Addresses"
             open={open}
-            onOk={handleOk}
-            onCancel={handleCancel}
+            onCancel={handleCancel} // close the model handling
             okButtonProps={{
               disabled: false,
             }}
@@ -162,6 +152,7 @@ function ShippingFields({ shippingData }) {
               disabled: false,
             }}
           >
+            {/* get address from ShippingAddresses component */}
             <div>
               <ShippingAddresses getAddress={getAddress} />
             </div>
@@ -270,9 +261,23 @@ function ShippingFields({ shippingData }) {
                 }
                 className="input-text"
               >
-                <Option value="Mosta">Mosta</Option>
-                <Option value="Zabbar">Zabbar</Option>
-                <Option value="Valletta">Valletta</Option>
+                <Option value="Dublin">Dublin</Option>
+                <Option value="Cork">Cork</Option>
+                <Option value="Galway">Galway</Option>
+                <Option value="Limerick">Limerick</Option>
+                <Option value="Waterford">Waterford</Option>
+                <Option value="Drogheda">Drogheda</Option>
+                <Option value="Dún Dealgan">Dún Dealgan</Option>
+                <Option value="Swords">Swords</Option>
+                <Option value="Tralee">Tralee</Option>
+                <Option value="Carlow">Carlow</Option>
+                <Option value="Ennis">Ennis</Option>
+                <Option value="Dunleary">Dunleary</Option>
+                <Option value="Kilkenny">Kilkenny</Option>
+                <Option value="Naas">Naas</Option>
+                <Option value="Sligo">Sligo</Option>
+                <Option value="Monaghan">Monaghan</Option>
+                <Option value="Ros Comáin">Ros Comáin</Option>
               </Select>
             </Form.Item>
           </Form>

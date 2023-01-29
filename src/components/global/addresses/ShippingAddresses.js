@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-// import hook
+// import hooksrc/pages/shop/checkout/Checkout.js
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // ShippingAddresses Component
