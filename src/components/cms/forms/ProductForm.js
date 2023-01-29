@@ -9,12 +9,6 @@ import ShippingField from "./ShippingField";
 import { useParams } from "react-router";
 import { axiosReq } from "../../../../../api/axiosDefaults";
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
-
 const ADD = "ADD";
 const EDIT = "EDIT";
 
@@ -41,7 +35,6 @@ function ProductForm(props) {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
-  //  pending bug - change not being effective
   useEffect(() => {
     axiosReq.get("/categories").then((response) => {
       let _categories = response.data.categories;

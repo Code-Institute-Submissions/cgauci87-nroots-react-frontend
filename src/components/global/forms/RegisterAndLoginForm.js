@@ -60,7 +60,6 @@ function RegisterAndLoginForm({onSuccess}) {
     email: "",
     password: "",
     password2: "",
-    msg: "" /*bug*/,
   });
 
   const updateData = (regData) => {
@@ -94,9 +93,6 @@ function RegisterAndLoginForm({onSuccess}) {
         setLoading(false);
         setAccessToken(response.data.access_token);
         setCSRFToken(response.headers["x-csrftoken"]);
-        message.success(
-          `${data.msg}`
-        ); /*bug -> https://ant.design/components/message */
       }, 1500);
       //handle success
       console.log(response);

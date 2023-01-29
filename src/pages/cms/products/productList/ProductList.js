@@ -7,26 +7,24 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { NumericFormat } from 'react-number-format';
+import { NumericFormat } from "react-number-format";
 
 // import utils
 import utils from "../../../../components/cms/utils/Table";
-import AvatarStatus from "../../../../components/cms/utils/AvatarStatus"
+import AvatarStatus from "../../../../components/cms/utils/AvatarStatus";
 import EllipsisDropdown from "../../../../components/cms/utils/EllipsisDropdown";
 import Flex from "../../../../components/cms/utils/Flex";
 
-
 const { Content } = Layout;
-
 const { Option } = Select;
 
 const categories = [];
 const tags = [];
 
-function ProductList({ options, user }) {
+function ProductList({ options }) {
+  // ====================================================================
+  // get product list data from API
   const [ProductListData, setProducts] = useState([]);
-
-
   const getProductList = async () => {
     try {
       const response = await axiosReq.get("/products");
@@ -37,26 +35,11 @@ function ProductList({ options, user }) {
     }
   };
 
-  // const getProductList = async () => {
-  //   try {
-  //     //const filters = 'tag=Summer'
-  //     const response = await axiosReq.get(`/products?${filter}`);
-  //     let data = response.data;
-  //     setProducts(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-
-  useEffect(() =>  {
-    getProductList();
+  useEffect(() => {
+    getProductList(); // Fetch product list whenever the list updates (asynchronous)
   }, []);
 
-
-  // useEffect(() =>  {//this function will get called everytime filter changes
-  //   getProductList();
-  // }, [filter]);
+  // ====================================================================
 
   const navigate = useNavigate();
   const [list, setList] = useState(ProductListData);
@@ -67,17 +50,21 @@ function ProductList({ options, user }) {
   const dropdownMenu = (row) => (
     <Menu>
       <Menu.Item onClick={() => viewDetails(row)}>
+        {" "}
+        {/* view/edit details of a specific product */}
         <Flex alignItems="center">
           <EyeOutlined />
-          <span className="ml-2">View Details</span>
+          <span className="ml-2">View Details / Edit</span>
         </Flex>
       </Menu.Item>
       <Menu.Item onClick={() => deleteRow(row)}>
+        {" "}
+        {/* delete a single row */}
         <Flex alignItems="center">
           <DeleteOutlined />
           <span className="ml-2">
             {selectedRows.length > 0
-              ? `Delete (${selectedRows.length})`
+              ? `Delete (${selectedRows.length})` // Multiple deletion of products if there will be multiple selection of rows
               : "Delete"}
           </span>
         </Flex>
@@ -85,31 +72,15 @@ function ProductList({ options, user }) {
     </Menu>
   );
 
-  // useEffect(() => {
-  //   if (deleteAll) {
-  //     // delete all products
-  //     axiosReq
-  //       .delete("/products/bulk_delete/", {
-  //         data: selectedRows.map((i) => i.id),
-  //       })
-  //       .then((response) => {
-  //         console.log("response", response);
-  //       });
-  //   }
-  // }, [deleteAll]);
-
   const addProduct = () => {
-    navigate(`/cms/add-product`);
+    navigate(`/cms/add-product`); // when admin/is_staff user clicks 'Add Product' button - it will navigate to the add product form
   };
 
   const viewDetails = (row) => {
     navigate(`/cms/edit-product/${row.id}`);
+    //  when admin/is_staff user clicks 'View Details / Edit' on a specific product;
+    //  it will navigate to the edit product form (which would include the id of that product in the end path)
   };
-
-  // To perform operations and clear selections after selecting some rows, use rowSelection.selectedRowKeys to control selected rows.
-  // Doc: https://ant.design/components/table#components-table-demo-row-selection
-  // example: https://codesandbox.io/s/t7muu
-  // or https://codesandbox.io/s/4092nz8r94?file=/index.js
 
   const deleteRow = async (row) => {
     if (!window.confirm("Are you sure you want to delete?")) {
@@ -123,7 +94,7 @@ function ProductList({ options, user }) {
         setSelectedRows([]);
         axiosReq
           .delete(
-            "/products/bulk_delete/",
+            "/products/bulk_delete/", // bulk delete API
             (data = selectedRows.map((i) => i.id))
           )
           .then((response) => {
@@ -131,12 +102,13 @@ function ProductList({ options, user }) {
           });
       });
     } else {
-      await axiosReq.delete(`/products/${row.id}/`);
-      getProductList();
+      await axiosReq.delete(`/products/${row.id}/`); // delete a single product
+      getProductList(); // this function is being called to fetch the latest data upon deletion
     }
   };
 
-  // pending bug
+  /*==========================================================================*/
+  /*define table columns*/
   const tableColumns = [
     {
       title: "Date Created",
@@ -193,7 +165,8 @@ function ProductList({ options, user }) {
       ),
     },
   ];
-
+  // =========================================================================================
+  // handing events
   const rowSelection = {
     onChange: (key, rows) => {
       setSelectedRows(rows);
@@ -229,6 +202,8 @@ function ProductList({ options, user }) {
       setList(ProductListData);
     }
   };
+
+  // =========================================================================================
 
   return (
     <Fragment>
@@ -285,17 +260,18 @@ function ProductList({ options, user }) {
                   <Button
                     onClick={() => {
                       const response = window.confirm(
+                        // confirm prior deletion
                         "Are you sure you want to delete selected products?"
                       );
                       console.log({ response });
                       if (response) {
                         axiosReq
                           .delete("/products/bulk_delete/", {
+                            // bulk_delete API for bulk deletion
                             data: selectedRows.map((i) => i.id),
                           })
-                          .then((response) => {
-                            console.log("response", response);
-                            getProductList();
+                          .then(() => {
+                            getProductList(); // Fetch data upon deletion to get the latest
                           });
                       }
                     }}
@@ -317,7 +293,7 @@ function ProductList({ options, user }) {
             <div className="table-responsive">
               <Table
                 columns={tableColumns}
-                dataSource={ProductListData}
+                dataSource={ProductListData} //payload
                 rowKey="id"
                 rowSelection={{
                   selectedRowKeys: selectedRowKeys,
