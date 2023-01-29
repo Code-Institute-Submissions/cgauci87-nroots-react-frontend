@@ -1,17 +1,15 @@
 import React, { Fragment } from "react";
-import Footer from "../../components/global/Footer";
-import Instagram from "../../components/global/Instagram";
-import PageTitle from "../../components/global/PageTitle";
-import Header from "../../components/header/HeaderShop";
-
-import LoginForm from "../../components/forms/LoginForm";
-
+// import components
+import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
+import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
+// import LoginForm
+import LoginForm from "../../../../components/global/forms/LoginForm"
 // ===================================================================================================
 
 function Login({ options }) {
   return (
     <Fragment>
-      <Header options={options} />
+      <HeaderShop options={options} />
 
       <PageTitle name="Login" />
 

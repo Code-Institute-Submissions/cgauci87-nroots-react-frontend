@@ -5,6 +5,7 @@ import HeaderShop from "../../../../components/shop/navbar/HeaderShop";
 import PageTitle from "../../../../components/shop/pageTitle/PageTitle";
 import Footer from "../../../../components/shop/footer/Footer";
 
+// import RegisterForm
 import RegisterForm from "../../../../components/global/forms/RegisterForm"
 
 // Register Page
