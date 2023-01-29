@@ -1,6 +1,7 @@
 import { authAxios } from "../api/axiosDefaults";
 import useAuth from "../hooks/useAuth";
 
+// useRefreshToken function - refresh token on the backend
 export default function useRefreshToken() {
     const { setAccessToken, setCSRFToken } = useAuth()
 
