@@ -1,76 +1,74 @@
-import React, { useState, Fragment, useEffect, useContext } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Carousel } from "antd";
-import Footer from "../../components/global/Footer";
-import Instagram from "../../components/global/Instagram";
-import PageTitle from "../../components/global/PageTitle";
-import HeaderShop from "../../components/header/HeaderShop";
-import ProductInfoTabs from "../../components/products/ProductInfoTabs";
-import QuickView from "../../components/products/QuickView";
-import RecentSingleProducts from "../../components/products/RecentSingleProducts";
-import { axiosReq } from "../../api/axiosDefaults";
-import { CartState } from "../../contexts/CartContext";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
+// import layout components
+import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import PageTitle from ".././../../components/shop/pageTitle/PageTitle";
+import Footer from "../../../components/shop/footer/Footer";
+
+// import product components
+import QuickView from "../../../components/shop/products/QuickView";
+import RecentSingleProducts from "../../../components/shop/products/RecentSingleProducts";
+
+//import contexts
+import { axiosReq } from "../../api/axiosDefaults";
+import { CartState } from "../../contexts/CartContext";
+
+// import style
 import "./shop.css";
 
+// ProductDetails Page
 function ProductDetails({ options }) {
   const [item, setItem] = useState({});
-  const { id } = useParams();
+  const { id } = useParams(); // using useParams hook to return the product details from the id
 
+  // ====================================================================================================
+  // context API - sharing cart data between components while useReducer handles the cart state.
   const {
     state: { cart },
     dispatch,
   } = CartState();
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart)); // store cart items in local storage
   }, [cart]);
 
-  console.log(cart, "cart");
-
+  // ====================================================================================================
+  // Get product details from API by id
   useEffect(() => {
-    console.log("id=>>>>", id);
     const handleMount = async () => {
       try {
         const { data: product } = await axiosReq.get(`/products/${id}/`);
-        console.log(product, "data");
         setItem(product);
       } catch (err) {
         console.log(err);
       }
     };
-
     handleMount();
-  }, [id]);
-
-  console.log(item);
+  }, [id]); // handleMount will be called whenever a new product is being selected to render it's details
 
   /**
    * states
    */
   const [showQuickView, setShowQuickView] = useState(false);
   const [quickViewData, setQuickViewData] = useState({});
-  const [productCount, setProductCount] = useState(1);
 
   const HandelQuickViewData = (e, item) => {
     e.preventDefault();
-    setShowQuickView(!showQuickView);
+    setShowQuickView(!showQuickView); // show quick view upon click
     setQuickViewData(item);
   };
 
   /**
    * Handel Quick View Close
    */
-  const HandelQuickViewClose = (e) => {
+  const HandelQuickViewClose = (e) => { // close quick view
     e.preventDefault();
     setShowQuickView(false);
     setQuickViewData({});
   };
-
-  // if (!item) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <Fragment>
@@ -111,14 +109,6 @@ function ProductDetails({ options }) {
                   <span className="current"> € {item.price}</span>
                   <span className="old"> €{item.comparePrice}</span>
                 </div>
-                <div className="rating">
-                  <i className="fi flaticon-star" />
-                  <i className="fi flaticon-star" />
-                  <i className="fi flaticon-star" />
-                  <i className="fi flaticon-star" />
-                  <i className="fi flaticon-star-social-favorite-middle-full" />
-                  <span>""</span>
-                </div>
                 <p>{item.description}</p>
                 <div className="product-option">
                   <div className="product-row">
@@ -130,32 +120,30 @@ function ProductDetails({ options }) {
                             value={item.qty}
                             onChange={(e) => {
                               dispatch({
-                                type: "CHANGE_CART_QTY",
+                                type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
                                 payload: {
                                   id: item.id,
                                   qty: e.target.value,
                                 },
                               });
-                              toast.info(
-                                "Item quantity has been updated"
-                              )
+                              toast.info("Item quantity has been updated"); // toast message upon change of qty
                             }}
                           >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="5">5</option> 
                           </select>
                           <button
-                            onClick={() =>
+                            onClick={() => // on click remove from cart
                               dispatch(
                                 {
-                                  type: "REMOVE_FROM_CART",
+                                  type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
                                   payload: item,
                                 },
                                 toast.info(
-                                  "Item has been removed from the cart"
+                                  "Item has been removed from the cart" // toast message upon removal of item in the cart
                                 )
                               )
                             }
@@ -167,8 +155,8 @@ function ProductDetails({ options }) {
                         <button
                           onClick={() =>
                             dispatch(
-                              { type: "ADD_TO_CART", payload: item },
-                              toast.info("Item has been added to the cart")
+                              { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
+                              toast.info("Item has been added to the cart") // toast message upon adding an item in the cart
                             )
                           }
                         >
@@ -206,7 +194,6 @@ function ProductDetails({ options }) {
         {/* end of container */}
       </section>
       {/* end of shop-single-section */}
-      <Instagram />
       <Footer />
     </Fragment>
   );

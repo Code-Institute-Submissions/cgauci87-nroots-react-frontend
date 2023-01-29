@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { axiosReq } from "../../../api/axiosDefaults"
 import { CartState, useCartContext } from "../../../contexts/CartContext";
 
+// Products component
 function Products({ ordering }) {
   // ===============================================================
   const { products, setProducts } = useCartContext();
