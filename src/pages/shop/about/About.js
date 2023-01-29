@@ -5,7 +5,7 @@ import PageTitle from ".././../../components/shop/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 
 import { NavLink } from "react-router-dom";
-
+// About Page
 function About({ options }) {
   return (
     <Fragment>
