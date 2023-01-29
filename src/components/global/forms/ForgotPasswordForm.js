@@ -1,10 +1,13 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authAxios } from "../../api/axiosDefaults";
-
-import MailOutlined  from "@ant-design/icons";
+import MailOutlined from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 
+// import hooks
+import { authAxios } from "../../../api/axiosDefaults";
+
+// ===============================================================================
+// Validation rules - antd form
 const rules = {
   email: [
     {
@@ -17,12 +20,14 @@ const rules = {
     },
   ],
 };
-
+// ===============================================================================
+// ForgotPasswordForm component
 function ForgotPasswordForm() {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm(); // built-in useForm method of ant design for validation
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // saving input value inside of state
   const [data, setData] = useState({
     email: "",
   });
@@ -33,24 +38,22 @@ function ForgotPasswordForm() {
   };
 
   const onSend = async () => {
-    setLoading(true);
+    setLoading(true); // set loading to true as soon as the onSend is invoked
     try {
       const response = await authAxios.post(
-        "/auth/forgot-password",
+        "/auth/forgot-password", // API
         JSON.stringify({
-          ...data,
+          ...data, // using spread syntax to be included
         })
       );
       setTimeout(() => {
-        setLoading(false);
-        navigate("/auth/email-verification");
+        // set timeout to call after 1500 milliseconds --> on success:
+        setLoading(false); // set loading to false
+        navigate("/auth/email-verification"); // navigate to /auth/email-verification
       }, 1500);
-      //handle success
-      console.log(response);
     } catch (error) {
       setLoading(false);
       console.log(error);
-      // TODO: handle errors
     }
   };
 
@@ -72,7 +75,7 @@ function ForgotPasswordForm() {
           onChange={(e) => {
             let regData = { ...data };
             regData.email = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input prefix={<MailOutlined className="text-primary" />} />
@@ -85,8 +88,8 @@ function ForgotPasswordForm() {
             className="ecom-Button ecom-button button ecom-form-register__submit"
             type="Submit"
             htmlType="submit"
-            loading={loading}
-            onClick={() => onSend()}
+            loading={loading} // set loading
+            onClick={() => onSend()} // onSend function
           >
             Send
           </Button>

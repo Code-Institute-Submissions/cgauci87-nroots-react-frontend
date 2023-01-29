@@ -56,7 +56,7 @@ function LoginForm() {
       const response = await authAxios.post(
         "auth/login", // API
         JSON.stringify({
-          ...data,
+          ...data, // using spread syntax to be included
         })
       );
       setTimeout(() => {
