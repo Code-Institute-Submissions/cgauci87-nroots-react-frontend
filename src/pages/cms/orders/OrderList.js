@@ -35,7 +35,6 @@ function OrderList(options) {
   // ==========================================================================
 
   const [list, setList] = useState(OrderListData);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const navigate = useNavigate();
   const viewDetails = (row) => {
@@ -114,7 +113,6 @@ function OrderList(options) {
     const searchArray = e.currentTarget.value ? list : OrderListData;
     const data = utils.wildCardSearch(searchArray, value);
     setList(data);
-    setSelectedRowKeys([]);
   };
 
   return (

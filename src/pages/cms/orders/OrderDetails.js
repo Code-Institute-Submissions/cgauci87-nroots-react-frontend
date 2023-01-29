@@ -1,29 +1,34 @@
 import React, { useEffect } from "react";
 import { useState, Fragment } from "react";
 import { useParams } from "react-router";
-
-import HeaderCms from "../../../../../components/header/HeaderCms";
-import PageTitle from "../../../../../components/global/PageTitle";
-
-import ShippingFields from "../../../../../pages/checkout/ShippingFields";
 import { Form } from "antd";
-import { jsonAxios } from "../../../../../api/axiosDefaults";
 
+// import components
+import HeaderCms from "../../../components/cms/navbar/HeaderCms";
+import PageTitle from "../../../components/global/pageTitle/PageTitle";
+import ShippingFields from "../../../components/global/forms/ShippingFields";
+
+// import axios
+import { jsonAxios } from "../../../api/axiosDefaults";
+
+// OrderDetails Page
 function OrderDetails({ options }) {
   const [form] = Form.useForm();
 
   const setFormValues = (values) => {
-    form.setFieldsValue(values);
+    form.setFieldsValue(values); // Set field values in the form
   };
 
   const [item, setItem] = useState(false);
 
   const { id } = useParams();
 
+  // =====================================================================================
+
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const { data: order } = await jsonAxios.get(`/order/${id}/`);
+        const { data: order } = await jsonAxios.get(`/order/${id}/`); // Get order of a specific id
         setItem(order);
         setFormValues(order);
       } catch (err) {
@@ -34,34 +39,13 @@ function OrderDetails({ options }) {
     handleMount();
   }, [id]); // handleMount - will trigger only when order ID is changed.
 
+  // =====================================================================================
+
   // this will include the nested array (items)
   const items = item && item.items ? item.items : [];
 
-  const getSubmitText = (item) => {
-    const order_status = {
-      "Order Created": "Submit Order For Processing",
-      "Order Processing": "Set Order Ready",
-      "Order Ready": "Set Delivered",
-      "Order Delivered": "Done",
-    };
-    return order_status[item.order_status];
-  };
+  // =====================================================================================
 
-  // URLS
-  const changeStatus = (item) => {
-    const order_status = {
-      "Order Created": `/order/order-processing`,
-      "Order Processing": `/order/order-ready`,
-      "Order Ready": `/order/order-delivered`,
-    };
-    const url = order_status[item.order_status];
-    const email = form.getFieldValue("email");
-
-    jsonAxios.post(url, { id: item.id }).then((response) => {
-      // alert('Order status changed to Order Processing'),
-      console.log(response);
-    });
-  };
 
   return (
     <Fragment>
@@ -80,7 +64,8 @@ function OrderDetails({ options }) {
                 className="checkout ecom-checkout"
               >
                 <div className="col2-set" id="customer_details">
-                  <ShippingFields shippingData={form} />
+                  {/* get shipping data from form */}
+                  <ShippingFields shippingData={form} /> 
                 </div>
                 <p id="order_review_heading">
                   <strong>Order ID:</strong> {item.order_id}
@@ -98,7 +83,7 @@ function OrderDetails({ options }) {
                         <th className="product-subtotal">Total</th>
                       </tr>
                     </thead>
-                    {/* ===========================================================wip====================================================== */}
+                    {/* ================================================================================================================= */}
                     <tbody>
                       {items.map((i, item_id) => (
                         <tr key={item_id} className="cart_item">
@@ -191,18 +176,6 @@ function OrderDetails({ options }) {
                         </label>
                       </li>
                     </ul>
-                    <div className="form-row place-order">
-                      <button
-                        type="button"
-                        // onClick={handleOrderSubmit}
-                        className="ecom-Button ecom-button button ecom-form-register__submit"
-                        name="update"
-                        defaultValue="Update"
-                        onClick={(e) => changeStatus(item)}
-                      >
-                        {getSubmitText(item)}
-                      </button>
-                    </div>
                   </div>
                 </div>
               </form>

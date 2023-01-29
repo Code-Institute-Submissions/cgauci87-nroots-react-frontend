@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 
 // import ShippingAddresses to get/save a user shipping
-import ShippingAddresses from "../../../components/global/addresses/ShippingAddresses";
+import ShippingAddresses from "../addresses/ShippingAddresses";
 
 // import hooks
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
