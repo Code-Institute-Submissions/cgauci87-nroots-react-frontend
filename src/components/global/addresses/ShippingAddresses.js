@@ -2,18 +2,18 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 // import hook
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // ShippingAddresses Component
 function ShippingAddresses({ ordering, getAddress }) {
-
   const [addressData, setAddressData] = useState([]);
   const [defaultId, setDefaultId] = useState([]);
 
+  // hook function
   const axiosPrivate = useAxiosPrivate();
 
   // ====================================================================================
-  // Get all addresses which are associated with the current user 
+  // Get all addresses which are associated with the current logged-in user
   const getAddressInfo = async () => {
     const response = await axiosPrivate.get("/auth/user/profile/addresses/");
     setAddressData(response.data);
@@ -25,8 +25,7 @@ function ShippingAddresses({ ordering, getAddress }) {
     getAddressInfo();
   }, []);
 
-    // ====================================================================================
-
+  // ====================================================================================
 
   // Set new default id if user clicks set default to a preferred address
   const setNewDefault = async (newDefaultId) => {
@@ -38,23 +37,19 @@ function ShippingAddresses({ ordering, getAddress }) {
     });
     setDefaultId(newDefaultId);
   };
+  // ====================================================================================
+  // User can delete a selected address of his own
 
   const deleteAddress = async (id) => {
-    await axiosPrivate.delete(`/auth/user/profile/addresses/${id}/`);
-    getAddressInfo();
+    await axiosPrivate.delete(`/auth/user/profile/addresses/${id}/`); // id of the address selected
+    getAddressInfo(); // call this function to display the latest payload once the address is deleted. (Display the remaining data, if any) 
   };
 
-  // const deleteAddress = async (id) => {
-  //   await axiosReq.delete(`/auth/user/profile/addresses/${id}/`);
-  //   getAddressInfo();
-  // };
+  // ====================================================================================
 
-  return addressData.length > 0 ? (
+  return addressData.length > 0 ? ( // If there is no data ( no addresses of the user ), then display message, see below span
     <Fragment>
       <div className="container">
-        {/* <div>
-          <img className="address-img" src={address_img} />
-        </div> */}
         <div>
           <ul
             className={
@@ -67,15 +62,15 @@ function ShippingAddresses({ ordering, getAddress }) {
                 ? "list-view"
                 : "")
             }
-          >
-            {addressData.map((item, index) => (
+          > 
+            {addressData.map((item, index) => ( // an array of data to render all addresses of the user.
               <div className="address-info">
                 <li key={index}>
                   <div>
                     {" "}
                     <Tooltip placement="top" title="Delete Address" color="red">
                       <DeleteOutlined
-                        onClick={(e) => deleteAddress(item.id)}
+                        onClick={(e) => deleteAddress(item.id)} // Once user click the delete icon - the id of that address will be retrieved to call the delete 
                         style={{ color: "red", fontSize: "120%" }}
                       />
                     </Tooltip>
@@ -100,7 +95,7 @@ function ShippingAddresses({ ordering, getAddress }) {
       </div>
     </Fragment>
   ) : (
-    <span> You've got no addresses saved! </span>
+    <span> You've got no addresses saved! </span> // This span will be visible if no data/addresses of the user
   );
 }
 
