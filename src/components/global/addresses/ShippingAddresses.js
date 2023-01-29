@@ -42,7 +42,7 @@ function ShippingAddresses({ ordering, getAddress }) {
 
   const deleteAddress = async (id) => {
     await axiosPrivate.delete(`/auth/user/profile/addresses/${id}/`); // id of the address selected
-    getAddressInfo(); // call this function to display the latest payload once the address is deleted. (Display the remaining data, if any) 
+    getAddressInfo(); // call this function to display the latest payload once the address is deleted. (Display the remaining data, if any)
   };
 
   // ====================================================================================
@@ -53,6 +53,7 @@ function ShippingAddresses({ ordering, getAddress }) {
         <div>
           <ul
             className={
+              // ordering
               "addressData " +
               (ordering == 1
                 ? "default-column"
@@ -62,34 +63,43 @@ function ShippingAddresses({ ordering, getAddress }) {
                 ? "list-view"
                 : "")
             }
-          > 
-            {addressData.map((item, index) => ( // an array of data to render all addresses of the user.
-              <div className="address-info">
-                <li key={index}>
-                  <div>
-                    {" "}
-                    <Tooltip placement="top" title="Delete Address" color="red">
-                      <DeleteOutlined
-                        onClick={(e) => deleteAddress(item.id)} // Once user click the delete icon - the id of that address will be retrieved to call the delete 
-                        style={{ color: "red", fontSize: "120%" }}
-                      />
-                    </Tooltip>
-                  </div>
-                  <h4>{item.apartment_address}</h4>
-                  <h4> {item.street_address}</h4>
-                  <h4>{item.city}</h4>
-                  <br></br>
-                  {getAddress ? (
-                    <button
-                      className="button-sm"
-                      onClick={(e) => getAddress(item)}
-                    >
-                      Use Address
-                    </button>
-                  ) : null}
-                </li>
-              </div>
-            ))}
+          >
+            {addressData.map(
+              (
+                item,
+                index // an array of data to render all addresses of the user.
+              ) => (
+                <div className="address-info">
+                  <li key={index}>
+                    <div>
+                      {" "}
+                      <Tooltip
+                        placement="top"
+                        title="Delete Address"
+                        color="red"
+                      >
+                        <DeleteOutlined
+                          onClick={(e) => deleteAddress(item.id)} // Once user click the delete icon - the id of that address will be retrieved to call the delete
+                          style={{ color: "red", fontSize: "120%" }}
+                        />
+                      </Tooltip>
+                    </div>
+                    <h4>{item.apartment_address}</h4>
+                    <h4> {item.street_address}</h4>
+                    <h4>{item.city}</h4>
+                    <br></br>
+                    {getAddress ? (
+                      <button
+                        className="button-sm"
+                        onClick={(e) => getAddress(item)}
+                      >
+                        Use Address
+                      </button>
+                    ) : null}
+                  </li>
+                </div>
+              )
+            )}
           </ul>
         </div>
       </div>
