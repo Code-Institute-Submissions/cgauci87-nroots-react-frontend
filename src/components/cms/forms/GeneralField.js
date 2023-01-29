@@ -15,18 +15,23 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
+// ===================================================================================
+// convert image file to Base64 in React
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
 };
 
-const GeneralField = (props) => {
-  console.log("general field received title", props.data.title);
-  const form = props.data;
-  form.setFieldValue({ uploadedImg: "test" });
-  console.log(form.getFieldsValue());
+// ===================================================================================
 
+// GeneralField form component
+const GeneralField = (props) => {
+  const form = props.data;
+
+  // ===================================================================================
+
+  // Image handler before upload
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
@@ -36,7 +41,6 @@ const GeneralField = (props) => {
     if (!isLt2M) {
       message.error("Image must smaller than 2MB!");
     }
-    console.log("fields", form.getFieldsValue());
     getBase64(file, (url) => {
       setLoading(false);
       props.setImage(url);
@@ -45,6 +49,9 @@ const GeneralField = (props) => {
     return false;
   };
 
+  // ===================================================================================
+
+  // Once user upload an image - display loading icon
   const [loading, setLoading] = useState(false);
 
   const uploadButton = (
@@ -54,25 +61,7 @@ const GeneralField = (props) => {
     </div>
   );
 
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      getBase64(info.file.originFileObj, () => {
-        setLoading(false);
-      });
-    }
-  };
-  const getFile = (e) => {
-    console.log("Upload event:", e);
-
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
+  // ===================================================================================
 
   return (
     <div>
@@ -129,7 +118,6 @@ const GeneralField = (props) => {
                     ]}
                   >
                     <InputNumber
-                      // defaultValue={10.99}
                       step={0.01}
                       prefix="€"
                     />
@@ -147,7 +135,6 @@ const GeneralField = (props) => {
                     ]}
                   >
                     <InputNumber
-                      // defaultValue={11.99}
                       defaultValue={props.data.comparePrice}
                       step={0.01}
                       prefix="€"
