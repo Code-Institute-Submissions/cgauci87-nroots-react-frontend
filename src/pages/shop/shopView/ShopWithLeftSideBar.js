@@ -5,18 +5,17 @@ import HeaderShop from "../../../components/shop/navbar/HeaderShop";
 import Footer from "../../../components/shop/footer/Footer";
 
 // import products
-import Products from "../../../components/shop/products";
-
+import Products from "../../../components/shop/products/Products";
 
 // ordering and pagination
 import Ordering from "../../../components/shop/ordering/Ordering";
 import OrderingToolbar from "../../../components/shop/ordering/OrderingToolbar";
-import Pagination from "../../../components/shop/Pagination";
+import Pagination from "../../../components/shop/pagination/Pagination";
 
 // widgets
-import SearchWidget from "../../../omponents/widget/SearchWidget";
-import ProductCategoriesWidget from "../../../components/widget/ProductCategoriesWidget";
-import TagFilterWidget from "../../../components/widget/TagFilterWidget";
+import SearchWidget from "../../../components/shop/widget/SearchWidget";
+import ProductCategoriesWidget from "../../../components/shop/widget/ProductCategoriesWidget";
+import TagFilterWidget from "../../../components/shop/widget/TagFilterWidget";
 
 // style
 import "./shop.css";
