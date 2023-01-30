@@ -5,12 +5,11 @@ import { toast } from "react-toastify";
 
 // import layout components
 import HeaderShop from "../../../components/shop/navbar/HeaderShop";
-import PageTitle from ".././../../components/shop/pageTitle/PageTitle";
+import PageTitle from ".././../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 
 // import product components
 import QuickView from "../../../components/shop/products/QuickView";
-import RecentSingleProducts from "../../../components/shop/products/RecentSingleProducts";
 
 //import contexts
 import { axiosReq } from "../../../api/axiosDefaults";
@@ -55,16 +54,12 @@ function ProductDetails({ options }) {
   const [showQuickView, setShowQuickView] = useState(false);
   const [quickViewData, setQuickViewData] = useState({});
 
-  const HandelQuickViewData = (e, item) => {
-    e.preventDefault();
-    setShowQuickView(!showQuickView); // show quick view upon click
-    setQuickViewData(item);
-  };
 
   /**
    * Handel Quick View Close
    */
-  const HandelQuickViewClose = (e) => { // close quick view
+  const HandelQuickViewClose = (e) => {
+    // close quick view
     e.preventDefault();
     setShowQuickView(false);
     setQuickViewData({});
@@ -133,10 +128,11 @@ function ProductDetails({ options }) {
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="5">5</option> 
+                            <option value="5">5</option>
                           </select>
                           <button
-                            onClick={() => // on click remove from cart
+                            onClick={() =>
+                              // on click remove from cart
                               dispatch(
                                 {
                                   type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
@@ -185,11 +181,6 @@ function ProductDetails({ options }) {
             </div>
           </div>
           {/* end row */}
-          <div className="row">
-            <div className="col col-xs-12">
-              <RecentSingleProducts onQuickViewClick={HandelQuickViewData} />
-            </div>
-          </div>
         </div>
         {/* end of container */}
       </section>

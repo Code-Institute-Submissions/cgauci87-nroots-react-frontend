@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import '../hero/hero.css';
 
 // hero data
-import heroData from '../../data/hero1.json';
+import heroData from '../../../data/hero1.json';
 import {NavLink} from "react-router-dom";
 
 // Hero1 Component

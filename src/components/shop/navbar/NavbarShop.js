@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../../global/logo/Logo";
-import "../../global/style/navBar.css";
+import "./navBar.css";
 
 // NavbarShop Component
 

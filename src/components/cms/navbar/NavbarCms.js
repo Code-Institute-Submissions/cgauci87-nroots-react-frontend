@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../global/logo/Logo";
 
 // import style
-import "../../global/style/navBar.css";
+import "./navBar.css";
 
 // NavbarCms component
 function NavbarCms({ options }) {

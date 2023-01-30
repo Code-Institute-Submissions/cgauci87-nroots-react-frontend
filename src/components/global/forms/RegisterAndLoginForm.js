@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from "react";
-import { authAxios } from "../../api/axiosDefaults";
-import useAuth from "../../hooks/useAuth";
-
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 
+// hooks
+import { authAxios } from "../../../api/axiosDefaults";
+import useAuth from "../../../hooks/useAuth";
+
+
+
+// ==============================================================
+// validation rules - antd form
 const rules = {
   first_name: [
     {
@@ -41,6 +46,7 @@ const rules = {
     },
     ({ getFieldValue }) => ({
       validator(_, value) {
+        // Check both passwords if they match - otherwise if no match, trigger message passwords do not match
         if (!value || getFieldValue("password") === value) {
           return Promise.resolve();
         }
@@ -50,8 +56,9 @@ const rules = {
   ],
 };
 
-function RegisterAndLoginForm({onSuccess}) {
-  console.log('modal visible', onSuccess)
+// ==============================================================
+// RegisterAndLoginForm - This form offers functionality to register & login on the fly during the checkout process
+function RegisterAndLoginForm({ onSuccess }) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -68,12 +75,13 @@ function RegisterAndLoginForm({onSuccess}) {
   };
 
   const { setAccessToken, setCSRFToken } = useAuth();
-
+  // ==============================================================
+  // Dual API axios requests - Register and then login
   const onSignUp = async () => {
     setLoading(true);
     try {
-      const reg_response = await authAxios.post(
-        "auth/register",
+      const reg_response = await authAxios.post( // Register user
+        "auth/register", // API
         JSON.stringify({
           ...data,
         })
@@ -81,27 +89,24 @@ function RegisterAndLoginForm({onSuccess}) {
       setTimeout(() => {
         setLoading(false);
       }, 1500);
-      console.log(reg_response);
-      const response = await authAxios.post(
-        "auth/login",
+      const response = await authAxios.post( // Login user
+        "auth/login", // API
         JSON.stringify({
           ...data,
         })
       );
-      onSuccess(reg_response.data);
+      onSuccess(reg_response.data); // on success: setloading to false, set accesstoken, set csrftoken
       setTimeout(() => {
         setLoading(false);
         setAccessToken(response.data.access_token);
         setCSRFToken(response.headers["x-csrftoken"]);
       }, 1500);
-      //handle success
-      console.log(response);
     } catch (error) {
-      setLoading(false);
+      setLoading(false); // on error: set loading to false and log error
       console.log(error);
-      // TODO: handle errors
     }
   };
+  // ==============================================================
 
   return (
     <Fragment>
@@ -121,7 +126,7 @@ function RegisterAndLoginForm({onSuccess}) {
           onChange={(e) => {
             let regData = { ...data };
             regData.first_name = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input />
@@ -135,7 +140,7 @@ function RegisterAndLoginForm({onSuccess}) {
           onChange={(e) => {
             let regData = { ...data };
             regData.last_name = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input />
@@ -150,7 +155,7 @@ function RegisterAndLoginForm({onSuccess}) {
           onChange={(e) => {
             let regData = { ...data };
             regData.email = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input prefix={<MailOutlined className="text-primary" />} />
@@ -164,7 +169,7 @@ function RegisterAndLoginForm({onSuccess}) {
           onChange={(e) => {
             let regData = { ...data };
             regData.password = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
@@ -179,7 +184,7 @@ function RegisterAndLoginForm({onSuccess}) {
           onChange={(e) => {
             let regData = { ...data };
             regData.password2 = e.target.value;
-            updateData(regData);
+            updateData(regData); // saving an input value inside of state
           }}
         >
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
@@ -191,23 +196,13 @@ function RegisterAndLoginForm({onSuccess}) {
             address.
           </p>
         </Form.Item>
-        <Form.Item className="ecom-text-box ecom-privacy-policy-text">
-          <p>
-            Your personal data will be used to support your experience
-            throughout this website, to manage access to your account, and for
-            other purposes described in our{" "}
-            <a href="#" className="ecom-privacy-policy-link">
-              privacy policy
-            </a>
-          </p>
-        </Form.Item>
         <Form.Item className="d-flex justify-content-center">
           <Button
             className="button-sm"
             type="Submit"
             htmlType="submit"
             loading={loading}
-            onClick={() => onSignUp()}
+            onClick={() => onSignUp()} // Initiate the process to get user registered and then on successful registration, proceed with the 2nd API call to login
           >
             Register & Login
           </Button>

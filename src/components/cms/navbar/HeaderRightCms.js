@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 // import style
-import "../../global/style/navBar.css";
+import "./navbarRight.css";
 
 //HeaderRight component
 function HeaderRight({ options }) {

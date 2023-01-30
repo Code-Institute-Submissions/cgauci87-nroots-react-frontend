@@ -1,12 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../global/style/navbarRight.css"
+import "./navbarRight.css";
 import { Link } from "react-router-dom";
-import { CartState } from "../../contexts/CartContext";
-import useLogout from "../../hooks/useLogout";
+import { CartState } from "../../../contexts/CartContext";
 
-import useAuth from "../../hooks/useAuth";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+// hooks
+import useLogout from "../../../hooks/useLogout";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // HeaderRightShop Component
 function HeaderRightShop({ options }) {

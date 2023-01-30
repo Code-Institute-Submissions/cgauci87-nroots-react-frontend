@@ -3,6 +3,7 @@ import React, { useState, Fragment } from "react";
 // import components
 import HeaderShop from "../../../components/shop/navbar/HeaderShop";
 import Footer from "../../../components/shop/footer/Footer";
+import PageTitle from "../../../components/global/pageTitle/PageTitle";
 
 // import products
 import Products from "../../../components/shop/products/Products";

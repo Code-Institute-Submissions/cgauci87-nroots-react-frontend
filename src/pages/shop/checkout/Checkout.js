@@ -3,19 +3,19 @@ import { Button, Modal, Form } from "antd";
 
 // import components
 import HeaderShop from "../../../components/shop/navbar/HeaderShop";
-import PageTitle from ".././../../components/shop/pageTitle/PageTitle";
+import PageTitle from ".././../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 
 // import contexts
-import { CartState } from "../../contexts/CartContext";
-import { jsonAxios } from "../../api/axiosDefaults";
-import useAuth from "../../hooks/useAuth";
+import { CartState } from "../../../contexts/CartContext";
+import { jsonAxios } from "../../../api/axiosDefaults";
+import useAuth from "../../../hooks/useAuth"
 
 // import ShippingFields for Addresses
-import ShippingFields from "./ShippingFields";
+import ShippingFields from "../../../components/global/forms/ShippingFields";
 
 // import RegisterAndLoginForm for Registration on the fly
-import RegisterAndLoginForm from "../../components/forms/RegisterAndLoginForm";
+import RegisterAndLoginForm from "../../../components/global/forms/RegisterAndLoginForm";
 
 // Checkout Page
 function Checkout({ options }) {

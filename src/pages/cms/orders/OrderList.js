@@ -8,7 +8,7 @@ import { Card, Table, Input, Button, Menu } from "antd";
 import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 
 // import components
-import HeaderCms from "../../../../components/cms/navbar/HeaderCms";
+import HeaderCms from "../../../components/cms/navbar/HeaderCms";
 
 // import utils
 import utils from "../../../components/cms/utils/Table";

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Tabs, Form, Button, message } from "antd";
 import { useParams } from "react-router";
-import { axiosReq } from "../../../../../api/axiosDefaults";
+import { axiosReq } from "../../../api/axiosDefaults";
 
 // import components
-import PageHeaderAlt from "../../../../src/components/cms/pageHeader/PageHeaderAlt";
-import Flex from "../../../../src/components/cms/utils/Flex";
+import PageHeaderAlt from "../../cms/pageHeader/PageHeaderAlt";
+import Flex from "../../cms/utils/Flex";
 import GeneralField from "./GeneralField";
 
 // declare add/edit for mode
