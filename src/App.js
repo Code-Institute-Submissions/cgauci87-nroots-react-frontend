@@ -53,7 +53,7 @@ function App() {
 
   /**
    * change mini cart state
-   *
+   * @constructor
    */
   const HandleMiniCartStatus = () => {
     setShowMiniCart(!showMiniCart);
@@ -65,7 +65,7 @@ function App() {
 
   /**
    * change usr account state
-   *
+   * @constructor
    */
   const HandleUsrAccountStatus = () => {
     setShowUsrAccount(!showUsrAccount);
@@ -77,7 +77,7 @@ function App() {
 
   /**
    * change left side info state
-   *
+   * @constructor
    */
   const HandleSideInfoStatus = () => {
     setShowSideInfo(!showSideInfo);
@@ -85,7 +85,7 @@ function App() {
 
   /**
    * change mobile nav state
-   *
+   * @constructor
    */
   const HandleMobileNavStatus = () => {
     setShowMobileNav(!showMobileNav);
@@ -115,6 +115,7 @@ function App() {
     onViewCartClick: HandleOverlayStatus,
     onCheckoutClick: HandleOverlayStatus,
   };
+
   // ====================================================================================
   // get user from useAuth function
   const { user } = useAuth();

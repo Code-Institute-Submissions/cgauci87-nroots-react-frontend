@@ -636,7 +636,6 @@ abbr[title] {
     font-size: 0.9333333333rem;
     font-weight: 500;
     color: #c2572b;
-    text-transform: uppercase;
     letter-spacing: 2px;
     margin: -0.4em 0 0.6em;
     display: block;
@@ -649,7 +648,6 @@ abbr[title] {
     font-size: 2.8rem;
     margin: -0.2em 0 0.2em;
     position: relative;
-    text-transform: capitalize;
 }
 
 @media (max-width: 767px) {
@@ -4214,6 +4212,7 @@ button:active {
 .category-section-area {
     padding-top: 0;
     padding-bottom: 80px;
+    padding-left: 80px !important;
 }
 
 .category-section-area .all-cat {
@@ -4222,7 +4221,7 @@ button:active {
 
 .category-section-area .all-cat ul>li {
     width: 12.5%;
-    float: left;
+    display: inline-block;
     -webkit-transition: all 250ms ease-in-out 0s;
     -moz-transition: all 250ms ease-in-out 0s;
     -o-transition: all 250ms ease-in-out 0s;
@@ -4245,11 +4244,14 @@ button:active {
     display: block;
 }
 
+
+
 .category-section-area .all-cat a {
     font-family: "futura-pt-demi", sans-serif;
     font-size: 16px;
     font-size: 1.0666666667rem;
-    color: #787878;
+    background-color: green;
+    color: #fff;
     display: block;
     padding: 25px 15px;
 }

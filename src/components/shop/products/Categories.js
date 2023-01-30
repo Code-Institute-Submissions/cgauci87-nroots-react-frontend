@@ -26,7 +26,7 @@ function Categories() {
                                         categoriesData.map((item, index) => (
                                             <li key={index}>
                                                 <NavLink to={item.link}>
-                                                    <i className={"fi " + item.icon}/>
+                                                    <img src= {item.icon} alt="category"/>
                                                     <span>{item.name}</span>
                                                 </NavLink>
                                             </li>
