@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 // Footer Component
 function Footer() {
@@ -17,21 +18,35 @@ function Footer() {
                   <div className="social">
                     <ul className="clearfix">
                       <li>
-                        <a href="https://www.facebook.com/" title="Facebook">
-                          fb
-                        </a>
+                        <Link to="https://facebook.com/"   target="_blank" rel="noopener noreferrer">
+                          <img
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/assets/icons/facebook32px.png"
+                            }
+                            alt="facebook"
+                          />
+                        </Link>
+                      
                       </li>
                       <li>
-                        <a href="https://www.instagram.com/" title="Instagram">
-                          ig
-                        </a>
+                      <Link to="https://instagram.com/"   target="_blank" rel="noopener noreferrer">
+                          <img
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/assets/icons/instagram32px.png"
+                            }
+                            alt="instagram"
+                          />
+                        </Link>
+                      
                       </li>{" "}
                     </ul>
                   </div>
                   <div className="extra-link">
                     <ul>
                       <li>
-                        <a href="#">Contact us </a>
+                        <a href="/contact">CONTACT US</a>
                       </li>
                     </ul>
                   </div>
