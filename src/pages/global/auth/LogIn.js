@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 // import components
-import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import PageTitle from "../../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 // import LoginForm

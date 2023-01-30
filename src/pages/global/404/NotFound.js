@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 // import components
-import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import Footer from "../../../components/shop/footer/Footer";
 
 //  404 Page (Not Found)

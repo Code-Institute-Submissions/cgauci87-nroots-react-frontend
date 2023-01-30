@@ -3,18 +3,12 @@ import { toast } from "react-toastify";
 
 const errorHandler = (error) => {
   if (error.response.status === 500) {
-    toast.error(`${error.response.data.detail}`, {
-      position: "top-center",
-      autoClose: false,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: 0,
-    });
+    toast.error(`${error.response.data.detail}`);
   }
-
-  return Promise.reject({ ...error });
+  else if (error.response.status === 401) {
+    toast.error("Email or Password is incorrect!");
+  }
+  else return Promise.reject({ ...error });
 };
 
 // axios instance for making requests

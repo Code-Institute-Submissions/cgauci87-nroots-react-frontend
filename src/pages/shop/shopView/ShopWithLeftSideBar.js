@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 
 // import components
-import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import Footer from "../../../components/shop/footer/Footer";
 import PageTitle from "../../../components/global/pageTitle/PageTitle";
 

@@ -68,6 +68,7 @@ function App() {
    * @constructor
    */
   const HandleUsrAccountStatus = () => {
+    console.log("got it!")
     setShowUsrAccount(!showUsrAccount);
     setShowMiniCart(false);
     setTimeout(() => {
@@ -120,11 +121,12 @@ function App() {
   // get user from useAuth function
   const { user } = useAuth();
 
+
   let adminRoutes = <Route></Route>; // restrict admin routes access to admin/is_staff
   if (user.is_staff) {
     adminRoutes = (
       <React.Fragment>
-        <Route path="cms">
+        <Route path="/cms">
           {/* products pages */}
           <Route path="products">
             <Route
@@ -203,10 +205,8 @@ function App() {
               path="/shop/product-details/:id"
               element={<ProductDetails options={options} />}
             />
-
-            {adminRoutes}
-
             <Route path="*" element={<NotFound options={options} />} />
+            {adminRoutes}
           </Route>
         </Routes>
       </Router>

@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
 // import layout components
-import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import PageTitle from ".././../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 

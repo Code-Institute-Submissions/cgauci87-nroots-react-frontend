@@ -100,28 +100,32 @@ function HeaderRightShop({ options }) {
     );
 
   /* ################################################################################################*/
-  const loggedInLinks = // Logged in links defined to display links according if user is logged in or out
-    (
-      <>
+  // Logged in links defined to display links according if user is logged in or out
+  const loggedInLinks = (
+    <>
+      <Link
+        className="view-btn"
+        to="/auth/my-account"
+        onClick={options.onMyAccountClick}
+      >
+        My Account
+      </Link>
+      {/* <Link className="view-btn" onClick={onLogout}>
+        Logout
+      </Link> */}
+      {user && user.is_staff ? (
         <Link
-          className="view-btn"
-          to="/auth/my-account"
-          onClick={options.onMyAccountClick}
+          className="checkout-btn"
+          to="/cms/products/product-list"
+          onClick={options.onCmsClick}
         >
-          My Account
+          CMS
         </Link>
-        <Link className="view-btn" onClick={onLogout}>
-          Logout
-        </Link>
-        {user && user.is_staff ? (
-          <Link className="checkout-btn" to="/cms" onClick={options.onCmsClick}>
-            CMS
-          </Link>
-        ) : (
-          <span></span>
-        )}
-      </>
-    );
+      ) : (
+        <span></span>
+      )}
+    </>
+  );
 
   /* ################################################################################################*/
 
@@ -151,8 +155,8 @@ function HeaderRightShop({ options }) {
               (options.usrAccount ? "mini-content-toggle" : "")
             }
           >
-            {/* display options for user depends if user is logged in.
-          If user is logged in, display loggedInLinks - otherwise display loggedOutLinks */}
+            {/* display options for user depends if user is logged in. */}
+            {/* If user is logged in, display loggedInLinks - otherwise display loggedOutLinks */}
             {user && user.first_name ? loggedInLinks : loggedOutLinks}
           </div>
         </div>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 // import components
 import ProductForm from "../../../../components/cms/forms/ProductForm";
-import HeaderCms from "../../../../components/cms/navbar/HeaderCms";
+import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 
 
 

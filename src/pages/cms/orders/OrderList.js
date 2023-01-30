@@ -8,7 +8,7 @@ import { Card, Table, Input, Button, Menu } from "antd";
 import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 
 // import components
-import HeaderCms from "../../../components/cms/navbar/HeaderCms";
+import HeaderCms from "../../../components/global/navbar/HeaderCms";
 
 // import utils
 import utils from "../../../components/cms/utils/Table";
@@ -38,7 +38,7 @@ function OrderList(options) {
 
   const navigate = useNavigate();
   const viewDetails = (row) => {
-    navigate(`${row.id}`); // navigate to order details of that specific order, once button of viewDetails is clicked
+    navigate(`order/${row.id}`); // navigate to order details of that specific order, once button of viewDetails is clicked
   };
 
   // ==========================================================================

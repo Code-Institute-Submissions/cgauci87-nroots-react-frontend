@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 
 // import components
-import HeaderShop from "../../../components/shop/navbar/HeaderShop";
+import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import Hero1 from "../../../components/shop/hero/Hero1";
 import FeaturedProducts from "../../../components/shop/products/FeaturedProducts";
 import Categories from "../../../components/shop/products/Categories";

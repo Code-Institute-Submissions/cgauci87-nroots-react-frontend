@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { Form } from "antd";
 
 // import components
-import HeaderCms from "../../../components/cms/navbar/HeaderCms";
+import HeaderCms from "../../../components/global/navbar/HeaderCms";
 import PageTitle from "../../../components/global/pageTitle/PageTitle";
 import ShippingFields from "../../../components/global/forms/ShippingFields";
 

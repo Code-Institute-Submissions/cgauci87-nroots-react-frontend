@@ -14,7 +14,7 @@ import {
 
 
 // import components
-import HeaderCms from "../../../../components/cms/navbar/HeaderCms"
+import HeaderCms from "../../../../components/global/navbar/HeaderCms"
 
 // import utils
 import utils from "../../../../components/cms/utils/Table";

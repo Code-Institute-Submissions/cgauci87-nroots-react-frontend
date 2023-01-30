@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 
 // import Logo
-import Logo from "../../global/logo/Logo";
+import Logo from "../logo/Logo";
 
 // import style
 import "./navBar.css";
@@ -24,7 +24,7 @@ function NavbarCms({ options }) {
         <ul className="nav navbar-nav">
           <li>
             <NavLink
-              to="/cms/product-list"
+              to="/cms/products/product-list"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
@@ -34,7 +34,7 @@ function NavbarCms({ options }) {
           </li>
           <li>
             <NavLink
-              to="/cms/add-product"
+              to="/cms/products/add-product"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
@@ -47,7 +47,7 @@ function NavbarCms({ options }) {
 
           <li>
             <NavLink
-              to="/cms/orders"
+              to="/cms/orders/order-list"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
