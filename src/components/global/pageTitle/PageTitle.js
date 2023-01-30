@@ -7,6 +7,7 @@ function PageTitle({ name }) {
   return (
     <Fragment>
       {/* start page-title */}
+      
       <section className="page-title">
         <div className="page-title-container">
           <div className="page-title-wrapper">

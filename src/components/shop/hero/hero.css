@@ -99,6 +99,7 @@ img:active {
     left: 10px;
     top: 110px;
     padding-top: 10px;
+    
 }
 
 .hero-1 .slide-title {
@@ -145,7 +146,6 @@ img:active {
     font-size: 1.4666666667rem;
     color: #fff;
     margin: 0;
-    text-transform: uppercase;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     letter-spacing: 8px;
