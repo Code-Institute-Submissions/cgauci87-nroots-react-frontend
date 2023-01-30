@@ -10,7 +10,7 @@ function Logo() {
         <Link className="logo-middle" to="/">
           <span className="hvr-wobble-vertical">
             <img
-              src={process.env.PUBLIC_URL + "/assets/images/logo.png"} // display logo
+              src={process.env.PUBLIC_URL + "/logo128px.png"} // display logo
               alt="logo"
             />
           </span>

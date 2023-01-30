@@ -906,7 +906,7 @@ button:active {
     border-color: #000;
 }
 
-.view-cart-btn,
+.view-btn,
 .checkout-btn {
     font-family: "futura-pt-demi", sans-serif;
     background: #000;
@@ -925,7 +925,7 @@ button:active {
     letter-spacing: 3px;
 }
 
-.view-cart-btn:hover,
+.view-btn:hover,
 .checkout-btn:hover {
     background-color: #c2572b;
     color: #fff;
@@ -2376,7 +2376,7 @@ button:active {
     color: #000;
 }
 
-.header-style-1 .header-right .mini-cart .cart-toggle-btn {
+.header-style-1 .header-right .mini-cart .toggle-btn {
     font-family: "Gothic A1", sans-serif;
 }
 
@@ -2400,7 +2400,7 @@ button:active {
     border-radius: 50%;
 }
 
-.header-style-1 .header-right .mini-cart-content {
+.header-style-1 .header-right .mini-content {
     background: #fff;
     width: 300px;
     z-index: 10;
@@ -2418,19 +2418,19 @@ button:active {
 }
 
 @media (max-width: 991px) {
-    .header-style-1 .header-right .mini-cart-content {
+    .header-style-1 .header-right .mini-content {
         top: 63px;
     }
 }
 
 @media (max-width: 450px) {
-    .header-style-1 .header-right .mini-cart-content {
+    .header-style-1 .header-right .mini-content {
         right: auto;
         left: -198px;
     }
 }
 
-.header-style-1 .header-right .mini-cart-content p {
+.header-style-1 .header-right .mini-content p {
     font-size: 15px;
     font-size: 1rem;
     font-weight: 500;
@@ -2439,23 +2439,23 @@ button:active {
     text-transform: uppercase;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-items {
+.header-style-1 .header-right .mini-content .mini-cart-items {
     padding: 25px 20px;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item {
+.header-style-1 .header-right .mini-content .mini-cart-item {
     padding-top: 15px;
     margin-top: 15px;
     border-top: 1px solid #efefef;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item:first-child {
+.header-style-1 .header-right .mini-content .mini-cart-item:first-child {
     padding-top: 0;
     margin-top: 0;
     border-top: 0;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-image {
+.header-style-1 .header-right .mini-content .mini-cart-item-image {
     width: 70px;
     height: 80px;
     border: 1px solid #f3f3f3;
@@ -2463,17 +2463,17 @@ button:active {
     margin-right: 15px;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-image a,
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-image img {
+.header-style-1 .header-right .mini-content .mini-cart-item-image a,
+.header-style-1 .header-right .mini-content .mini-cart-item-image img {
     display: block;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-des {
+.header-style-1 .header-right .mini-content .mini-cart-item-des {
     position: relative;
     overflow: hidden;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-des a {
+.header-style-1 .header-right .mini-content .mini-cart-item-des a {
     font-size: 14px;
     font-size: 0.9333333333rem;
     font-weight: 500;
@@ -2483,11 +2483,11 @@ button:active {
     margin-bottom: 0.5em;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-des a:hover {
+.header-style-1 .header-right .mini-content .mini-cart-item-des a:hover {
     color: #c2572b;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-des .mini-cart-item-price {
+.header-style-1 .header-right .mini-content .mini-cart-item-des .mini-cart-item-price {
     font-family: "futura-pt-demi", sans-serif;
     font-size: 14px;
     font-size: 0.9333333333rem;
@@ -2496,24 +2496,24 @@ button:active {
     margin-top: 3px;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-item-des .mini-cart-item-quantity {
+.header-style-1 .header-right .mini-content .mini-cart-item-des .mini-cart-item-quantity {
     font-size: 13px;
     font-size: 0.8666666667rem;
     color: #888;
     display: block;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-action {
+.header-style-1 .header-right .mini-content .mini-cart-action {
     padding: 20px 25px 30px;
     border-top: 1px solid #efefef;
     text-align: center;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-action .theme-btn-s2 {
+.header-style-1 .header-right .mini-content .mini-cart-action .theme-btn-s2 {
     float: right;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-action .mini-checkout-price {
+.header-style-1 .header-right .mini-content .mini-cart-action .mini-checkout-price {
     font-family: "futura-pt-demi", sans-serif;
     font-size: 18px;
     font-size: 1.2rem;
@@ -2523,7 +2523,7 @@ button:active {
     margin-bottom: 20px;
 }
 
-.header-style-1 .header-right .mini-cart-content .mini-cart-action .mini-checkout-price+a {
+.header-style-1 .header-right .mini-content .mini-cart-action .mini-checkout-price+a {
     margin-bottom: 8px;
 }
 
@@ -2723,7 +2723,7 @@ button:active {
     font-weight: 600;
 }
 
-.header-style-2 .header-right .mini-cart-content {
+.header-style-2 .header-right .mini-content {
     background: #fff;
     width: 300px;
     z-index: 10;
@@ -2741,19 +2741,19 @@ button:active {
 }
 
 @media (max-width: 991px) {
-    .header-style-2 .header-right .mini-cart-content {
+    .header-style-2 .header-right .mini-content {
         top: 63px;
     }
 }
 
 @media (max-width: 450px) {
-    .header-style-2 .header-right .mini-cart-content {
+    .header-style-2 .header-right .mini-content {
         right: auto;
         left: -198px;
     }
 }
 
-.header-style-2 .header-right .mini-cart-content p {
+.header-style-2 .header-right .mini-content p {
     font-size: 15px;
     font-size: 1rem;
     font-weight: 500;
@@ -2762,23 +2762,23 @@ button:active {
     text-transform: uppercase;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-items {
+.header-style-2 .header-right .mini-content .mini-cart-items {
     padding: 25px 20px;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item {
+.header-style-2 .header-right .mini-content .mini-cart-item {
     padding-top: 15px;
     margin-top: 15px;
     border-top: 1px solid #efefef;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item:first-child {
+.header-style-2 .header-right .mini-content .mini-cart-item:first-child {
     padding-top: 0;
     margin-top: 0;
     border-top: 0;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-image {
+.header-style-2 .header-right .mini-content .mini-cart-item-image {
     width: 70px;
     height: 80px;
     border: 1px solid #f3f3f3;
@@ -2786,17 +2786,17 @@ button:active {
     margin-right: 15px;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-image a,
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-image img {
+.header-style-2 .header-right .mini-content .mini-cart-item-image a,
+.header-style-2 .header-right .mini-content .mini-cart-item-image img {
     display: block;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-des {
+.header-style-2 .header-right .mini-content .mini-cart-item-des {
     position: relative;
     overflow: hidden;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-des a {
+.header-style-2 .header-right .mini-content .mini-cart-item-des a {
     font-size: 14px;
     font-size: 0.9333333333rem;
     font-weight: 500;
@@ -2806,11 +2806,11 @@ button:active {
     margin-bottom: 0.5em;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-des a:hover {
+.header-style-2 .header-right .mini-content .mini-cart-item-des a:hover {
     color: #c2572b;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-des .mini-cart-item-price {
+.header-style-2 .header-right .mini-content .mini-cart-item-des .mini-cart-item-price {
     font-family: "futura-pt-demi", sans-serif;
     font-size: 14px;
     font-size: 0.9333333333rem;
@@ -2819,24 +2819,24 @@ button:active {
     margin-top: 3px;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-item-des .mini-cart-item-quantity {
+.header-style-2 .header-right .mini-content .mini-cart-item-des .mini-cart-item-quantity {
     font-size: 13px;
     font-size: 0.8666666667rem;
     color: #888;
     display: block;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-action {
+.header-style-2 .header-right .mini-content .mini-cart-action {
     padding: 20px 25px 30px;
     border-top: 1px solid #efefef;
     text-align: center;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-action .theme-btn-s2 {
+.header-style-2 .header-right .mini-content .mini-cart-action .theme-btn-s2 {
     float: right;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-action .mini-checkout-price {
+.header-style-2 .header-right .mini-content .mini-cart-action .mini-checkout-price {
     font-family: "futura-pt-demi", sans-serif;
     font-size: 18px;
     font-size: 1.2rem;
@@ -2846,7 +2846,7 @@ button:active {
     margin-bottom: 20px;
 }
 
-.header-style-2 .header-right .mini-cart-content .mini-cart-action .mini-checkout-price+a {
+.header-style-2 .header-right .mini-content .mini-cart-action .mini-checkout-price+a {
     margin-bottom: 8px;
 }
 
