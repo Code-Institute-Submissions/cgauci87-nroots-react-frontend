@@ -2529,7 +2529,7 @@ button:active {
     margin-bottom: 8px;
 }
 
-.header-style-1 .header-right .mini-cart-content-toggle,
+.header-style-1 .header-right .mini-content-toggle,
 .header-style-1 .header-right .header-search-content-toggle {
     opacity: 1;
     visibility: visible;
@@ -2852,7 +2852,7 @@ button:active {
     margin-bottom: 8px;
 }
 
-.header-style-2 .header-right .mini-cart-content-toggle,
+.header-style-2 .header-right .mini-content-toggle,
 .header-style-2 .header-right .header-search-content-toggle {
     opacity: 1;
     visibility: visible;

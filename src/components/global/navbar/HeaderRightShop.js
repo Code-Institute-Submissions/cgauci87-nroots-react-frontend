@@ -110,9 +110,9 @@ function HeaderRightShop({ options }) {
       >
         My Account
       </Link>
-      {/* <Link className="view-btn" onClick={onLogout}>
+      <Link className="view-btn" onClick={onLogout}>
         Logout
-      </Link> */}
+      </Link>
       {user && user.is_staff ? (
         <Link
           className="checkout-btn"
