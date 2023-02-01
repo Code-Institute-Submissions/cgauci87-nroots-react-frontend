@@ -4581,8 +4581,12 @@ button:active {
 
 .ecom-cart .ecom table.shop_table .cart_item td.product-name,
 .ecom-cart .ecom table.shop_table .cart_item td.product-name a {
-    color: #555;
+    font-weight: 500;
+    color: #c2572b;
+    text-decoration: underline;
 }
+
+
 
 .ecom-cart .ecom table.shop_table .cart_item td {
     padding: 21px 19px;
@@ -6670,6 +6674,7 @@ button:active {
     text-transform: uppercase;
     letter-spacing: 3px;
     border: 0;
+    float: right;
 
 }
 

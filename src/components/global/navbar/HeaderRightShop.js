@@ -61,7 +61,8 @@ function HeaderRightShop({ options }) {
 
   const [total, setTotal] = useState(null);
   useEffect(() => {
-    setTotal(cart.reduce((acc, curr) => acc + curr.price * curr.qty, 0)); // Set cart total according to the state
+    setTotal(cart.reduce((total, item) => (parseFloat((total + item.price * item.qty)).toFixed(2)),0)); // Set cart total according to the state
+    
   }, [cart]);
 
   {

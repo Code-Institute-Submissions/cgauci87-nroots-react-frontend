@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 // import css for cart
 import "./cart.css";
@@ -13,6 +14,8 @@ import CalculatedShipping from "../../../components/shop/cart/CalculatedShipping
 
 // import Context API for cart state
 import { CartState } from "../../../contexts/CartContext";
+
+
 
 // Cart Page
 function Cart({ options }) {
@@ -37,10 +40,14 @@ function Cart({ options }) {
 
   // =======================================================================
   // set total price  based on the below calculation
-  const [total, setTotal] = useState(null);
+
+
+  const [total, setTotal] = useState(0);
+  
   useEffect(() => {
     setTotal(
-      cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
+      // cart.reduce((acc, curr) => acc + Number.parseFloat(curr.price).toFixed(2) * curr.qty, 0)
+      cart.reduce((total, item) => (parseFloat((total + item.price * item.qty)).toFixed(2)),0)
     );
   }, [cart]);
   // =======================================================================
@@ -114,11 +121,19 @@ function Cart({ options }) {
                                 height={70}
                                 src={item.uploadedImg}
                                 className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                alt="#"
+                                alt="product image"
                               />
                             </td>
                             <td className="product-name" data-title="Product">
-                              <a href="#">{item.title}</a>
+                              <Link to={`/shop/product-details/${item.id}`}>
+                                <a
+                                  href="#"
+                                  title="See Product Details!"
+                                  data-tip="Product Details"
+                                >
+                                  {item.title}
+                                </a>
+                              </Link>
                             </td>
                             <td className="product-price" data-title="Price">
                               <span className="ecom-Price-amount amount">
@@ -162,7 +177,7 @@ function Cart({ options }) {
                                 <span className="ecom-Price-currencySymbol">
                                   €
                                 </span>
-                                {item.qty * item.price}
+                                {total}
                               </span>
                             </td>
                           </tr>

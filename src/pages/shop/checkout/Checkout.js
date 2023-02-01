@@ -9,7 +9,7 @@ import Footer from "../../../components/shop/footer/Footer";
 // import contexts
 import { CartState } from "../../../contexts/CartContext";
 import { jsonAxios } from "../../../api/axiosDefaults";
-import useAuth from "../../../hooks/useAuth"
+import useAuth from "../../../hooks/useAuth";
 
 // import ShippingFields for Addresses
 import ShippingFields from "../../../components/global/forms/ShippingFields";
@@ -43,7 +43,10 @@ function Checkout({ options }) {
   const [total, setTotal] = useState(null);
   useEffect(() => {
     setTotal(
-      cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
+      cart.reduce(
+        (total, item) => parseFloat(total + item.price * item.qty).toFixed(2),
+        0
+      )
     );
   }, [cart]);
 
