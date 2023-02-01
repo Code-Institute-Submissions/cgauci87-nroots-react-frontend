@@ -6,6 +6,13 @@
     margin-left: 0px;
 }
 
+.product-option select {
+    display: block;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: -80px;
+}
+
 .slick-initialized .slick-slide:active, 
 .slick-initialized .slick-slide:focus, 
 .slick-slider:active, 

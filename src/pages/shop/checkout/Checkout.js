@@ -176,7 +176,7 @@ function Checkout({ options }) {
       <section className="checkout-section section-padding">
         <div className="container">
           <div className="row">
-            <div className="col col-xs-12">
+            <div className="col col-sm-10">
               <div className="ecom">
                 <form
                   name="checkout"

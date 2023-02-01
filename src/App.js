@@ -68,7 +68,6 @@ function App() {
    * @constructor
    */
   const HandleUsrAccountStatus = () => {
-    console.log("got it!")
     setShowUsrAccount(!showUsrAccount);
     setShowMiniCart(false);
     setTimeout(() => {
@@ -138,7 +137,7 @@ function App() {
               element={<AddProduct options={options} />}
             />
             <Route
-              path="edit-product"
+              path="view-edit/product/:id"
               element={<EditProduct options={options} />}
             />
           </Route>

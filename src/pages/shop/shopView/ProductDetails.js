@@ -54,7 +54,6 @@ function ProductDetails({ options }) {
   const [showQuickView, setShowQuickView] = useState(false);
   const [quickViewData, setQuickViewData] = useState({});
 
-
   /**
    * Handel Quick View Close
    */
@@ -108,10 +107,17 @@ function ProductDetails({ options }) {
                 <div className="product-option">
                   <div className="product-row">
                     <div className="touchspin-wrap"></div>
-                    <div>
+                    <div className="product-qty">
                       {cart.some((p) => p.id === item.id) ? (
                         <>
+                          <span>
+                            <b>Quantity</b>
+                          </span>
                           <select
+                            style={{
+                              width: "40px",
+                              textAlign: "center",
+                            }}
                             value={item.qty}
                             onChange={(e) => {
                               dispatch({

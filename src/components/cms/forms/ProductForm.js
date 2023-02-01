@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Tabs, Form, Button, message } from "antd";
 import { useParams } from "react-router";
-import { axiosReq } from "../../../api/axiosDefaults";
 
 // import components
 import PageHeaderAlt from "../../cms/pageHeader/PageHeaderAlt";
 import Flex from "../../cms/utils/Flex";
 import GeneralField from "./GeneralField";
+
+// import hooks
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // declare add/edit for mode
 const ADD = "ADD";
@@ -16,6 +18,7 @@ const EDIT = "EDIT";
 
 // ProductForm component (for ADD & EDIT)
 function ProductForm(props) {
+  const axiosPrivate = useAxiosPrivate();
   const { mode = ADD } = props; // props passed are for add product
 
   const { id } = useParams(); // using this hook to return the id of a selected product
@@ -25,14 +28,14 @@ function ProductForm(props) {
   const [uploadedImg, setImage] = useState([]);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-// ======================================================================
-// Category & Tags API
+  // ======================================================================
+  // Category & Tags API
 
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    axiosReq.get("/categories").then((response) => {
+    axiosPrivate.get("/categories").then((response) => {
       let _categories = response.data.categories;
       if (_categories.length > 0) {
         let data = {};
@@ -44,7 +47,7 @@ function ProductForm(props) {
   }, []);
 
   useEffect(() => {
-    axiosReq.get("/tags").then((response) => {
+    axiosPrivate.get("/tags").then((response) => {
       let _tags = response.data.tags;
       if (_tags.length > 0) {
         let data = {};
@@ -57,23 +60,21 @@ function ProductForm(props) {
 
   // ======================================================================
 
-
   const getProductList = async () => {
     try {
-      const response = await axiosReq.get("/products");
+      const response = await axiosPrivate.get("/products");
       let data = response.data;
       const productData = data.find((product) => product.id === +id);
       if (productData) {
         form.setFieldsValue(productData); // set values of product data
-        setImage(productData.uploadedImg); // set image 
+        setImage(productData.uploadedImg); // set image
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-    // ======================================================================
-
+  // ======================================================================
 
   useEffect(() => {
     if (mode === EDIT) {
@@ -81,13 +82,12 @@ function ProductForm(props) {
     }
   }, []);
 
-    // ======================================================================
+  // ======================================================================
 
   const onFinish = async () => {
     setSubmitLoading(true); // if user add an image
 
     // ======================================================================
-
 
     var formData;
     let results = form.getFieldsValue();
@@ -99,10 +99,12 @@ function ProductForm(props) {
       delete results.uploadedImg;
     }
 
-// =======================================================================================
-// Dual API requests based on condiontional rendering
-    if (mode === ADD) { // if admin/is_staff adding a product
-      axiosReq({
+    // =======================================================================================
+    // Dual API requests based on condiontional rendering
+
+    if (mode === ADD) {
+      // if admin/is_staff adding a product
+      axiosPrivate({
         method: "post",
         url: "/products/",
         data: {
@@ -115,15 +117,15 @@ function ProductForm(props) {
             setSubmitLoading(false);
             message.success(`Created ${results.title} to product list`);
           }, 1500);
-          //handle success
           console.log(response);
         })
         .catch(function (response) {
           //handle error
           console.log(response);
         });
-    } else { // referring to mode === EDIT, if admin/is_staff edit a product
-      axiosReq({
+    } else {
+      // referring to mode === EDIT, if admin/is_staff edit a product
+      axiosPrivate({
         method: "patch",
         url: `/products/${id}/`, // update the specific product by id
         data: {
@@ -148,7 +150,6 @@ function ProductForm(props) {
 
   // =======================================================================================
 
-
   return (
     <>
       <Form
@@ -170,20 +171,10 @@ function ProductForm(props) {
               justifyContent="between"
               alignItems="center"
             >
-               {/* conditional rendering depends on the mode */}
-              <h2 className="mb-3"> 
-                {mode === "ADD" ? "Add New Product" : `Edit Product`}{" "} 
+              {/* conditional rendering depends on the mode */}
+              <h2 className="mb-3">
+                {mode === "ADD" ? "Add New Product" : `Product Details`}{" "}
               </h2>
-              <div className="mb-3">
-                <Button
-                  type="file"
-                  onClick={() => onFinish()}
-                  htmlType="submit"
-                  loading={submitLoading}
-                >
-                  {mode === "ADD" ? "Add" : `Save`}
-                </Button>
-              </div>
             </Flex>
           </div>
         </PageHeaderAlt>
@@ -204,9 +195,19 @@ function ProductForm(props) {
                     data={form}
                   />
                 ),
-              }
+              },
             ]}
           />
+        </div>
+        <div className="cms-button">
+          <Button
+            type="file"
+            onClick={() => onFinish()}
+            htmlType="submit"
+            loading={submitLoading}
+          >
+            {mode === "ADD" ? "Add" : `Save`}
+          </Button>
         </div>
       </Form>
     </>

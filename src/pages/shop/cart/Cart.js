@@ -9,6 +9,7 @@ import "./cart.css";
 import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import PageTitle from ".././../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
+import CalculatedShipping from "../../../components/shop/cart/CalculatedShipping";
 
 // import Context API for cart state
 import { CartState } from "../../../contexts/CartContext";
@@ -28,13 +29,13 @@ function Cart({ options }) {
     dispatch,
   } = CartState();
 
-    // =======================================================================
+  // =======================================================================
   // set cart items in local storage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-    // =======================================================================
+  // =======================================================================
   // set total price  based on the below calculation
   const [total, setTotal] = useState(null);
   useEffect(() => {
@@ -42,8 +43,7 @@ function Cart({ options }) {
       cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
     );
   }, [cart]);
-    // =======================================================================
-
+  // =======================================================================
 
   return cart.length > 0 ? ( // if card is empty - then navigate to /shop
     <Fragment>
@@ -63,7 +63,8 @@ function Cart({ options }) {
                       <tr>
                         <th
                           className="product-remove"
-                          onClick={() => //  on click -> remoeve item
+                          onClick={() =>
+                            //  on click -> remoeve item
                             dispatch({
                               type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
                               payload: item,
@@ -80,89 +81,99 @@ function Cart({ options }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {cart.map((item) => ( // an array of data to render cart items
-                        <tr className="cart_item">
-                          <td className="product-remove">
-                            <a
-                              href="#"
-                              onClick={() => //  on click -> remoeve item
-                                dispatch(
-                                  {
-                                    type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
-                                    payload: item,
-                                  },
-                                  toast.info(
-                                    "Item has been removed from the cart" // toast message upon removal of an item
-                                  )
-                                )
-                              }
-                              className="remove bg-danger"
-                              title="Remove this item"
-                              data-product_id={item.id}
-                            >
-                              ×
-                            </a>
-                          </td>
-                          <td className="product-thumbnail">
-                            <img
-                              width={57}
-                              height={70}
-                              src={item.uploadedImg}
-                              className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                              alt="#"
-                            />
-                          </td>
-                          <td className="product-name" data-title="Product">
-                            <a href="#">{item.title}</a>
-                          </td>
-                          <td className="product-price" data-title="Price">
-                            <span className="ecom-Price-amount amount">
-                              <span className="ecom-Price-currencySymbol">
-                                €
-                              </span>
-                              {item.price}
-                            </span>
-                          </td>
-                          <td
-                            className="product-quantity"
-                            data-title="Quantity"
-                          >
-                            <div className="quantity">
-                              <select
-                                value={item.qty}
-                                onChange={(e) => { // change qty according to the selected option
-                                  dispatch({
-                                    type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
-                                    payload: {
-                                      id: item.id,
-                                      qty: e.target.value,
+                      {cart.map(
+                        (
+                          item // an array of data to render cart items
+                        ) => (
+                          <tr className="cart_item">
+                            <td className="product-remove">
+                              <a
+                                href="#"
+                                onClick={() =>
+                                  //  on click -> remoeve item
+                                  dispatch(
+                                    {
+                                      type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
+                                      payload: item,
                                     },
-                                  });
-                                  toast.info("Item quantity has been updated"); // toast message upon change of qty
-                                }}
+                                    toast.info(
+                                      "Item has been removed from the cart" // toast message upon removal of an item
+                                    )
+                                  )
+                                }
+                                className="remove bg-danger"
+                                title="Remove this item"
+                                data-product_id={item.id}
                               >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                            </div>
-                          </td>
-                          <td className="product-subtotal" data-title="Total">
-                            <span className="ecom-Price-amount amount">
-                              <span className="ecom-Price-currencySymbol">
-                                €
+                                ×
+                              </a>
+                            </td>
+                            <td className="product-thumbnail">
+                              <img
+                                width={57}
+                                height={70}
+                                src={item.uploadedImg}
+                                className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
+                                alt="#"
+                              />
+                            </td>
+                            <td className="product-name" data-title="Product">
+                              <a href="#">{item.title}</a>
+                            </td>
+                            <td className="product-price" data-title="Price">
+                              <span className="ecom-Price-amount amount">
+                                <span className="ecom-Price-currencySymbol">
+                                  €
+                                </span>
+                                {item.price}
                               </span>
-                              {item.qty * item.price}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+                            <td
+                              className="product-quantity"
+                              data-title="Quantity"
+                            >
+                              <div className="quantity">
+                                <select
+                                  value={item.qty}
+                                  onChange={(e) => {
+                                    // change qty according to the selected option
+                                    dispatch({
+                                      type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
+                                      payload: {
+                                        id: item.id,
+                                        qty: e.target.value,
+                                      },
+                                    });
+                                    toast.info(
+                                      "Item quantity has been updated"
+                                    ); // toast message upon change of qty
+                                  }}
+                                >
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                </select>
+                              </div>
+                            </td>
+                            <td className="product-subtotal" data-title="Total">
+                              <span className="ecom-Price-amount amount">
+                                <span className="ecom-Price-currencySymbol">
+                                  €
+                                </span>
+                                {item.qty * item.price}
+                              </span>
+                            </td>
+                          </tr>
+                        )
+                      )}
                     </tbody>
                   </table>
                 </form>
-                <div className="cart-collaterals">€ price={total}</div>
+                <div className="cart-collaterals">
+                  <CalculatedShipping currencySymbol="€" price={total} />
+                </div>
               </div>
             </div>
           </div>

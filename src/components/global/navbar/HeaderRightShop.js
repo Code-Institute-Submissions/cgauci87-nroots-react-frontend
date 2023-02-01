@@ -79,25 +79,26 @@ function HeaderRightShop({ options }) {
 
   /* ################################################################################################*/
 
-  const loggedOutLinks = // Logged out links defined to display links according if user is logged in or out
-    (
-      <>
-        <Link
-          className="view-btn"
-          to="/auth/login"
-          onClick={options.onLoginClick}
-        >
-          Login
-        </Link>
-        <Link
-          className="view-btn"
-          to="/auth/register"
-          onClick={options.onRegisterClick}
-        >
-          Register
-        </Link>
-      </>
-    );
+  // Logged out links defined to display links according if user is logged in or out
+
+  const loggedOutLinks = (
+    <>
+      <Link
+        className="view-btn"
+        to="/auth/login"
+        onClick={options.onLoginClick}
+      >
+        Login
+      </Link>
+      <Link
+        className="view-btn"
+        to="/auth/register"
+        onClick={options.onRegisterClick}
+      >
+        Register
+      </Link>
+    </>
+  );
 
   /* ################################################################################################*/
   // Logged in links defined to display links according if user is logged in or out
@@ -157,7 +158,7 @@ function HeaderRightShop({ options }) {
           >
             {/* display options for user depends if user is logged in. */}
             {/* If user is logged in, display loggedInLinks - otherwise display loggedOutLinks */}
-            {user && user.first_name ? loggedInLinks : loggedOutLinks}
+            {user && user.is_active ? loggedInLinks : loggedOutLinks}
           </div>
         </div>
 

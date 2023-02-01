@@ -12,9 +12,8 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 
-
 // import components
-import HeaderCms from "../../../../components/global/navbar/HeaderCms"
+import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 
 // import utils
 import utils from "../../../../components/cms/utils/Table";
@@ -80,12 +79,8 @@ function ProductList({ options }) {
     </Menu>
   );
 
-  const addProduct = () => {
-    navigate(`/cms/add-product`); // when admin/is_staff user clicks 'Add Product' button - it will navigate to the add product form
-  };
-
   const viewDetails = (row) => {
-    navigate(`/cms/edit-product/${row.id}`);
+    navigate(`/cms/products/view-edit/product/${row.id}`);
     //  when admin/is_staff user clicks 'View Details / Edit' on a specific product;
     //  it will navigate to the edit product form (which would include the id of that product in the end path)
   };
@@ -164,8 +159,8 @@ function ProductList({ options }) {
       sorter: (a, b) => utils.antdTableSorter(a, b, "price"),
     },
     {
-      title: "",
-      dataIndex: "actions",
+      title: 'Action',
+      key: 'action',
       render: (_, elm) => (
         <div className="text-right">
           <EllipsisDropdown menu={dropdownMenu(elm)} />
@@ -288,14 +283,6 @@ function ProductList({ options }) {
                     Delete Selected
                   </Button>
                 )}
-                <Button
-                  onClick={addProduct}
-                  type="primary"
-                  icon={<PlusCircleOutlined />}
-                  block
-                >
-                  Add product
-                </Button>
               </div>
             </Flex>
             <div className="table-responsive">

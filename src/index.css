@@ -558,6 +558,7 @@ abbr[title] {
     margin: 0;
 }
 
+
 .section-padding {
     padding: 110px 0;
 }
@@ -4500,6 +4501,13 @@ button:active {
 /*--------------------------------------------------------------
 #8.1	checkout-section
 --------------------------------------------------------------*/
+
+
+.checkout-section{
+    padding:110px 0 0 260px;
+}
+
+
 .checkout-section hr {
     clear: both;
     visibility: hidden;
@@ -5562,6 +5570,23 @@ button:active {
 .shop-single-section .product-details .product-option {
     margin: 35px 0;
 }
+
+.shop-single-section .product-details .product-option .product-qty span {
+    display: block;
+    position: absolute;
+    margin-top: 0px;
+    margin-left: -60px;
+}
+
+.shop-single-section .product-details .product-option .product-qty select {
+    display: block;
+    position: absolute;
+    margin-top: 27px;
+    margin-left: -60px;
+}
+
+
+
 
 .shop-single-section .product-details .product-option .btn {
     padding: 7px 4px 7px 6px;
@@ -6630,5 +6655,24 @@ button:active {
 }
 
 /*--------------------------------------------------------------
-#14.1 CMS - Antd
+#14.1 CMS
 --------------------------------------------------------------*/
+
+.cms-button {
+    background: rgba(0, 0, 0, 0.9);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 30px;
+    color: #fff;
+    margin-top: 20px;
+    color: white;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border: 0;
+
+}
+
+.cms-button:hover {
+    background: #000;
+}

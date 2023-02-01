@@ -166,10 +166,8 @@ const GeneralField = (props) => {
               </Upload>
             </Card>
             <Card title="Category & Tag">
-              <Form.Item name="category">
+              <Form.Item name="category"  label="Category" >
                 <Select
-                  mode="category"
-                  placeholder="Pick a Category"
                   className="w-100"
                   value={props.data.category}
                 >
@@ -180,10 +178,8 @@ const GeneralField = (props) => {
                   ))}
                 </Select>
               </Form.Item>
-              <Form.Item name="tag">
+              <Form.Item name="tag" label="Tag">
                 <Select
-                  mode="tag"
-                  placeholder="Pick a Tag"
                   className="w-100"
                   value={props.data.tag}
                 >
