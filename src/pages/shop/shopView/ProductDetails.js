@@ -77,7 +77,7 @@ function ProductDetails({ options }) {
 
       <HeaderShop options={options} />
 
-      <PageTitle name="Shop single" />
+      <PageTitle name={item.title } previouspage="Shop"/>
 
       {/* start shop-single-section */}
 

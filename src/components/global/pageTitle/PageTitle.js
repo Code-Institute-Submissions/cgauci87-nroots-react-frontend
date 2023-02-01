@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 
 // PageTitle Component
 
-function PageTitle({ name }) {
+function PageTitle({ name, previouspage }) {
   return (
     <Fragment>
       {/* start page-title */}
-      
+
       <section className="page-title">
         <div className="page-title-container">
           <div className="page-title-wrapper">
@@ -20,6 +20,7 @@ function PageTitle({ name }) {
                     <li>
                       <NavLink to="/">Home</NavLink>
                     </li>
+                    <li><NavLink to="/shop">{previouspage}</NavLink></li>
                     <li>{name}</li>
                   </ol>
                 </div>
