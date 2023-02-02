@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosReq } from "../../../../api/axiosDefaults";
+
+// import hooks
+import useAxiosPrivate from "../../../../hooks/useAxiosPrivate"
 
 // import antD components
 import { NumericFormat } from "react-number-format";
@@ -9,7 +11,6 @@ import {
   EyeOutlined,
   DeleteOutlined,
   SearchOutlined,
-  PlusCircleOutlined,
 } from "@ant-design/icons";
 
 // import components
@@ -29,12 +30,13 @@ const tags = [];
 
 // ProductList Page
 function ProductList({ options }) {
+  const axiosPrivate = useAxiosPrivate();
   // ====================================================================
   // get product list data from API
   const [ProductListData, setProducts] = useState([]);
   const getProductList = async () => {
     try {
-      const response = await axiosReq.get("/products");
+      const response = await axiosPrivate.get("/products");
       let data = response.data;
       setProducts(data);
     } catch (error) {
@@ -92,10 +94,10 @@ function ProductList({ options }) {
     if (selectedRows.length > 1) {
       selectedRows.forEach((elm) => {
         const objKey = "id";
-        let data = axiosReq.delete(objKey, elm);
+        let data = axiosPrivate.delete(objKey, elm);
         setList(data);
         setSelectedRows([]);
-        axiosReq
+        axiosPrivate
           .delete(
             "/products/bulk_delete/", // bulk delete API
             (data = selectedRows.map((i) => i.id))
@@ -105,7 +107,7 @@ function ProductList({ options }) {
           });
       });
     } else {
-      await axiosReq.delete(`/products/${row.id}/`); // delete a single product
+      await axiosPrivate.delete(`/products/${row.id}/`); // delete a single product
       getProductList(); // this function is being called to fetch the latest data upon deletion
     }
   };
@@ -268,7 +270,7 @@ function ProductList({ options }) {
                       );
                       console.log({ response });
                       if (response) {
-                        axiosReq
+                        axiosPrivate
                           .delete("/products/bulk_delete/", {
                             // bulk_delete API for bulk deletion
                             data: selectedRows.map((i) => i.id),

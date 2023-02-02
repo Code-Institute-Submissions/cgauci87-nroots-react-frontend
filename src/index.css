@@ -5185,6 +5185,13 @@ button:active {
     position: relative;
 }
 
+.shop-section .product-holder img {
+    width: 220px;
+    height: 220px;
+    min-width: 100%;
+    min-height: 100%;
+}
+
 .shop-section .product-holder .product-badge {
     background-color: #c2572b;
     font-size: 12px;
