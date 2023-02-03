@@ -89,6 +89,7 @@ function ProductDetails({ options }) {
           <div className="row">
             <div className="col col-md-6">
               <div className="shop-single-slider slider-thumbnail">
+                {/* Wrap Carousel inside LazyLoad to defer loading content in predictable way */}
                 <LazyLoad>
                   <Carousel autoplay>
                     <img src={item.uploadedImg} alt="carousel-img-1" />
