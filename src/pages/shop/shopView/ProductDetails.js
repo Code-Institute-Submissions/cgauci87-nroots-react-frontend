@@ -8,6 +8,9 @@ import HeaderShop from "../../../components/global/navbar/HeaderShop";
 import PageTitle from ".././../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 
+// import lazy loading
+import LazyLoad from "react-lazy-load";
+
 // import product components
 import QuickView from "../../../components/shop/products/QuickView";
 
@@ -77,7 +80,7 @@ function ProductDetails({ options }) {
 
       <HeaderShop options={options} />
 
-      <PageTitle name={item.title } previouspage="Shop"/>
+      <PageTitle name={item.title} previouspage="Shop" />
 
       {/* start shop-single-section */}
 
@@ -86,11 +89,13 @@ function ProductDetails({ options }) {
           <div className="row">
             <div className="col col-md-6">
               <div className="shop-single-slider slider-thumbnail">
-                <Carousel autoplay>
-                  <img src={item.uploadedImg} alt="carousel-img-1" />
-                  <img src={item.uploadedImg} alt="carousel-img-2" />
-                  <img src={item.uploadedImg} alt="carousel-img-3" />
-                </Carousel>
+                <LazyLoad>
+                  <Carousel autoplay>
+                    <img src={item.uploadedImg} alt="carousel-img-1" />
+                    <img src={item.uploadedImg} alt="carousel-img-2" />
+                    <img src={item.uploadedImg} alt="carousel-img-3" />
+                  </Carousel>
+                </LazyLoad>
 
                 <div className="slider-nav"></div>
               </div>

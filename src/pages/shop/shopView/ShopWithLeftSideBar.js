@@ -8,12 +8,12 @@ import PageTitle from "../../../components/global/pageTitle/PageTitle";
 // import products
 import Products from "../../../components/shop/products/Products";
 
-// ordering and pagination
+// import ordering and pagination
 import Ordering from "../../../components/shop/ordering/Ordering";
 import OrderingToolbar from "../../../components/shop/ordering/OrderingToolbar";
 import Pagination from "../../../components/shop/pagination/Pagination";
 
-// widgets
+// import  widgets
 import SearchWidget from "../../../components/shop/widget/SearchWidget";
 import ProductCategoriesWidget from "../../../components/shop/widget/ProductCategoriesWidget";
 import TagFilterWidget from "../../../components/shop/widget/TagFilterWidget";

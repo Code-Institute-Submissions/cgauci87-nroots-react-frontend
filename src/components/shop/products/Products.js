@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // import context
-import { axiosReq } from "../../../api/axiosDefaults"
+import { axiosReq } from "../../../api/axiosDefaults";
 import { CartState, useCartContext } from "../../../contexts/CartContext";
+
+// import lazy loading
+import LazyLoad from "react-lazy-load";
 
 // Products component
 function Products({ ordering }) {
@@ -36,7 +39,7 @@ function Products({ ordering }) {
       <ul
         className={
           "products " +
-          (ordering == 1     // ordering defined
+          (ordering == 1 // ordering defined
             ? "default-column"
             : ordering == 2
             ? "three-column"
@@ -48,14 +51,15 @@ function Products({ ordering }) {
         {products.map((item, index) => (
           <li key={index} className="product">
             <div className="product-holder">
-              {/* link to product details of the selected product */}
-              <Link to={`/shop/product-details/${item.id}`}> 
-                <img
-                  loading="lazy"
-                  src={item.uploadedImg}
-                  alt="product image"
-                />
-              </Link>
+              <LazyLoad  height={220} width={220}>
+                {/* link to product details of the selected product */}
+                <Link to={`/shop/product-details/${item.id}`}>
+                  <img
+                    src={item.uploadedImg}
+                    alt="product image"
+                  />
+                </Link>
+              </LazyLoad>
               <div className="shop-action-wrap">
                 <ul className="shop-action">
                   <li>
@@ -71,7 +75,8 @@ function Products({ ordering }) {
                   </li>
                   {cart.some((p) => p.id === item.id) ? (
                     <li
-                      onClick={() => // on click remove item from cart
+                      onClick={() =>
+                        // on click remove item from cart
                         dispatch(
                           { type: "REMOVE_FROM_CART", payload: item }, // case is defined in CartReducer.js
                           toast.info("Item has been removed from the cart")
@@ -88,7 +93,8 @@ function Products({ ordering }) {
                     </li>
                   ) : (
                     <li
-                      onClick={() => // on click add item to cart
+                      onClick={() =>
+                        // on click add item to cart
                         dispatch(
                           { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
                           toast.info("Item has been added to the cart")
@@ -118,7 +124,7 @@ function Products({ ordering }) {
                     </bdi>
                   </span>
                 </ins>
-                {parseInt(item.price) < parseInt(item.comparePrice) ? ( // parses a value as a string and returns the first integer. 
+                {parseInt(item.price) < parseInt(item.comparePrice) ? ( // parses a value as a string and returns the first integer.
                   <del>
                     <span className="ecom-Price-amount amount">
                       <bdi>
