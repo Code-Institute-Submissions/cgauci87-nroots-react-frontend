@@ -5214,9 +5214,9 @@ button:active {
 
 .shop-section .shop-action-wrap {
     width: 100%;
-    text-align: center;
+    text-align: center !important;
     position: absolute;
-    left: 0;
+    left: -45px;
     bottom: 15px;
     opacity: 0;
     visibility: hidden;
@@ -5226,6 +5226,13 @@ button:active {
     -ms-transition: all 0.3s;
     transition: all 0.3s;
 }
+
+@media screen and (max-width: 1900px) {
+    .shop-section .shop-action-wrap {
+        left: 0;
+    }
+}
+
 
 .shop-section .shop-action {
     display: inline-block;
