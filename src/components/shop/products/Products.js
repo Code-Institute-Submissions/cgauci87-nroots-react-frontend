@@ -51,6 +51,7 @@ function Products({ ordering }) {
         {products.map((item, index) => (
           <li key={index} className="product">
             <div className="product-holder">
+              {/* Wrap img inside LazyLoad to defer loading content in predictable way */}
               <LazyLoad  height={220} width={220}>
                 {/* link to product details of the selected product */}
                 <Link to={`/shop/product-details/${item.id}`}>
