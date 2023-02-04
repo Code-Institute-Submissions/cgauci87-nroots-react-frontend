@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -10,18 +10,21 @@ import { CartState, useCartContext } from "../../../contexts/CartContext";
 import LazyLoad from "react-lazy-load";
 
 // Products component
-function Products({ ordering }) {
+function Products({ ordering, filter }) {
   // ===============================================================
   const { products, setProducts } = useCartContext();
 
-  const getProducts = async () => {
-    const response = await axiosReq.get("/products");
+
+
+  const getProducts = async (f) => {
+    const response = await axiosReq.get(`/products?${filter}`);
     setProducts(response.data);
   };
 
   useEffect(() => {
-    getProducts();
-  }, []); // Get products from API
+    console.log("filter changed", filter)
+    getProducts(filter);
+  }, [filter]); // Get products from API & filter
 
   const {
     state: { cart },

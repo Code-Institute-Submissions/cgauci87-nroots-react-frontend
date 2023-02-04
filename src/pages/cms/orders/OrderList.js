@@ -1,7 +1,9 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
-import { axiosReq } from "../../../api/axiosDefaults";
+
+// import hooks
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // import antD components
 import { Card, Table, Input, Button, Menu } from "antd";
@@ -17,10 +19,11 @@ import Flex from "../../../components/cms/utils/Flex";
 
 // OrderList page
 function OrderList(options) {
+  const axiosPrivate = useAxiosPrivate();
   const [OrderListData, setOrders] = useState([]);
   const getOrderList = async () => {
     try {
-      const response = await axiosReq.get("/order"); // API
+      const response = await axiosPrivate.get("/order"); // API
       let data = response.data;
       setOrders(data);
     } catch (error) {
