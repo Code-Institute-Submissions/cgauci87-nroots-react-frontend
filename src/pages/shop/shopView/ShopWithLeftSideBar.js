@@ -25,6 +25,7 @@ function ShopWithLeftSideBar({ options }) {
   const [ordering, setOrdering] = useState(1);
 
   const [filter, setFilter] = useState('')
+  const [search, setSearch] = useState('')
 
   /**
    * Handle Ordering Status
@@ -59,14 +60,14 @@ function ShopWithLeftSideBar({ options }) {
                       <Ordering />
                     </div>
 
-                    <Products ordering={ordering}  filter={filter} />
+                    <Products ordering={ordering}  filter={filter} search={search}/>
                   </div>
                   <Pagination extraClass="" />
                 </div>
                 <div className="shop-sidebar">
-                  <SearchWidget title="" />
+                  <SearchWidget setSearch={setSearch} />
                   <ProductCategoriesWidget setFilter={setFilter} />
-                  <TagFilterWidget />
+                  <TagFilterWidget setFilter={setFilter} />
                 </div>
               </div>
             </div>

@@ -12,19 +12,19 @@ function ProductCategoriesWidget({setFilter}) {
         <h3>Filter by categories</h3>
         <ul className="product-categories">
           <li className="cat-item">
-            <Link onClick={e => setFilter('categories=Tiny Plants')}>
+            <Link onClick={e => setFilter('category=Tiny Plants')}>
               Tiny Plants
             </Link>
           </li>
 
           <li className="cat-item">
-            <a href="#" onClick={e => setFilter('categories=Large Plants')}>Large Plants</a>
+            <a href="#" onClick={e => setFilter('category=Large Plants')}>Large Plants</a>
           </li>
           <li className="cat-item">
-            <a href="#" onClick={e => setFilter('categories=Planters')}>Planters</a>
+            <a href="#" onClick={e => setFilter('category=Planters')}>Planters</a>
           </li>
           <li className="cat-item">
-            <a href="#" onClick={e => setFilter('categories=Plant Care')}>Plant Care</a>
+            <a href="#" onClick={e => setFilter('category=Plant Care')}>Plant Care</a>
           </li>
         </ul>
       </div>

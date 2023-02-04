@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -10,21 +10,30 @@ import { CartState, useCartContext } from "../../../contexts/CartContext";
 import LazyLoad from "react-lazy-load";
 
 // Products component
-function Products({ ordering, filter }) {
+function Products({ ordering, filter, search }) {
   // ===============================================================
   const { products, setProducts } = useCartContext();
 
-
-
-  const getProducts = async (f) => {
+  const getProducts = async () => {
     const response = await axiosReq.get(`/products?${filter}`);
     setProducts(response.data);
   };
 
   useEffect(() => {
-    console.log("filter changed", filter)
     getProducts(filter);
-  }, [filter]); // Get products from API & filter
+  }, [filter]); // Get products from API & filter whenever it changes
+
+
+  const productSearch = async () => {
+    const response = await axiosReq.get(`/products?${search}`);
+    setProducts(response.data);
+  };
+
+  useEffect(() => {
+    productSearch(search);
+  }, [search]); // Get products from API & filter whenever it changes
+
+
 
   const {
     state: { cart },
@@ -55,13 +64,10 @@ function Products({ ordering, filter }) {
           <li key={index} className="product">
             <div className="product-holder">
               {/* Wrap img inside LazyLoad to defer loading content in predictable way */}
-              <LazyLoad  height={220} width={220}>
+              <LazyLoad height={220} width={220}>
                 {/* link to product details of the selected product */}
                 <Link to={`/shop/product-details/${item.id}`}>
-                  <img
-                    src={item.uploadedImg}
-                    alt="product image"
-                  />
+                  <img src={item.uploadedImg} alt="product image" />
                 </Link>
               </LazyLoad>
               <div className="shop-action-wrap">

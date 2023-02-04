@@ -2,13 +2,13 @@ import React, {Fragment} from 'react';
 
 
 
-function SearchWidget({title}) {
+function SearchWidget({setSearch}) {
 
     return (
         <Fragment>
             <div className="widget search-widget">
                 {
-                    title.length > 0 ? <h3>{title}</h3> : ''
+                    setSearch.length > 0 ? <h3>{setSearch}</h3> : ''
                 }
 
                 <form>
