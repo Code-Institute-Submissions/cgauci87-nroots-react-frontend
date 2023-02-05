@@ -25,6 +25,7 @@ root.render(
             pauseOnFocusLoss
             draggable
             pauseOnHover
+            limit={1}
           />
           <App />
         </React.StrictMode>
