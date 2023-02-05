@@ -11,7 +11,6 @@ import Products from "../../../components/shop/products/Products";
 // import ordering and pagination
 import Ordering from "../../../components/shop/ordering/Ordering";
 import OrderingToolbar from "../../../components/shop/ordering/OrderingToolbar";
-import Pagination from "../../../components/shop/pagination/Pagination";
 
 // import  widgets
 import SearchWidget from "../../../components/shop/widget/SearchWidget";
@@ -22,7 +21,7 @@ import TagFilterWidget from "../../../components/shop/widget/TagFilterWidget";
 import "./shop.css";
 
 function ShopWithLeftSideBar({ options }) {
-  const [ordering, setOrdering] = useState(1);
+  const [ordering, setOrdering] = useState('&ordering=-created_at');
 
   const [filter, setFilter] = useState('')
   const [query, setQuery] = useState('')
@@ -57,16 +56,16 @@ function ShopWithLeftSideBar({ options }) {
                         ordering={ordering}
                       />
 
-                      <Ordering />
+                      <Ordering setOrdering={setOrdering} />
                     </div>
 
-                    <Products ordering={ordering}  filter={filter} query={query}/>
+                    <Products ordering={ordering}  filter={filter} query={query} ordering={ordering}/>
                   </div>
-                  <Pagination extraClass="" />
+                  
                 </div>
                 <div className="shop-sidebar">
-                  <SearchWidget setQuery={setQuery} />
-                  <ProductCategoriesWidget setFilter={setFilter} />
+                  <SearchWidget setQuery={setQuery} setFilter={setFilter} />
+                  <ProductCategoriesWidget setFilter={setFilter} currentFilter={filter} />
                   <TagFilterWidget setFilter={setFilter} />
                 </div>
               </div>

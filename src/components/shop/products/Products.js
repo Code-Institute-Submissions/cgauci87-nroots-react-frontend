@@ -10,20 +10,24 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 // import lazy loading
 import LazyLoad from "react-lazy-load";
+import Pagination from "../../../components/shop/pagination/Pagination";
 
 // Products component
 function Products({ ordering, filter, query }) {
   // ===============================================================
   const { products, setProducts } = useCartContext();
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalProducts, setTotalProducts] = useState(0)
 
   const getProducts = async () => {
     setLoading(true); // set loading to true as soon as getProducts is invoked
     try {
       const response = await axiosReq.get(
-        `/products/?${filter}&search=${query}`
+        `/products/?${filter}&search=${query}${ordering}&page=${currentPage}`
       );
-      setProducts(response.data);
+      setProducts(response.data.results);
+      setTotalProducts(response.data.count)
       setLoading(false);
     } catch (error) {
       // Error Handling
@@ -38,7 +42,7 @@ function Products({ ordering, filter, query }) {
 
   useEffect(() => {
     getProducts();
-  }, [filter, query]); // Get products from API & filter whenever it changes
+  }, [filter, query, ordering, currentPage]); // Get products from API & filter whenever it changes
 
 
   const {
@@ -162,6 +166,7 @@ function Products({ ordering, filter, query }) {
             </li>
           ))}
         </ul>
+        <Pagination extraClass="" total={totalProducts} setCurrentPage={setCurrentPage} currentPage={currentPage} pageSize={10}/>
       </Fragment>
     ) : (
       <h3>No products found!</h3>

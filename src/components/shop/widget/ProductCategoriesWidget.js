@@ -4,14 +4,19 @@ import { Link } from "react-router-dom";
 
 
 
-function ProductCategoriesWidget({setFilter}) {
+function ProductCategoriesWidget({setFilter, currentFilter}) {
   
   return (
     <Fragment>
       <div className="widget ecom widget_product_categories">
         <h3>Filter by categories</h3>
         <ul className="product-categories">
-          <li className="cat-item">
+        <li className="cat-item">
+            <Link onClick={e => setFilter('')} style={{fontWeight: currentFilter === '' ? 'bold' : 'normal'}}>
+              All Products
+            </Link>
+          </li>
+          <li className="cat-item" style={{fontWeight: currentFilter === 'category=Tiny Plants' ? 'bold' : 'normal'}}>
             <Link onClick={e => setFilter('category=Tiny Plants')}>
               Tiny Plants
             </Link>

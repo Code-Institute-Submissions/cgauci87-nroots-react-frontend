@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-function SearchWidget({ query, setQuery }) {
+function SearchWidget({ query, setQuery, setFilter }) {
   return (
     <Fragment>
       <div className="widget search-widget">
@@ -9,7 +9,7 @@ function SearchWidget({ query, setQuery }) {
             <input
               type="text"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {setQuery(event.target.value); setFilter('')}}
               placeholder="Search Product.."
             />
             <button type="submit">
