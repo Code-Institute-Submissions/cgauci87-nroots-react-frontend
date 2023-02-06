@@ -17,6 +17,10 @@ import ProductSearchWidget from "../../../components/shop/widget/ProductSearchWi
 import ProductCategoriesWidget from "../../../components/shop/widget/ProductCategoriesWidget";
 import ProductTagsWidget from "../../../components/shop/widget/ProductTagsWidget";
 
+// import this hook to sync query parameters
+import { useQueryState } from "../../../hooks/useQueryState"
+
+
 // style
 import "./shop.css";
 
@@ -26,7 +30,8 @@ function ShopWithLeftSideBar({ options }) {
   const [ordering, setOrdering] = useState('&ordering=-created_at');
   const [gridOrdering, setGridOrdering] = useState('1')
 
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useQueryState('filter')
+  console.log(filter, "<<< This is the filter")
   const [query, setQuery] = useState('')
 
   /**

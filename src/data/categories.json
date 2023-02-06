@@ -15,7 +15,7 @@
         "id": 3,
         "name": "Planters",
         "icon": "/assets/icons/planters-512x512.png",
-        "link": "/categories"
+        "link": "/shop?filter=category%3DPlanters"
     },
     {
         "id": 4,
