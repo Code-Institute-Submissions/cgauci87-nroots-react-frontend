@@ -13,12 +13,13 @@ import Ordering from "../../../components/shop/ordering/Ordering";
 import GridOrderingToolbar from "../../../components/shop/ordering/GridOrderingToolbar";
 
 // import  widgets
-import SearchWidget from "../../../components/shop/widget/SearchWidget";
+import ProductSearchWidget from "../../../components/shop/widget/ProductSearchWidget";
 import ProductCategoriesWidget from "../../../components/shop/widget/ProductCategoriesWidget";
-import TagFilterWidget from "../../../components/shop/widget/TagFilterWidget";
+import ProductTagsWidget from "../../../components/shop/widget/ProductTagsWidget";
 
 // style
 import "./shop.css";
+
 
 
 function ShopWithLeftSideBar({ options }) {
@@ -66,9 +67,9 @@ function ShopWithLeftSideBar({ options }) {
                   
                 </div>
                 <div className="shop-sidebar">
-                  <SearchWidget setQuery={setQuery} setFilter={setFilter} />
+                  <ProductSearchWidget setQuery={setQuery} setFilter={setFilter} />
                   <ProductCategoriesWidget setFilter={setFilter} currentFilter={filter} />
-                  <TagFilterWidget setFilter={setFilter} />
+                  <ProductTagsWidget setFilter={setFilter} currentFilter={filter} />
                 </div>
               </div>
             </div>

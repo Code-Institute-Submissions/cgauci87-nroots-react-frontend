@@ -67,7 +67,7 @@ function Products({ gridOrdering, ordering, filter, query }) {
         <ul
           className={
             "products " +
-            (gridOrdering == 1 // ordering defined
+            (gridOrdering == 1 // grid ordering defined
               ? "default-column"
               : gridOrdering == 2
               ? "three-column"

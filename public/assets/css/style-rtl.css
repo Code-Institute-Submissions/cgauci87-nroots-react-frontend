@@ -510,7 +510,7 @@ select {
     left: inherit;
 }
 
-.shop-sidebar .widget_product_tag_cloud .tagcloud a {
+.shop-sidebar .widget_product_cloud .cloud a {
     float: right;
     margin: 0 0px 8px 8px;
 }

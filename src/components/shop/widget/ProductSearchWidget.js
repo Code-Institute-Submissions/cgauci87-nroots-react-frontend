@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-function SearchWidget({ query, setQuery, setFilter }) {
+function ProductSearchWidget({ query, setQuery, setFilter }) {
   return (
     <Fragment>
       <div className="widget search-widget">
@@ -22,4 +22,4 @@ function SearchWidget({ query, setQuery, setFilter }) {
   );
 }
 
-export default SearchWidget;
+export default ProductSearchWidget;
