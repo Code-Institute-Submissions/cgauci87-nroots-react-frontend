@@ -2,10 +2,10 @@ class Utils {
 
 	/**
 	 * Filter array of object 
-	 * @param {Array} list - array of objects that need to filter
-	 * @param {String} key - object key target
-	 * @param {any} value  - value that excluded from filter
-	 * @return {Array} a value minus b value
+	 * list - array of objects that need to filter
+	 *  key - object key target
+	 * value  - value that excluded from filter
+	 *  a value minus b value
 	 */
 	static filterArray(list, key, value) {
 		let data = list
@@ -17,10 +17,10 @@ class Utils {
 
 	/**
 	 * Remove object from array by value
-	 * @param {Array} list - array of objects
-	 * @param {String} key - object key target
-	 * @param {any} value  - target value
-	 * @return {Array} Array that removed target object
+	 * list - array of objects
+	 *  key - object key target
+	 * value  - target value
+	 * Array that removed target object
 	 */
 	static deleteArrayRow(list, key, value) {
 		let data = list
@@ -32,9 +32,9 @@ class Utils {
 
 	/**
 	 * Wild card search on all property of the object
-	 * @param {Number | String} input - any value to search
-	 * @param {Array} list - array for search
-	 * @return {Array} array of object contained keyword
+	 * input - any value to search
+	 * list - array for search
+	 * array of object contained keyword
 	 */
 	static wildCardSearch(list, input) {
 		const searchText = (item) => {
@@ -53,8 +53,8 @@ class Utils {
 
 	/**
 	 * Get Breakpoint
-	 * @param {Object} screens - Grid.useBreakpoint() from antd
-	 * @return {Array} array of breakpoint size
+	 *  screens - Grid.useBreakpoint() from antd
+	 * array of breakpoint size
 	 */
 	static getBreakPoint(screens) {
 		let breakpoints = []

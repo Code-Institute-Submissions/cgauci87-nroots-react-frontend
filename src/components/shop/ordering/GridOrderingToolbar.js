@@ -1,18 +1,16 @@
 import React, {Fragment} from 'react';
 
 /**
- * product Ordering Toolbar component
- * @param HandleOrderingStatus
- * @param ordering
+ * Grid Ordering Toolbar component
  */
-function OrderingToolbar({HandleOrderingStatus, ordering}) {
+function GridOrderingToolbar({HandleOrderingStatus, gridOrdering}) {
 
     return (
         <Fragment>
             <div className="products-sizes">
                 <a href="#" onClick={(event) => {
                     HandleOrderingStatus(event, 1)
-                }} className={"grid-4 " + (ordering == 1 ? 'active' : '')}>
+                }} className={"grid-4 " + (gridOrdering == 1 ? 'active' : '')}>
                     <div className="grid-draw">
                         <span/><span/><span/><span/>
                     </div>
@@ -25,7 +23,7 @@ function OrderingToolbar({HandleOrderingStatus, ordering}) {
                 </a>
                 <a href="#" onClick={(event) => {
                     HandleOrderingStatus(event, 2)
-                }} className={"grid-3 " + (ordering == 2 ? 'active' : '')}>
+                }} className={"grid-3 " + (gridOrdering == 2 ? 'active' : '')}>
                     <div className="grid-draw">
                         <span/><span/><span/>
                     </div>
@@ -38,7 +36,7 @@ function OrderingToolbar({HandleOrderingStatus, ordering}) {
                 </a>
                 <a href="#" onClick={(event) => {
                     HandleOrderingStatus(event, 3)
-                }} className={"list-view " + (ordering == 3 ? 'active' : '')}>
+                }} className={"list-view " + (gridOrdering == 3 ? 'active' : '')}>
                     <div className="grid-draw-line">
                         <span/><span/>
                     </div>
@@ -54,4 +52,4 @@ function OrderingToolbar({HandleOrderingStatus, ordering}) {
     );
 }
 
-export default OrderingToolbar;
+export default GridOrderingToolbar;

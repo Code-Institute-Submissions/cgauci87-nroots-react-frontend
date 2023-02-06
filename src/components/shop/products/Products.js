@@ -10,10 +10,12 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 // import lazy loading
 import LazyLoad from "react-lazy-load";
+
+// import pagination
 import Pagination from "../../../components/shop/pagination/Pagination";
 
 // Products component
-function Products({ ordering, filter, query }) {
+function Products({ gridOrdering, ordering, filter, query }) {
   // ===============================================================
   const { products, setProducts } = useCartContext();
   const [loading, setLoading] = useState(true);
@@ -65,11 +67,11 @@ function Products({ ordering, filter, query }) {
         <ul
           className={
             "products " +
-            (ordering == 1 // ordering defined
+            (gridOrdering == 1 // ordering defined
               ? "default-column"
-              : ordering == 2
+              : gridOrdering == 2
               ? "three-column"
-              : ordering == 3
+              : gridOrdering == 3
               ? "list-view"
               : "")
           }

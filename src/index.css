@@ -4986,7 +4986,7 @@ button:active {
 
 .shop-section .ecom-toolbar-top select {
     background-position: calc(100% - 15px) 15px;
-    padding: 6px 15px;
+    padding: 6px 30px;
 }
 
 @media (max-width: 1500px) {

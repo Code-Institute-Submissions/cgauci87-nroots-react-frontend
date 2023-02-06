@@ -2,10 +2,6 @@ import React, {Fragment} from 'react';
 
 /**
  * product Quick View component
- * @param data
- * @param onQuickViewCloseClick
- * @returns {*}
- * @constructor
  */
 function QuickView({data, onQuickViewCloseClick}) {
 

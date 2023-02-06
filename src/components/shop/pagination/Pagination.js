@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 
 /**
  * Pagination component
- * @param extraClass
  */
 function Pagination({extraClass, total, currentPage, pageSize, setCurrentPage}) {
     const links = []; 

@@ -8,9 +8,9 @@ import PageTitle from "../../../components/global/pageTitle/PageTitle";
 // import products
 import Products from "../../../components/shop/products/Products";
 
-// import ordering and pagination
+// import ordering
 import Ordering from "../../../components/shop/ordering/Ordering";
-import OrderingToolbar from "../../../components/shop/ordering/OrderingToolbar";
+import GridOrderingToolbar from "../../../components/shop/ordering/GridOrderingToolbar";
 
 // import  widgets
 import SearchWidget from "../../../components/shop/widget/SearchWidget";
@@ -20,8 +20,10 @@ import TagFilterWidget from "../../../components/shop/widget/TagFilterWidget";
 // style
 import "./shop.css";
 
+
 function ShopWithLeftSideBar({ options }) {
   const [ordering, setOrdering] = useState('&ordering=-created_at');
+  const [gridOrdering, setGridOrdering] = useState('1')
 
   const [filter, setFilter] = useState('')
   const [query, setQuery] = useState('')
@@ -31,7 +33,7 @@ function ShopWithLeftSideBar({ options }) {
    */
   const HandleOrderingStatus = (event, data) => {
     event.preventDefault();
-    setOrdering(data);
+    setGridOrdering(data);
   };
 
   return (
@@ -51,15 +53,15 @@ function ShopWithLeftSideBar({ options }) {
                     <div className="ecom-toolbar-top">
                       <p className="ecom-result-count"></p>
 
-                      <OrderingToolbar
+                      <GridOrderingToolbar
                         HandleOrderingStatus={HandleOrderingStatus}
-                        ordering={ordering}
+                        gridOrdering={gridOrdering}
                       />
 
                       <Ordering setOrdering={setOrdering} />
                     </div>
 
-                    <Products ordering={ordering}  filter={filter} query={query} ordering={ordering}/>
+                    <Products gridOrdering={gridOrdering} ordering={ordering}  filter={filter} query={query}/>
                   </div>
                   
                 </div>
