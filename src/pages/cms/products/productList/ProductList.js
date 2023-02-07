@@ -2,16 +2,12 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import hooks
-import useAxiosPrivate from "../../../../hooks/useAxiosPrivate"
+import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 
 // import antD components
 import { NumericFormat } from "react-number-format";
 import { Layout, Card, Table, Select, Input, Button, Menu } from "antd";
-import {
-  EyeOutlined,
-  DeleteOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { EyeOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 
 // import components
 import HeaderCms from "../../../../components/global/navbar/HeaderCms";
@@ -38,7 +34,8 @@ function ProductList({ options }) {
     try {
       const response = await axiosPrivate.get("/products");
       let data = response.data;
-      setProducts(data);
+      setProducts(data.results);
+      console.log(data.results);
     } catch (error) {
       console.log(error);
     }
@@ -161,8 +158,8 @@ function ProductList({ options }) {
       sorter: (a, b) => utils.antdTableSorter(a, b, "price"),
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (_, elm) => (
         <div className="text-right">
           <EllipsisDropdown menu={dropdownMenu(elm)} />
@@ -186,6 +183,7 @@ function ProductList({ options }) {
     const data = utils.wildCardSearch(searchArray, value);
     setList(data);
     setSelectedRowKeys([]);
+    console.log (data, "<<< this is the data from the search")
   };
 
   const handleShowCategory = (value) => {

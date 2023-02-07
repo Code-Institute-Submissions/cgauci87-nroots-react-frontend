@@ -23,12 +23,12 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
             <a
               href="#"
               className="cloud-link"
-              onClick={(e) => setFilter("category=Tiny Plants")}
+              onClick={(e) => setFilter("category=Tiny-Plants")}
               style={{
                 background:
-                  currentFilter === "category=Tiny Plants" ? "#000" : "none",
+                  currentFilter === "category=Tiny-Plants" ? "#000" : "none",
                 color:
-                  currentFilter === "category=Tiny Plants" ? "#fff" : "#787878",
+                  currentFilter === "category=Tiny-Plants" ? "#fff" : "#787878",
               }}
             >
               Tiny Plants
@@ -39,12 +39,12 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
             <a
               href="#"
               className="cloud-link"
-              onClick={(e) => setFilter("category=Large Plants")}
+              onClick={(e) => setFilter("category=Large-Plants")}
               style={{
                 background:
-                  currentFilter === "category=Large Plants" ? "#000" : "none",
+                  currentFilter === "category=Large-Plants" ? "#000" : "none",
                 color:
-                  currentFilter === "category=Large Plants"
+                  currentFilter === "category=Large-Plants"
                     ? "#fff"
                     : "#787878",
               }}
@@ -71,12 +71,12 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
             <a
               href="#"
               className="cloud-link"
-              onClick={(e) => setFilter("category=Plant Care")}
+              onClick={(e) => setFilter("category=Plant-Care")}
               style={{
                 background:
-                  currentFilter === "category=Plant Care" ? "#000" : "none",
+                  currentFilter === "category=Plant-Care" ? "#000" : "none",
                 color:
-                  currentFilter === "category=Plant Care" ? "#fff" : "#787878",
+                  currentFilter === "category=Plant-Care" ? "#fff" : "#787878",
               }}
             >
               Plant Care

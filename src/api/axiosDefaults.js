@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let baseUrl = "https://8000-cgauci87-nrootsdrfapi-j8v838srezm.ws-eu85.gitpod.io/"; // Development
+let baseUrl = "https://8000-cgauci87-nrootsdrfapi-hp6qke2yhal.ws-eu85.gitpod.io/"; // Development
 axios.defaults.baseURL = baseUrl;
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";

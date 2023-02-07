@@ -63,7 +63,7 @@ function ProductForm(props) {
   const getProductList = async () => {
     try {
       const response = await axiosPrivate.get("/products");
-      let data = response.data;
+      let data = response.data.results;
       const productData = data.find((product) => product.id === +id);
       if (productData) {
         form.setFieldsValue(productData); // set values of product data

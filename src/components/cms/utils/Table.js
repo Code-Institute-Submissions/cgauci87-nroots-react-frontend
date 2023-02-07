@@ -1,11 +1,30 @@
 class Utils {
+	/**
+	 * Returns either ascending or descending value
+	 *  a - antd Table sorter param a
+	 *  b - antd Table sorter param b
+	 *  key - object key for compare
+	 *  return  a value minus b value
+	 */
+	static antdTableSorter(a, b, key) {
+		if(typeof a[key] === 'number' && typeof b[key] === 'number') {
+			return a[key] - b[key]
+		}
+
+		if(typeof a[key] === 'string' && typeof b[key] === 'string') {
+			a = a[key].toLowerCase();
+			b = b[key].toLowerCase();
+			return a > b ? -1 : b > a ? 1 : 0;
+		}
+		return
+	}
 
 	/**
 	 * Filter array of object 
 	 * list - array of objects that need to filter
-	 *  key - object key target
-	 * value  - value that excluded from filter
-	 *  a value minus b value
+	 * key - object key target
+	 * any value  - value that excluded from filter
+	 * return a value minus b value
 	 */
 	static filterArray(list, key, value) {
 		let data = list
@@ -16,25 +35,10 @@ class Utils {
 	}
 
 	/**
-	 * Remove object from array by value
-	 * list - array of objects
-	 *  key - object key target
-	 * value  - target value
-	 * Array that removed target object
-	 */
-	static deleteArrayRow(list, key, value) {
-		let data = list
-		if(list) {
-			data = list.filter(item => item[key] !== value)
-		}
-		return data
-	}
-
-	/**
 	 * Wild card search on all property of the object
-	 * input - any value to search
-	 * list - array for search
-	 * array of object contained keyword
+	 * Number | String input - any value to search
+	 * Arraylist - array for search
+	 * Return array of object contained keyword
 	 */
 	static wildCardSearch(list, input) {
 		const searchText = (item) => {
@@ -53,8 +57,8 @@ class Utils {
 
 	/**
 	 * Get Breakpoint
-	 *  screens - Grid.useBreakpoint() from antd
-	 * array of breakpoint size
+	 * screens - Grid.useBreakpoint() from antd
+	 * Return array of breakpoint size
 	 */
 	static getBreakPoint(screens) {
 		let breakpoints = []

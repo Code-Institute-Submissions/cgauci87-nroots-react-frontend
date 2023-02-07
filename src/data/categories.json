@@ -3,13 +3,13 @@
         "id": 1,
         "name": "Tiny Plants",
         "icon": "/assets/icons/tiny-plants-128x128.png",
-        "link": "/shop?filter=category%3DTiny Plants"
+        "link": "/shop?filter=category%3DTiny-Plants"
     },
     {
         "id": 2,
         "name": "Large Plants",
         "icon": "/assets/icons/large-plants-512x512.png",
-        "link": "/shop?filter=category%3DLarge Plants"
+        "link": "/shop?filter=category%3DLarge-Plants"
     },
     {
         "id": 3,
@@ -21,6 +21,6 @@
         "id": 4,
         "name": "Plant Care",
         "icon": "/assets/icons/plant-care-512x512.png",
-        "link": "/shop?filter=category%3DPlant Care"
+        "link": "/shop?filter=category%3DPlant-Care"
     }
 ]

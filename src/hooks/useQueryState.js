@@ -12,14 +12,7 @@ export const useQueryState = (query) => {
       const existingQueries = qs.parse(location.search, {
         ignoreQueryPrefix: true,
       });
-
-      // const queryString = encodeURIComponent(
-      //   qs.stringify(
-      //     { ...existingQueries, [query]: value },
-      //     { skipNulls: true }
-      //   )
-      // );
-
+      
       const queryString = qs.stringify(
         { ...existingQueries, [query]: value },
         { skipNulls: true }

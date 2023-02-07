@@ -67,17 +67,21 @@ function ProductDetails({ options }) {
     setQuickViewData({});
   };
 
-  // parse url for the item category
-  let urlCat = "/shop?filter=category%3D" + item.category;
-  // parse url for the item tag
-  let urlTag = "/shop?filter=tag%3D" + item.tag;
+  // =============================================================================================================
 
   // display category if there is any, otherwise do not display
   let showCategory = <span></span>;
   if (item.category) {
+    // replace hyphen (category name to be displayed with empty space if there is more than one word)
+    let cat = item.category;
+    let cat_name = cat.replace(/-/g, " ");
+
+    // parse url for the item category
+    let str = encodeURIComponent(item.category);
+    let urlCat = "/shop?filter=category%3D" + str;
     showCategory = (
       <div>
-        <span>Category:</span> <a href={urlCat}>{item.category}</a>
+        <span>Category:</span> <a href={urlCat}>{cat_name}</a>
       </div>
     );
   }
@@ -85,12 +89,19 @@ function ProductDetails({ options }) {
   // display tag if there is any, otherwise do not display
   let showTag = <span></span>;
   if (item.tag) {
+    // replace hyphen (category name to be displayed with empty space if there is more than one word)
+    let tag = item.tag;
+    let tag_name = tag.replace(/-/g, " ");
+    // parse url for the item tag
+    let urlTag = "/shop?filter=tag%3D" + item.tag;
     showTag = (
       <div>
-        <span>Tag:</span> <a href={urlTag}>{item.tag}</a>
+        <span>Tag:</span> <a href={urlTag}>{tag_name}</a>
       </div>
     );
   }
+
+  // =============================================================================================================
 
   return (
     <Fragment>
