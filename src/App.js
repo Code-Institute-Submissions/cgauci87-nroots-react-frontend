@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import components
 import PersistLogin from "./components/global/persistLogin/PersistLogin";
@@ -120,39 +120,40 @@ function App() {
   // get user from useAuth function
   const { user } = useAuth();
 
-
   let adminRoutes = <Route></Route>; // restrict admin routes access to admin/is_staff
   if (user.is_staff) {
     adminRoutes = (
       <React.Fragment>
-        <Route path="/cms">
-          {/* products pages */}
-          <Route path="products">
-            <Route
-              path="product-list"
-              element={<ProductList options={options} />}
-            />
-            <Route
-              path="add-product"
-              element={<AddProduct options={options} />}
-            />
-            <Route
-              path="view-edit/product/:id"
-              element={<EditProduct options={options} />}
-            />
+        <BrowserRouter>
+          <Route path="/cms">
+            {/* products pages */}
+            <Route path="products">
+              <Route
+                path="product-list"
+                element={<ProductList options={options} />}
+              />
+              <Route
+                path="add-product"
+                element={<AddProduct options={options} />}
+              />
+              <Route
+                path="view-edit/product/:id"
+                element={<EditProduct options={options} />}
+              />
+            </Route>
+            {/* orders pages */}
+            <Route path="orders">
+              <Route
+                path="order-list"
+                element={<OrderList options={options} />}
+              />
+              <Route
+                path="order:id"
+                element={<OrderDetails options={options} />}
+              />
+            </Route>
           </Route>
-          {/* orders pages */}
-          <Route path="orders">
-            <Route
-              path="order-list"
-              element={<OrderList options={options} />}
-            />
-            <Route
-              path="order:id"
-              element={<OrderDetails options={options} />}
-            />
-          </Route>
-        </Route>
+        </BrowserRouter>
       </React.Fragment>
     );
 
@@ -161,7 +162,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Routes>
           {/* ========================== SHOP ROUTING ============================= */}
           <Route path="/" element={<PersistLogin />}>
@@ -208,7 +209,7 @@ function App() {
             {adminRoutes}
           </Route>
         </Routes>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

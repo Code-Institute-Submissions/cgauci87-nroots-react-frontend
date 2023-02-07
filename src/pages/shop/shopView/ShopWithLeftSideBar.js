@@ -18,21 +18,19 @@ import ProductCategoriesWidget from "../../../components/shop/widget/ProductCate
 import ProductTagsWidget from "../../../components/shop/widget/ProductTagsWidget";
 
 // import this hook to sync query parameters
-import { useQueryState } from "../../../hooks/useQueryState"
-
+import { useQueryState } from "../../../hooks/useQueryState";
 
 // style
 import "./shop.css";
 
-
-
 function ShopWithLeftSideBar({ options }) {
-  const [ordering, setOrdering] = useState('&ordering=-created_at');
-  const [gridOrdering, setGridOrdering] = useState('1')
+  const [ordering, setOrdering] = useState("&ordering=-created_at");
+  const [gridOrdering, setGridOrdering] = useState("1");
 
-  const [filter, setFilter] = useQueryState('filter')
-  console.log(filter, "<<< This is the filter")
-  const [query, setQuery] = useState('')
+  const [filter, setFilter] = useQueryState("filter");
+
+  //const [query, setQuery] = useState("");
+  const [query, setQuery] = useQueryState("query");
 
   /**
    * Handle Ordering Status
@@ -67,14 +65,27 @@ function ShopWithLeftSideBar({ options }) {
                       <Ordering setOrdering={setOrdering} />
                     </div>
 
-                    <Products gridOrdering={gridOrdering} ordering={ordering}  filter={filter} query={query}/>
+                    <Products
+                      gridOrdering={gridOrdering}
+                      ordering={ordering}
+                      filter={filter}
+                      query={query}
+                    />
                   </div>
-                  
                 </div>
                 <div className="shop-sidebar">
-                  <ProductSearchWidget setQuery={setQuery} setFilter={setFilter} />
-                  <ProductCategoriesWidget setFilter={setFilter} currentFilter={filter} />
-                  <ProductTagsWidget setFilter={setFilter} currentFilter={filter} />
+                  <ProductSearchWidget
+                    setQuery={setQuery}
+                    setFilter={setFilter}
+                  />
+                  <ProductCategoriesWidget
+                    setFilter={setFilter}
+                    currentFilter={filter}
+                  />
+                  <ProductTagsWidget
+                    setFilter={setFilter}
+                    currentFilter={filter}
+                  />
                 </div>
               </div>
             </div>

@@ -7,17 +7,19 @@ function ProductTagsWidget({ setFilter, currentFilter }) {
       <div className="widget ecom widget_product_cloud">
         <h3>Filter by Product tags</h3>
         <div className="cloud">
-          <Link
+          <a
+            href="#"
             className="cloud-link"
             onClick={(e) => setFilter("tag=Featured")}
             style={{
               background: currentFilter === "tag=Featured" ? "#000" : "none",
-              color: currentFilter === "tag=Featured" ? "#fff" : "#787878"
+              color: currentFilter === "tag=Featured" ? "#fff" : "#787878",
             }}
           >
             Featured
-          </Link>
-          <Link
+          </a>
+          <a
+            href="#"
             className="cloud-link"
             onClick={(e) => setFilter("tag=Special Offer")}
             style={{
@@ -26,7 +28,7 @@ function ProductTagsWidget({ setFilter, currentFilter }) {
             }}
           >
             Special Offer
-          </Link>
+          </a>
         </div>
       </div>
     </Fragment>

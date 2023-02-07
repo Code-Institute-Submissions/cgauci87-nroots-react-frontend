@@ -1,20 +1,14 @@
 import React, { Fragment } from "react";
-import { useNavigate, Link } from "react-router-dom";
 
 function ProductCategoriesWidget({ setFilter, currentFilter }) {
-  const navigate = useNavigate();
-
-  // const routeChange = () => {
-  //   navigate("/shop?filter=category%3DPlanters");
-  // };
-
   return (
     <Fragment>
       <div className="widget ecom widget_product_cloud">
         <h3>Filter by Product categories</h3>
         <ul className="product-categories">
           <li className="cloud">
-            <Link
+            <a
+              href="#"
               className="cloud-link"
               onClick={(e) => setFilter("")}
               style={{
@@ -23,10 +17,11 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               All Products
-            </Link>
+            </a>
           </li>
           <li className="cloud">
-            <Link
+            <a
+              href="#"
               className="cloud-link"
               onClick={(e) => setFilter("category=Tiny Plants")}
               style={{
@@ -37,11 +32,12 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Tiny Plants
-            </Link>
+            </a>
           </li>
 
           <li className="cloud">
-            <Link
+            <a
+              href="#"
               className="cloud-link"
               onClick={(e) => setFilter("category=Large Plants")}
               style={{
@@ -54,10 +50,11 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Large Plants
-            </Link>
+            </a>
           </li>
           <li className="cloud">
-            <Link
+            <a
+              href="#"
               className="cloud-link"
               onClick={(e) => setFilter("category=Planters")}
               style={{
@@ -68,10 +65,11 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Planters
-            </Link>
+            </a>
           </li>
           <li className="cloud">
-            <Link
+            <a
+              href="#"
               className="cloud-link"
               onClick={(e) => setFilter("category=Plant Care")}
               style={{
@@ -82,7 +80,7 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Plant Care
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
