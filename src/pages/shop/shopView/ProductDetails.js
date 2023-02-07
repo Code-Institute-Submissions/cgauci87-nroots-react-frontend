@@ -67,6 +67,31 @@ function ProductDetails({ options }) {
     setQuickViewData({});
   };
 
+  // parse url for the item category
+  let urlCat = "/shop?filter=category%3D" + item.category;
+  // parse url for the item tag
+  let urlTag = "/shop?filter=tag%3D" + item.tag;
+
+  // display category if there is any, otherwise do not display
+  let showCategory = <span></span>;
+  if (item.category) {
+    showCategory = (
+      <div>
+        <span>Category:</span> <a href={urlCat}>{item.category}</a>
+      </div>
+    );
+  }
+
+  // display tag if there is any, otherwise do not display
+  let showTag = <span></span>;
+  if (item.tag) {
+    showTag = (
+      <div>
+        <span>Tag:</span> <a href={urlTag}>{item.tag}</a>
+      </div>
+    );
+  }
+
   return (
     <Fragment>
       {showQuickView ? (
@@ -176,10 +201,9 @@ function ProductDetails({ options }) {
                 </div>
                 <div className="thb-product-meta-before">
                   <div className="product_meta">
-                    <span className="posted_in">
-                      Categories: {item.category}
-                    </span>
-                    <span className="tagged_as">Tags:{item.tag}</span>
+                    <div className="cloud">{showCategory}</div>
+
+                    <div className="cloud">{showTag}</div>
                   </div>
                 </div>
               </div>

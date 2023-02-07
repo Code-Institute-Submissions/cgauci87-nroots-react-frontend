@@ -1626,12 +1626,12 @@ button:active {
     padding-left: 15px;
 }
 
-.shop-sidebar .widget_product_cloud .cloud {
+.cloud {
     overflow: hidden;
     list-style: none;
 }
 
-.shop-sidebar .widget_product_cloud .cloud a {
+ .cloud a {
     float: left;
     margin: 0 8px 8px 0;
     font-size: 13px;
@@ -1644,7 +1644,7 @@ button:active {
     border-radius: 2px;
 }
 
-.shop-sidebar .widget_product_cloud .cloud a:hover {
+.cloud a:hover {
     background: #000;
     color: #fff;
     border-color: #000;
@@ -5741,7 +5741,7 @@ button:active {
     color: #c2572b;
 }
 
-.shop-single-section .thb-product-meta-before .product_meta>span {
+.shop-single-section .thb-product-meta-before .product_meta span {
     display: block;
     font-size: 14px;
     font-size: 0.9333333333rem;
