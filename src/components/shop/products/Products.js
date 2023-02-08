@@ -19,8 +19,8 @@ function Products({ gridOrdering, ordering, filter, query }) {
   // ===============================================================
   const { products, setProducts } = useCartContext();
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalProducts, setTotalProducts] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   const getProducts = async () => {
     setLoading(true); // set loading to true as soon as getProducts is invoked
@@ -29,7 +29,7 @@ function Products({ gridOrdering, ordering, filter, query }) {
         `/products/?${filter}&search=${query}${ordering}&page=${currentPage}`
       );
       setProducts(response.data.results);
-      setTotalProducts(response.data.count)
+      setTotalProducts(response.data.count);
       setLoading(false);
     } catch (error) {
       // Error Handling
@@ -45,7 +45,6 @@ function Products({ gridOrdering, ordering, filter, query }) {
   useEffect(() => {
     getProducts();
   }, [filter, query, ordering, currentPage]); // Get products from API & filter whenever it changes
-
 
   const {
     state: { cart },
@@ -168,7 +167,14 @@ function Products({ gridOrdering, ordering, filter, query }) {
             </li>
           ))}
         </ul>
-        <Pagination extraClass="" total={totalProducts} setCurrentPage={setCurrentPage} currentPage={currentPage} pageSize={10}/>
+        {/* pageSize value should match with pagination settings of the backend */}
+        <Pagination
+          extraClass=""
+          total={totalProducts}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          pageSize={12}
+        />
       </Fragment>
     ) : (
       <h3>No products found!</h3>
