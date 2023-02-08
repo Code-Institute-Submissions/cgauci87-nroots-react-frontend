@@ -13,16 +13,11 @@ import { EyeOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 
 // import utils
-import utils from "../../../../components/cms/utils/Table";
 import AvatarStatus from "../../../../components/cms/utils/AvatarStatus";
 import EllipsisDropdown from "../../../../components/cms/utils/EllipsisDropdown";
 import Flex from "../../../../components/cms/utils/Flex";
 
 const { Content } = Layout;
-const { Option } = Select;
-
-const categories = [];
-const tags = [];
 
 // ProductList Page
 function ProductList({ options }) {
@@ -30,12 +25,20 @@ function ProductList({ options }) {
   // ====================================================================
   // get product list data from API
   const [ProductListData, setProducts] = useState([]);
+  const [count, setCount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [orderField, setOrderField] = useState("&orderField=-created_at");
+
   const getProductList = async () => {
     try {
-      const response = await axiosPrivate.get("/products");
-      let data = response.data;
-      setProducts(data.results);
-      console.log(data.results);
+      const response = await axiosPrivate.get(
+        `/products/?page=${currentPage}&search=${searchTerm}&ordering=${orderField}`
+      );
+      let data = response.data.results;
+      setCount(response.data.count);
+      setProducts(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +46,7 @@ function ProductList({ options }) {
 
   useEffect(() => {
     getProductList(); // Fetch product list whenever the list updates (asynchronous)
-  }, []);
+  }, [currentPage, searchTerm, orderField]);
 
   // ====================================================================
 
@@ -110,12 +113,12 @@ function ProductList({ options }) {
   };
 
   /*==========================================================================*/
-  // define table columns and set sorting with utils
+  // define table columns and set sorting from the backend
   const tableColumns = [
     {
       title: "Date Created",
       dataIndex: "created_at",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "created_at"),
+      sorter: true,
     },
     {
       title: "Product",
@@ -130,17 +133,17 @@ function ProductList({ options }) {
           />
         </div>
       ),
-      sorter: (a, b) => utils.antdTableSorter(a, b, "title"),
+      sorter: true,
     },
     {
       title: "Category",
       dataIndex: "category",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "category"),
+      sorter: true,
     },
     {
       title: "Tag",
       dataIndex: "tag",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "tag"),
+      sorter: true,
     },
     {
       title: "Price",
@@ -155,7 +158,7 @@ function ProductList({ options }) {
           />
         </div>
       ),
-      sorter: (a, b) => utils.antdTableSorter(a, b, "price"),
+      sorter: true,
     },
     {
       title: "Action",
@@ -169,6 +172,19 @@ function ProductList({ options }) {
   ];
   // =========================================================================================
   // handing events
+  const onPaginationChange = (e) => {
+    setCurrentPage(e);
+  };
+
+  const onTableChange = (paginationConfig, filters, sorter) => {
+    console.log(paginationConfig, filters, sorter);
+
+    const order = sorter.order !== "ascend" ? "-" : "";
+    const column = sorter.field;
+    setOrderField(`${order}${column}`);
+    return false;
+  };
+
   const rowSelection = {
     onChange: (key, rows) => {
       setSelectedRows(rows);
@@ -179,35 +195,11 @@ function ProductList({ options }) {
 
   const onSearch = (e) => {
     const value = e.currentTarget.value;
-    const searchArray = e.currentTarget.value ? list : ProductListData;
-    const data = utils.wildCardSearch(searchArray, value);
-    setList(data);
     setSelectedRowKeys([]);
-    console.log (data, "<<< this is the data from the search")
-  };
-
-  const handleShowCategory = (value) => {
-    if (value !== "All") {
-      const key = "category";
-      const data = utils.filterArray(ProductListData, key, value);
-      setList(data);
-    } else {
-      setList(ProductListData);
-    }
-  };
-
-  const handleShowTag = (value) => {
-    if (value !== "All") {
-      const key = "tag";
-      const data = utils.filterArray(ProductListData, key, value);
-      setList(data);
-    } else {
-      setList(ProductListData);
-    }
+    setSearchTerm(value);
   };
 
   // =========================================================================================
-
   return (
     <Fragment>
       <HeaderCms options={options} />
@@ -226,36 +218,6 @@ function ProductList({ options }) {
                     prefix={<SearchOutlined />}
                     onChange={(e) => onSearch(e)}
                   />
-                </div>
-                <div className="mb-3">
-                  <Select
-                    defaultValue="All"
-                    className="w-100"
-                    onChange={handleShowCategory}
-                    placeholder="Category"
-                  >
-                    <Option value="All">All</Option>
-                    {categories.map((elm) => (
-                      <Option key={elm} value={elm}>
-                        {elm}
-                      </Option>
-                    ))}
-                  </Select>
-                </div>
-                <div className="mb-3">
-                  <Select
-                    defaultValue="All"
-                    className="w-100"
-                    onChange={handleShowTag}
-                    placeholder="Tag"
-                  >
-                    <Option value="All">All</Option>
-                    {tags.map((elm) => (
-                      <Option key={elm} value={elm}>
-                        {elm}
-                      </Option>
-                    ))}
-                  </Select>
                 </div>
               </Flex>
               <div>
@@ -287,6 +249,15 @@ function ProductList({ options }) {
             </Flex>
             <div className="table-responsive">
               <Table
+                pagination={{
+                  // current: {page},
+                  // pageSize: {limit},
+                  defaultPageSize: 12,
+                  total: count,
+                  onChange: onPaginationChange,
+                }}
+                onChange={onTableChange}
+                // pagination={{ defaultPageSize: 12 }}
                 columns={tableColumns}
                 dataSource={ProductListData} //payload
                 rowKey="id"
