@@ -8,11 +8,12 @@ import HeaderCms from "../../../components/global/navbar/HeaderCms";
 import PageTitle from "../../../components/global/pageTitle/PageTitle";
 import ShippingFields from "../../../components/global/forms/ShippingFields";
 
-// import axios
-import { jsonAxios } from "../../../api/axiosDefaults";
+// import hooks
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // OrderDetails Page
 function OrderDetails({ options }) {
+  const axiosPrivate = useAxiosPrivate();
   const [form] = Form.useForm();
 
   const setFormValues = (values) => {
@@ -28,7 +29,7 @@ function OrderDetails({ options }) {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const { data: order } = await jsonAxios.get(`/order/${id}/`); // Get order of a specific id
+        const { data: order } = await axiosPrivate.get(`/order/${id}/`); // Get order of a specific id
         setItem(order);
         setFormValues(order);
       } catch (err) {
@@ -46,7 +47,6 @@ function OrderDetails({ options }) {
 
   // =====================================================================================
 
-
   return (
     <Fragment>
       <HeaderCms options={options} />
@@ -55,7 +55,7 @@ function OrderDetails({ options }) {
 
       {/* start OrderDetails-section */}
       <section className="checkout-section section-padding">
-        <div className="container-1410">
+        <div className="container">
           <div className="row">
             <div className="col col-xs-12">
               <form
@@ -65,7 +65,7 @@ function OrderDetails({ options }) {
               >
                 <div className="col2-set" id="customer_details">
                   {/* get shipping data from form */}
-                  <ShippingFields shippingData={form} /> 
+                  <ShippingFields shippingData={form} />
                 </div>
                 <p id="order_review_heading">
                   <strong>Order ID:</strong> {item.order_id}

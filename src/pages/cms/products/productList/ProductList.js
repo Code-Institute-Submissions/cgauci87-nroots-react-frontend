@@ -214,7 +214,7 @@ function ProductList({ options }) {
               <Flex className="mb-1" mobileFlex={false}>
                 <div className="mr-md-3 mb-3">
                   <Input
-                    placeholder="Search"
+                    placeholder="Search by Product / Category / Tag"
                     prefix={<SearchOutlined />}
                     onChange={(e) => onSearch(e)}
                   />
@@ -250,14 +250,11 @@ function ProductList({ options }) {
             <div className="table-responsive">
               <Table
                 pagination={{
-                  // current: {page},
-                  // pageSize: {limit},
                   defaultPageSize: 12,
                   total: count,
                   onChange: onPaginationChange,
                 }}
                 onChange={onTableChange}
-                // pagination={{ defaultPageSize: 12 }}
                 columns={tableColumns}
                 dataSource={ProductListData} //payload
                 rowKey="id"

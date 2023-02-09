@@ -145,7 +145,12 @@ function ProductDetails({ options }) {
                   <span className="current"> € {item.price}</span>
                   <span className="old"> €{item.comparePrice}</span>
                 </div>
-                <p>{item.description}</p>
+                  <p>{item.description}</p>
+                <div>
+                  <p style={{ fontWeight: "bold", color: "green" }}>
+                    {item.additional_details}
+                  </p>
+                </div>
                 <div className="product-option">
                   <div className="product-row">
                     <div className="touchspin-wrap"></div>

@@ -13,7 +13,6 @@ import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 import HeaderCms from "../../../components/global/navbar/HeaderCms";
 
 // import utils
-import utils from "../../../components/cms/utils/Table";
 import EllipsisDropdown from "../../../components/cms/utils/EllipsisDropdown";
 import Flex from "../../../components/cms/utils/Flex";
 
@@ -21,10 +20,16 @@ import Flex from "../../../components/cms/utils/Flex";
 function OrderList(options) {
   const axiosPrivate = useAxiosPrivate();
   const [OrderListData, setOrders] = useState([]);
+  const [count, setCount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [orderField, setOrderField] = useState("&orderField=-created_at");
+
   const getOrderList = async () => {
     try {
-      const response = await axiosPrivate.get("/order"); // API
-      let data = response.data;
+      const response = await axiosPrivate.get(`/order/?page=${currentPage}&search=${searchTerm}&ordering=${orderField}`); // API
+      let data = response.data.results;
+      setCount(response.data.count);
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -33,7 +38,7 @@ function OrderList(options) {
 
   useEffect(() => {
     getOrderList(); // Fetch list upon update
-  }, []);
+  }, [currentPage, searchTerm, orderField]);
 
   // ==========================================================================
 
@@ -41,8 +46,8 @@ function OrderList(options) {
 
   const navigate = useNavigate();
   const viewDetails = (row) => {
-    navigate(`order/${row.id}`); // navigate to order details of that specific order, once button of viewDetails is clicked
-  };
+    navigate(`/cms/orders/view/order/${row.id}`); // navigate to order details of that specific order, once button of viewDetails is clicked
+  }
 
   // ==========================================================================
 
@@ -65,25 +70,20 @@ function OrderList(options) {
     {
       title: "Date Ordered",
       dataIndex: "created_at",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "created_at"),
+      sorter: true,
     },
     {
-      title: "Customer",
-      dataIndex: "full_name",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "full_name"),
+      title: "Order ID",
+      dataIndex: "order_id",
+      sorter: true,
     },
     {
-      title: "Locality",
-      dataIndex: "city",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "city"),
-    },
-    {
-      title: "Checkout",
+      title: "Checkout Type",
       dataIndex: "checkout_type",
-      sorter: (a, b) => utils.antdTableSorter(a, b, "checkout_type"),
+      sorter: true,
     },
     {
-      title: "Total",
+      title: "Total Amount",
       dataIndex: "total",
       render: (total) => (
         <div>
@@ -95,7 +95,7 @@ function OrderList(options) {
           />
         </div>
       ),
-      sorter: (a, b) => utils.antdTableSorter(a, b, "total"),
+      sorter: true,
     },
     {
       title: "",
@@ -108,14 +108,26 @@ function OrderList(options) {
     },
   ];
 
-
   // ==========================================================================
-  // onSearch using utils.wildCardSearch
+  // onSearch
+
   const onSearch = (e) => {
     const value = e.currentTarget.value;
-    const searchArray = e.currentTarget.value ? list : OrderListData;
-    const data = utils.wildCardSearch(searchArray, value);
-    setList(data);
+    setSearchTerm(value);
+  };
+
+  // =========================================================================================
+  // handing events
+  const onPaginationChange = (e) => {
+    setCurrentPage(e);
+  };
+  const onTableChange = (paginationConfig, filters, sorter) => {
+    console.log(paginationConfig, filters, sorter);
+
+    const order = sorter.order !== "ascend" ? "-" : "";
+    const column = sorter.field;
+    setOrderField(`${order}${column}`);
+    return false;
   };
 
   return (
@@ -126,7 +138,7 @@ function OrderList(options) {
           <Flex className="mb-1" mobileFlex={false}>
             <div className="mr-md-3 mb-3" style={{ marginLeft: 250 }}>
               <Input
-                placeholder="Search"
+                placeholder="Search by Order ID"
                 prefix={<SearchOutlined />}
                 onChange={(e) => onSearch(e)}
               />
@@ -135,6 +147,12 @@ function OrderList(options) {
         </Flex>
         <div className="table-responsive" style={{ marginLeft: 250 }}>
           <Table
+            pagination={{
+              defaultPageSize: 12,
+              total: count,
+              onChange: onPaginationChange,
+            }}
+            onChange={onTableChange}
             columns={tableColumns}
             dataSource={OrderListData}
             rowKey="id"

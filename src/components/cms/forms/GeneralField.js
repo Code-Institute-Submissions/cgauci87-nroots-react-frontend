@@ -31,9 +31,8 @@ const GeneralField = (props) => {
 
   // ===================================================================================
 
-  // Image handler before upload 
+  // Image handler before upload
   const beforeUpload = (file) => {
-
     const sizeLimit5Mb = file.size / 2560 / 2560 < 5;
     if (!sizeLimit5Mb) {
       message.error("Image must smaller than 5MB!");
@@ -101,6 +100,15 @@ const GeneralField = (props) => {
               >
                 <Input.TextArea />
               </Form.Item>
+
+              <Form.Item
+                label="Additional Details"
+                name="additional_details"
+                value={props.data.additional_details}
+                rows={4}
+              >
+                <Input style={{ fontWeight: "bold", color: "green" }} />
+              </Form.Item>
             </Card>
             <Card title="Pricing">
               <Row gutter={16}>
@@ -115,23 +123,11 @@ const GeneralField = (props) => {
                       },
                     ]}
                   >
-                    <InputNumber
-                      step={0.01}
-                      prefix="€"
-                    />
+                    <InputNumber step={0.01} prefix="€" />
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={24} md={12}>
-                  <Form.Item
-                    label="Old Price"
-                    name="comparePrice"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input an old price",
-                      },
-                    ]}
-                  >
+                  <Form.Item label="Old Price" name="comparePrice">
                     <InputNumber
                       defaultValue={props.data.comparePrice}
                       step={0.01}
@@ -144,7 +140,16 @@ const GeneralField = (props) => {
           </Col>
           <Col xs={24} sm={24} md={7}>
             <Card title="Media">
-              <Form.Item name="uploadedImg"></Form.Item>
+              <Form.Item
+                name="uploadedImg"
+                label="Product Image"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please upload an image",
+                  },
+                ]}
+              ></Form.Item>
               <Upload
                 name="uploadedImg"
                 listType="picture-card"
@@ -164,11 +169,8 @@ const GeneralField = (props) => {
               </Upload>
             </Card>
             <Card title="Category & Tag">
-              <Form.Item name="category"  label="Category" >
-                <Select
-                  className="w-100"
-                  value={props.data.category}
-                >
+              <Form.Item name="category" label="Category">
+                <Select className="w-100" value={props.data.category}>
                   {props.categories.map((elm) => (
                     <Option key={elm[0]} value={elm[0]}>
                       {elm[1]}
@@ -177,10 +179,7 @@ const GeneralField = (props) => {
                 </Select>
               </Form.Item>
               <Form.Item name="tag" label="Tag">
-                <Select
-                  className="w-100"
-                  value={props.data.tag}
-                >
+                <Select className="w-100" value={props.data.tag}>
                   {props.tags.map((elm) => (
                     <Option key={elm[0]} value={elm[0]}>
                       {elm[1]}

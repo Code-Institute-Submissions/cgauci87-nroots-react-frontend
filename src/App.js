@@ -147,7 +147,7 @@ function App() {
               element={<OrderList options={options} />}
             />
             <Route
-              path="order:id"
+              path="view/order/:id"
               element={<OrderDetails options={options} />}
             />
           </Route>

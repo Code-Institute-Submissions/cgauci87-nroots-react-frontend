@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
 
+// Product Tags
 function ProductTagsWidget({ setFilter, currentFilter }) {
   return (
     <Fragment>
@@ -21,10 +21,10 @@ function ProductTagsWidget({ setFilter, currentFilter }) {
           <a
             href="#"
             className="cloud-link"
-            onClick={(e) => setFilter("tag=Special Offer")}
+            onClick={(e) => setFilter("tag=Special-Offer")}
             style={{
               fontWeight:
-                currentFilter === "tag=Special Offer" ? "bold" : "normal",
+                currentFilter === "tag=Special-Offer" ? "bold" : "normal",
             }}
           >
             Special Offer
