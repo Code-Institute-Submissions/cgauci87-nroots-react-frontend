@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Tiny Plants",
-        "icon": "/assets/icons/tiny-plants-128x128.png",
+        "icon": "/assets/icons/tiny-plants-512x512.png",
         "link": "/shop?filter=category%3DTiny-Plants"
     },
     {

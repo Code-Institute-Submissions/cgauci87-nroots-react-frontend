@@ -12,11 +12,11 @@ function NavbarShop({ options }) {
         id="navbar"
         className={
           "navbar-collapse collapse navigation-holder " +
-          (options.mobileNav ? "slideInn" : "") // show mobile nav on mobile/portable devices
+          (options.onMobileNavClick ? "slideInn" : "") // show mobile nav on mobile/portable devices
         }
       >
         {/* on click handle mobile nav status / options App.js */}
-        <button onClick={options.onMobileNavClick} className="close-navbar"> 
+        <button onClick={options.onMobileNav} className="close-navbar"> 
           <i className="ti-close" />
         </button>
         <ul className="nav navbar-nav">

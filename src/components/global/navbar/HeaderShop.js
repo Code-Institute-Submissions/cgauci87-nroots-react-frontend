@@ -2,8 +2,8 @@ import React, {Fragment} from 'react';
 import {Link} from 'react-router-dom';
 
 import HeaderRightShop from './HeaderRightShop';
-import Navbar from './NavbarShop';
 import data from '../../../../src/data/topbar-text.json';
+import NavbarShop from './NavbarShop';
 
 // HeaderShop Component
 
@@ -37,7 +37,7 @@ function HeaderShop({ options }) {
 
                         </div>
 
-                        <Navbar options={options}/>
+                        <NavbarShop options={options}/>
 
                         <HeaderRightShop options={options} />
 

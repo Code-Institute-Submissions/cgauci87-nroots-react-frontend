@@ -51,9 +51,10 @@ function App() {
   const [showSideInfo, setShowSideInfo] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
 
+  console.log(showMobileNav , "<< this is showMobileNav")
+
   /**
    * change mini cart state
-   * @constructor
    */
   const HandleMiniCartStatus = () => {
     setShowMiniCart(!showMiniCart);
@@ -65,19 +66,18 @@ function App() {
 
   /**
    * change usr account state
-   * @constructor
    */
   const HandleUsrAccountStatus = () => {
-    setShowUsrAccount(!showUsrAccount);
+    setShowUsrAccount(!showUsrAccount); // << clone
     setShowMiniCart(false);
     setTimeout(() => {
       setShowUsrAccount(false);
     }, 6000);
   };
 
+
   /**
    * change left side info state
-   * @constructor
    */
   const HandleSideInfoStatus = () => {
     setShowSideInfo(!showSideInfo);
@@ -85,17 +85,16 @@ function App() {
 
   /**
    * change mobile nav state
-   * @constructor
    */
   const HandleMobileNavStatus = () => {
     setShowMobileNav(!showMobileNav);
   };
 
+
   const HandleOverlayStatus = () => {
     setShowMiniCart(false);
     setShowUsrAccount(false);
     setShowSideInfo(false);
-    setShowMobileNav(false);
   };
 
   const options = {
@@ -103,10 +102,12 @@ function App() {
     mobileNav: showMobileNav,
     miniCart: showMiniCart,
     usrAccount: showUsrAccount,
+    
     onSideInfoClick: HandleSideInfoStatus,
     onMobileNavClick: HandleMobileNavStatus,
     onMiniCartClick: HandleMiniCartStatus,
     onUsrAccountClick: HandleUsrAccountStatus,
+
     onRegisterClick: HandleOverlayStatus,
     onLoginClick: HandleOverlayStatus,
     onLogoutClick: HandleOverlayStatus,
