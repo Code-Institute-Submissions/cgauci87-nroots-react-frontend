@@ -2065,10 +2065,8 @@ button:active {
         padding: 10px 15px 10px 35px;
     }
 
-    .site-header .slideInn {
-        right: 0 !important;
-        visibility: visible;
-        opacity: 1;
+    .site-header #navbar.slideInn {
+        right: 0;
     }
 }
 

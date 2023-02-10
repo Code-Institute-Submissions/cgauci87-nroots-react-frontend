@@ -51,8 +51,6 @@ function App() {
   const [showSideInfo, setShowSideInfo] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
 
-  console.log(showMobileNav , "<< this is showMobileNav")
-
   /**
    * change mini cart state
    */
@@ -68,7 +66,7 @@ function App() {
    * change usr account state
    */
   const HandleUsrAccountStatus = () => {
-    setShowUsrAccount(!showUsrAccount); // << clone
+    setShowUsrAccount(!showUsrAccount);
     setShowMiniCart(false);
     setTimeout(() => {
       setShowUsrAccount(false);
