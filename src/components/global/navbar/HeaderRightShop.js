@@ -61,8 +61,12 @@ function HeaderRightShop({ options }) {
 
   const [total, setTotal] = useState(null);
   useEffect(() => {
-    setTotal(cart.reduce((total, item) => (parseFloat((total + item.price * item.qty)).toFixed(2)),0)); // Set cart total according to the state
-    
+    setTotal(
+      cart.reduce(
+        (total, item) => parseFloat(total + item.price * item.qty).toFixed(2),
+        0
+      )
+    ); // Set cart total according to the state
   }, [cart]);
 
   {
@@ -84,20 +88,24 @@ function HeaderRightShop({ options }) {
 
   const loggedOutLinks = (
     <>
-      <Link
-        className="view-btn"
-        to="/auth/login"
-        onClick={options.onLoginClick}
-      >
-        Login
-      </Link>
-      <Link
-        className="view-btn"
-        to="/auth/register"
-        onClick={options.onRegisterClick}
-      >
-        Register
-      </Link>
+      <div className="options-wrapper">
+        <div className="options-content">
+          <Link
+            className="usr-account-login-btn"
+            to="/auth/login"
+            onClick={options.onLoginClick}
+          >
+            Login
+          </Link>
+          <Link
+            className="usr-account-reg-btn"
+            to="/auth/register"
+            onClick={options.onRegisterClick}
+          >
+            Register
+          </Link>
+        </div>
+      </div>
     </>
   );
 
@@ -153,7 +161,7 @@ function HeaderRightShop({ options }) {
           </button>
           <div
             className={
-              "mini-content " +
+              "usr-account-options-content " +
               (options.usrAccount ? "mini-content-toggle" : "")
             }
           >

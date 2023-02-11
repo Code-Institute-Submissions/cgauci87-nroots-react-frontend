@@ -31,6 +31,10 @@ function FeaturedProducts() {
     maxWidth: "346px",
     maxHeight: "400px",
   };
+
+  const divStyle = {
+   backgroundColor: "#90EE90",
+  };
   // =====================================================================================================
 
   return (
@@ -57,16 +61,18 @@ function FeaturedProducts() {
                           Featured
                         </a>
                       </div>
-                      <LazyLoad height={460} width={415}>
-                        {/* link to product details of the selected product */}
-                        <Link to={`/shop/product-details/${item.id}`}>
-                          <img
-                            src={item.uploadedImg}
-                            alt="product image"
-                            style={imgStyle}
-                          />
-                        </Link>
-                      </LazyLoad>
+                      <div style={divStyle}>
+                        <LazyLoad height={460} width={415}>
+                          {/* link to product details of the selected product */}
+                          <Link to={`/shop/product-details/${item.id}`}>
+                            <img
+                              src={item.uploadedImg}
+                              alt="product image"
+                              style={imgStyle}
+                            />
+                          </Link>
+                        </LazyLoad>
+                      </div>
                     </div>
                     <div className="details">
                       <h3>{item.title}</h3>
