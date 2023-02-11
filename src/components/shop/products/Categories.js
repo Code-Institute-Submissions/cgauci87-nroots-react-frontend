@@ -27,12 +27,14 @@ function Categories() {
                                             <li key={index}>
                                                 <NavLink to={item.link}>
                                                     <img src= {item.icon} alt="category"/>
-                                                    <h3>{item.name}</h3>
                                                 </NavLink>
+                                                <h3>{item.name}</h3>
                                             </li>
+                                            
                                         ))
                                     }
                                 </ul>
+                              
                             </div>
                         </div>
                     </div>

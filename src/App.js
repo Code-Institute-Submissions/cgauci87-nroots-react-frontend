@@ -68,11 +68,11 @@ function App() {
   const HandleUsrAccountStatus = () => {
     setShowUsrAccount(!showUsrAccount);
     setShowMiniCart(false);
+    setShowMobileNav(false);
     setTimeout(() => {
       setShowUsrAccount(false);
     }, 6000);
   };
-
 
   /**
    * change left side info state
@@ -86,8 +86,12 @@ function App() {
    */
   const HandleMobileNavStatus = () => {
     setShowMobileNav(!showMobileNav);
+    setShowUsrAccount(false)
+    setShowMiniCart(false);
+    // setTimeout(() => {
+    //   setShowMobileNav(false);
+    // }, 6000);
   };
-
 
   const HandleOverlayStatus = () => {
     setShowMiniCart(false);
@@ -100,7 +104,7 @@ function App() {
     mobileNav: showMobileNav,
     miniCart: showMiniCart,
     usrAccount: showUsrAccount,
-    
+
     onSideInfoClick: HandleSideInfoStatus,
     onMobileNavClick: HandleMobileNavStatus,
     onMiniCartClick: HandleMiniCartStatus,
