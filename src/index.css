@@ -4757,10 +4757,25 @@ button:active {
         height: 100%;
         min-width: 100px;
         min-height: 50px;
-    
+
     }
+
     .shop-section .products>li {
         width: 50px;
+    }
+
+    .shop-sidebar .search-widget {
+        width: 50%;
+    }
+
+    ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: transparent;
+    }
+
+    .shop-sidebar .search-widget:hover {
+        margin-left: -250px;
+        width: 250%;
     }
 
     .widget h3 {
@@ -4771,6 +4786,16 @@ button:active {
         display: none;
     }
 }
+
+@media (max-width: 991px) and (orientation: landscape) {
+    .shop-section .shop-sidebar {
+        position: sticky;
+        display: flex;
+        left: 540px;
+        top: 200px;
+    }
+}
+
 
 .shop-section .products {
     overflow: hidden;

@@ -75,10 +75,10 @@ function ShopWithLeftSideBar({ options }) {
                   </div>
                 </div>
                 <div className="shop-sidebar">
-                  {/* <ProductSearchWidget
+                  <ProductSearchWidget
                     setQuery={setQuery}
                     setFilter={setFilter}
-                  /> */}
+                  />
                   <ProductCategoriesWidget
                     setFilter={setFilter}
                     currentFilter={filter}
