@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { LoadingOutlined } from "@ant-design/icons";
 
 // import context
 import { axiosReq } from "../../../api/axiosDefaults";
 import { CartState, useCartContext } from "../../../contexts/CartContext";
-
-import { LoadingOutlined } from "@ant-design/icons";
 
 // import lazy loading
 import LazyLoad from "react-lazy-load";

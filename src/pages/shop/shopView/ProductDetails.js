@@ -2,6 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Carousel } from "antd";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
+import { LoadingOutlined } from "@ant-design/icons";
 
 // import layout components
 import HeaderShop from "../../../components/global/navbar/HeaderShop";
@@ -39,12 +40,18 @@ function ProductDetails({ options }) {
 
   // ====================================================================================================
   // Get product details from API by id
+
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const handleMount = async () => {
+      setLoading(true);
       try {
         const { data: product } = await axiosReq.get(`/products/${id}/`);
+        setLoading(false);
         setItem(product);
       } catch (err) {
+        setLoading(false);
         console.log(err);
       }
     };
@@ -102,144 +109,148 @@ function ProductDetails({ options }) {
   }
 
   // =============================================================================================================
+  if (loading) {
+    <div>
+      <LoadingOutlined />
+    </div>;
+  } else
+    return (
+      <Fragment>
+        {showQuickView ? (
+          <QuickView
+            data={quickViewData}
+            onQuickViewCloseClick={HandelQuickViewClose}
+          />
+        ) : (
+          ""
+        )}
 
-  return (
-    <Fragment>
-      {showQuickView ? (
-        <QuickView
-          data={quickViewData}
-          onQuickViewCloseClick={HandelQuickViewClose}
-        />
-      ) : (
-        ""
-      )}
+        <HeaderShop options={options} />
 
-      <HeaderShop options={options} />
+        <PageTitle name={item.title} previouspage="Shop" />
 
-      <PageTitle name={item.title} previouspage="Shop" />
+        {/* start shop-single-section */}
 
-      {/* start shop-single-section */}
+        <section className="shop-single-section section-padding">
+          <div className="container-1410">
+            <div className="row">
+              <div className="col col-md-6">
+                <div className="shop-single-slider slider-thumbnail">
+                  {/* Wrap Carousel inside LazyLoad to defer loading content in predictable way */}
+                  <LazyLoad>
+                    <Carousel autoplay>
+                      <img src={item.uploadedImg} alt="carousel-img-1" />
+                      <img src={item.uploadedImg} alt="carousel-img-2" />
+                      <img src={item.uploadedImg} alt="carousel-img-3" />
+                    </Carousel>
+                  </LazyLoad>
 
-      <section className="shop-single-section section-padding">
-        <div className="container-1410">
-          <div className="row">
-            <div className="col col-md-6">
-              <div className="shop-single-slider slider-thumbnail">
-                {/* Wrap Carousel inside LazyLoad to defer loading content in predictable way */}
-                <LazyLoad>
-                  <Carousel autoplay>
-                    <img src={item.uploadedImg} alt="carousel-img-1" />
-                    <img src={item.uploadedImg} alt="carousel-img-2" />
-                    <img src={item.uploadedImg} alt="carousel-img-3" />
-                  </Carousel>
-                </LazyLoad>
-
-                <div className="slider-nav"></div>
+                  <div className="slider-nav"></div>
+                </div>
               </div>
-            </div>
 
-            <div className="col col-md-6">
-              <div className="product-details">
-                <h2>{item.title}</h2>
-                <div className="price">
-                  <span className="current"> € {item.price}</span>
-                  <span className="old"> €{item.comparePrice}</span>
-                </div>
+              <div className="col col-md-6">
+                <div className="product-details">
+                  <h2>{item.title}</h2>
+                  <div className="price">
+                    <span className="current"> € {item.price}</span>
+                    <span className="old"> €{item.comparePrice}</span>
+                  </div>
                   <p>{item.description}</p>
-                <div>
-                  <p style={{ fontWeight: "bold", color: "green" }}>
-                    {item.additional_details}
-                  </p>
-                </div>
-                <div className="product-option">
-                  <div className="product-row">
-                    <div className="touchspin-wrap"></div>
-                    <div className="product-qty">
-                      {cart.some((p) => p.id === item.id) ? (
-                        <>
-                          <span>
-                            <b>Quantity</b>
-                          </span>
-                          <select
-                            style={{
-                              width: "40px",
-                              textAlign: "center",
-                            }}
-                            value={item.qty}
-                            onChange={(e) => {
-                              dispatch({
-                                type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
-                                payload: {
-                                  id: item.id,
-                                  qty: e.target.value,
-                                },
-                              });
-                              toast.info("Item quantity has been updated"); // toast message upon change of qty
-                            }}
-                          >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                          </select>
+                  <div>
+                    <p style={{ fontWeight: "bold", color: "green" }}>
+                      {item.additional_details}
+                    </p>
+                  </div>
+                  <div className="product-option">
+                    <div className="product-row">
+                      <div className="touchspin-wrap"></div>
+                      <div className="product-qty">
+                        {cart.some((p) => p.id === item.id) ? (
+                          <>
+                            <span>
+                              <b>Quantity</b>
+                            </span>
+                            <select
+                              style={{
+                                width: "40px",
+                                textAlign: "center",
+                              }}
+                              value={item.qty}
+                              onChange={(e) => {
+                                dispatch({
+                                  type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
+                                  payload: {
+                                    id: item.id,
+                                    qty: e.target.value,
+                                  },
+                                });
+                                toast.info("Item quantity has been updated"); // toast message upon change of qty
+                              }}
+                            >
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                            <button
+                              onClick={() =>
+                                // on click remove from cart
+                                dispatch(
+                                  {
+                                    type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
+                                    payload: item,
+                                  },
+                                  toast.info(
+                                    "Item has been removed from the cart" // toast message upon removal of item in the cart
+                                  )
+                                )
+                              }
+                            >
+                              Remove from cart
+                            </button>
+                          </>
+                        ) : (
                           <button
                             onClick={() =>
-                              // on click remove from cart
                               dispatch(
-                                {
-                                  type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
-                                  payload: item,
-                                },
-                                toast.info(
-                                  "Item has been removed from the cart" // toast message upon removal of item in the cart
-                                )
+                                { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
+                                toast.info("Item has been added to the cart") // toast message upon adding an item in the cart
                               )
                             }
                           >
-                            Remove from cart
+                            Add to cart
                           </button>
-                        </>
-                      ) : (
-                        <button
-                          onClick={() =>
-                            dispatch(
-                              { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
-                              toast.info("Item has been added to the cart") // toast message upon adding an item in the cart
-                            )
-                          }
-                        >
-                          Add to cart
-                        </button>
-                      )}
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="thb-product-meta-before">
+                    <div className="product_meta">
+                      <div className="cloud">{showCategory}</div>
+
+                      <div className="cloud">{showTag}</div>
                     </div>
                   </div>
                 </div>
-                <div className="thb-product-meta-before">
-                  <div className="product_meta">
-                    <div className="cloud">{showCategory}</div>
-
-                    <div className="cloud">{showTag}</div>
-                  </div>
-                </div>
+              </div>
+              {/* end col */}
+            </div>
+            {/* end row */}
+            <div className="row">
+              <div className="col col-md-8 col-md-offset-2">
+                {/* <ProductInfoTabs /> */}
               </div>
             </div>
-            {/* end col */}
+            {/* end row */}
           </div>
-          {/* end row */}
-          <div className="row">
-            <div className="col col-md-8 col-md-offset-2">
-              {/* <ProductInfoTabs /> */}
-            </div>
-          </div>
-          {/* end row */}
-        </div>
-        {/* end of container */}
-      </section>
-      {/* end of shop-single-section */}
-      <Footer />
-    </Fragment>
-  );
+          {/* end of container */}
+        </section>
+        {/* end of shop-single-section */}
+        <Footer />
+      </Fragment>
+    );
 }
 
 export default ProductDetails;

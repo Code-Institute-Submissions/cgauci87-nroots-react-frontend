@@ -44,7 +44,7 @@ function HeaderShop({ options }) {
               </button>
               <Link className="mobile-only navbar-brand" to="/">
                 {/* dispaying logo */}
-                <img src={process.env.PUBLIC_URL + "logo64px.png"} alt="logo" />
+                <img src={process.env.PUBLIC_URL + "/logo64px.png"} alt="logo" />
               </Link>
             </div>
 
