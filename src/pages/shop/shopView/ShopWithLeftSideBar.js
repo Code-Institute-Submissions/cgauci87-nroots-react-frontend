@@ -23,6 +23,7 @@ import { useQueryState } from "../../../hooks/useQueryState";
 // style
 import "./shop.css";
 
+
 function ShopWithLeftSideBar({ options }) {
   const [ordering, setOrdering] = useState("&ordering=-created_at");
   const [gridOrdering, setGridOrdering] = useState("1");
@@ -74,10 +75,10 @@ function ShopWithLeftSideBar({ options }) {
                   </div>
                 </div>
                 <div className="shop-sidebar">
-                  <ProductSearchWidget
+                  {/* <ProductSearchWidget
                     setQuery={setQuery}
                     setFilter={setFilter}
-                  />
+                  /> */}
                   <ProductCategoriesWidget
                     setFilter={setFilter}
                     currentFilter={filter}
