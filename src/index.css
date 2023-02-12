@@ -171,9 +171,16 @@ textarea {
     input[type="password"],
     input[type="email"],
     input[type="tel"],
-    form select,
     textarea {
         padding: 10px 15px;
+    }
+
+    form select {
+        padding: 5px;
+        width: auto;
+    }
+    .shop-sidebar form.search {
+        display: none;
     }
 }
 
@@ -2290,8 +2297,6 @@ button:active {
     line-height: normal;
 }
 
-
-/* www */
 
 .header-style-1 #navbar .logo-middle {
     position: relative;
@@ -4483,21 +4488,11 @@ button:active {
 
 /* www */
 
-@media (max-width: 991px) {
 
-    .ecom-cart .ecom table.shop_table th.product-name {
-        margin-left: -50px;
-    }
 
-    .ecom-cart .ecom table.shop_table {
-        display: table-cell;
-        margin-left: -80px;
-    }
 
-    td.product-thumbnail {
-     display: none;
-      }
-}
+
+
 
 /* Firefox */
 .ecom-cart input[type=number] {
@@ -4710,10 +4705,10 @@ button:active {
         width: 50%;
     }
 
+    /* 
     ::-moz-placeholder {
-        /* Firefox 19+ */
         color: transparent;
-    }
+    } */
 
     .shop-sidebar .search-widget:hover {
         margin-left: -250px;
@@ -4724,9 +4719,7 @@ button:active {
         display: none;
     }
 
-    .site-footer {
-        display: none;
-    }
+
 }
 
 @media (max-width: 991px) and (orientation: landscape) {
@@ -6387,4 +6380,49 @@ button:active {
 
 .cms-button:hover {
     background: #000;
+}
+
+.mobile-show form.search {
+    display: none;
+}
+
+@media (max-width: 991px) {
+
+    .App .ecom-cart .ecom table.shop_table th {
+        font-size: 10px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .App .ecom-cart .ecom table.shop_table td {
+        font-size: 10px;
+        padding: 0;
+        margin: 0;
+        left: -15px;
+    }
+
+    .mini-cart-item-image img {
+        display: block !important;
+        min-width: 70px;
+        min-height: 80px;
+        border: 1px solid #f3f3f3;
+        float: left;
+        margin-right: 15px;
+    }
+
+    .shop-section .ecom-toolbar-top {
+        text-align: right;
+        margin-bottom: 10px;
+        overflow: hidden;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+    .mobile-show form.search {
+        display: block;
+    }
+    .App .site-footer.shop {
+        width: 70%;
+    }
+    
 }

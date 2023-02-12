@@ -2,11 +2,11 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 // Footer Component
-function Footer() {
+function Footer({currentPage}) {
   return (
     <Fragment>
       {/* start site-footer */}
-      <footer className="site-footer">
+      <footer className={`site-footer ${currentPage}`}>
         <div className="lower-footer">
           <div className="container-1410">
             <div className="row">

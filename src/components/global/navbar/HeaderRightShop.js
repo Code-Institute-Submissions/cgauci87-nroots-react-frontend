@@ -196,7 +196,7 @@ function HeaderRightShop({ options }) {
               {cart.map((item, index) => (
                 <div key={index} className="mini-cart-item clearfix">
                   <div className="mini-cart-item-image">
-                    <img src={item.uploadedImg} alt="" />
+                    <img src={item.uploadedImg} alt="product" />
                   </div>
                   <div className="mini-cart-item-des">
                     {item.title}

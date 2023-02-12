@@ -66,6 +66,14 @@ function ShopWithLeftSideBar({ options }) {
                       <Ordering setOrdering={setOrdering} />
                     </div>
 
+                    <div class='mobile-show'>
+
+                      <ProductSearchWidget
+                        setQuery={setQuery}
+                        setFilter={setFilter}
+                      />
+                    </div>
+
                     <Products
                       gridOrdering={gridOrdering}
                       ordering={ordering}
@@ -96,7 +104,7 @@ function ShopWithLeftSideBar({ options }) {
       </section>
       {/* end shop-section */}
 
-      <Footer />
+      <Footer currentPage="shop" />
     </Fragment>
   );
 }

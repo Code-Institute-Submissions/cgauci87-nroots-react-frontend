@@ -202,6 +202,7 @@ function App() {
             <Route path="/cart" element={<Cart options={options} />} />
             <Route
               path="/shop"
+              
               element={<ShopWithLeftSideBar options={options} />}
             />
             <Route

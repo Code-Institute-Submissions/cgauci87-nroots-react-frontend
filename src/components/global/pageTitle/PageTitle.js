@@ -20,7 +20,7 @@ function PageTitle({ name, previouspage }) {
                     <li>
                       <NavLink to="/">Home</NavLink>
                     </li>
-                    <li><NavLink to="/shop">{previouspage}</NavLink></li>
+                    { previouspage && <li><NavLink to="/shop">{previouspage}</NavLink></li>}
                     <li>{name}</li>
                   </ol>
                 </div>

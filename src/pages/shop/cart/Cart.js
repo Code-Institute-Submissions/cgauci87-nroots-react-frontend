@@ -115,13 +115,13 @@ function Cart({ options }) {
                                 ×
                               </a>
                             </td>
-                            <td className="product-thumbnail">
+                            <td className="mini-cart-item-image">
                               <img
                                 width={57}
                                 height={70}
                                 src={item.uploadedImg}
                                 className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                alt="product image"
+                                alt="product"
                               />
                             </td>
                             <td className="product-name" data-title="Product">
