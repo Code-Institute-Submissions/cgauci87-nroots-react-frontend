@@ -32,9 +32,6 @@ function FeaturedProducts() {
     maxHeight: "400px",
   };
 
-  const divStyle = {
-   backgroundColor: "#90EE90",
-  };
   // =====================================================================================================
 
   return (
@@ -44,7 +41,7 @@ function FeaturedProducts() {
         <div className="container-1410">
           <div className="row">
             <div className="col col-xs-12">
-              <div className="product-grids clearfix">
+              <div id="product-grids" className="product-grids clearfix">
                 {featuredProductsData.map((item, index) => (
                   <div key={index} className="grid">
                     <div className="img-holder">
@@ -61,11 +58,11 @@ function FeaturedProducts() {
                           Featured
                         </a>
                       </div>
-                      <div style={divStyle}>
-                        <LazyLoad height={460} width={415}>
+                      <div id="fp-image-wrapper">
+                        <LazyLoad  height={460} width={415}>     
                           {/* link to product details of the selected product */}
                           <Link to={`/shop/product-details/${item.id}`}>
-                            <img
+                            <img id="imgStyle"
                               src={item.uploadedImg}
                               alt="product image"
                               style={imgStyle}

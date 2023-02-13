@@ -93,6 +93,13 @@ img:active {
     min-height: 600px;
 }
 
+@media (max-width: 991px) and (orientation: landscape) {
+    .hero-1 .swiper-slide {
+        height: calc(100vh - 152px);
+        min-height: 300px;
+    }
+}
+
 
 .hero-1 .slide-text {
     position: absolute;

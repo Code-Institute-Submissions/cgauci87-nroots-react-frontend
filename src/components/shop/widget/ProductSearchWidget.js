@@ -9,18 +9,15 @@ function ProductSearchWidget({ query, setQuery, setFilter }) {
   return (
     <Fragment>
       <div className="widget search-widget">
-        <form onSubmit={(event) => event.preventDefault()} class='search'>
+        <form onSubmit={(event) => event.preventDefault()} class="search">
           <div>
             <input
-              
               type="text"
               value={query}
               onChange={handleChange}
               placeholder="Search Product.."
             />
-            <button type="submit">
-              <i className="ti-search" />
-            </button>
+            <i id="ti-search" className="ti-search" />
           </div>
         </form>
       </div>

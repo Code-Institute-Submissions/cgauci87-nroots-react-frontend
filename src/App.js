@@ -58,9 +58,9 @@ function App() {
     setShowMiniCart(!showMiniCart);
     setShowUsrAccount(false);
     setShowMobileNav(false);
-    setTimeout(() => {
-      setShowMiniCart(false);
-    }, 10000);
+    // setTimeout(() => {
+    //   setShowMiniCart(false);
+    // }, 10000);
   };
 
   /**
@@ -70,9 +70,9 @@ function App() {
     setShowUsrAccount(!showUsrAccount);
     setShowMiniCart(false);
     setShowMobileNav(false);
-    setTimeout(() => {
-      setShowUsrAccount(false);
-    }, 6000);
+    // setTimeout(() => {
+    //   setShowUsrAccount(false);
+    // }, 6000);
   };
 
   /**
@@ -89,9 +89,9 @@ function App() {
     setShowMobileNav(!showMobileNav);
     setShowUsrAccount(false)
     setShowMiniCart(false);
-    setTimeout(() => {
-      setShowMobileNav(false);
-    }, 6000);
+    // setTimeout(() => {
+    //   setShowMobileNav(false);
+    // }, 6000);
   };
 
   const HandleOverlayStatus = () => {
