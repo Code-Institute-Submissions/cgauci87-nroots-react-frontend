@@ -921,8 +921,6 @@ button:active {
     border-color: #000;
 }
 
-
-
 .usr-account-login-btn,
 .usr-account-reg-btn,
 .view-btn,
@@ -942,6 +940,30 @@ button:active {
     border-top: 1px solid #efefef;
     text-align: center;
 }
+
+/* wwv*/
+
+
+.usr-account-login-btn,
+.usr-account-reg-btn {
+    width: 50%;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 20px 40px;
+    letter-spacing: 4px;
+}
+
+
+.view-btn,
+.checkout-btn {
+    height: 50%;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 5px 10px;
+    letter-spacing: 4px;
+}
+
+
 
 .view-btn:hover,
 .checkout-btn:hover {
@@ -2228,32 +2250,10 @@ button:active {
         padding-bottom: 0px;
     }
 
-    .options-wrapper {
-        background: #fff;
-        margin-top: -30px;
-        padding-left: 15px;
-        padding-right: 10px;
-        margin-right: auto;
-        margin-left: auto;
-        width: 100px;
-    }
-
-    .options-content {
-        width: 250px;
-        background: black;
-    }
-
-    .mini-content {
-        margin-top: -30px;
-    }
-
-
-    .usr-account-login-btn,
-    .usr-account-reg-btn {
-        font-family: "futura-pt-demi", sans-serif;
-        background: #000;
-        width: 50%;
-        padding: 80px 40px;
+    #options-wrapper {
+        margin-top: -31px;
+        margin-left: 110px;
+        width: 100%;
     }
 
 }
@@ -2494,7 +2494,7 @@ button:active {
 
 @media (max-width: 991px) {
     .header-style-1 .header-right .mini-content {
-        top: 63px;
+        top: 32px;
     }
 }
 
@@ -4714,10 +4714,6 @@ button:active {
         width: 50%;
     }
 
-    /* 
-    ::-moz-placeholder {
-        color: transparent;
-    } */
 
     .shop-sidebar .search-widget:hover {
         margin-left: -250px;
@@ -4732,6 +4728,65 @@ button:active {
 }
 
 @media (max-width: 991px) and (orientation: landscape) {
+
+
+    .site-header #navbar ul li a {
+        display: block;
+        padding: 8px;
+    }
+
+    .site-header #navbar.slideInn {
+        top: 100px;
+        height: 170px;
+    }
+
+
+    .usr-account-login-btn,
+    .usr-account-reg-btn {
+        width: 50%;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 20px 40px;
+        letter-spacing: 4px;
+    }
+
+
+    .view-btn,
+    .checkout-btn {
+        height: 50%;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 5px 10px;
+        letter-spacing: 4px;
+    }
+
+
+    #options-wrapper {
+        margin-top: -31px;
+        margin-left: 190px;
+        width: 100%;
+    }
+
+    .header-style-1 .header-right .mini-content {
+        margin-top: 0px;
+    }
+
+    .header-style-1 .header-right .mini-content .mini-cart-items {
+        height: 64vh;
+        font-size: 12px;
+        padding-top: 5px;
+    }
+
+    .header-style-1 .header-right .mini-content .mini-cart-action {
+        padding: 0;
+        margin: 0;
+    }
+
+    .header-style-1 .header-right .mini-content .mini-cart-action .mini-checkout-price {
+        padding: 0;
+        margin: 0;
+    }
+
 
     .header-style-1 .navbar-header img {
         margin-left: -367px;
@@ -4792,7 +4847,6 @@ button:active {
         max-width: 180px;
         padding: 5px;
     }
-
 
 
 }

@@ -88,7 +88,7 @@ function HeaderRightShop({ options }) {
 
   const loggedOutLinks = (
     <>
-      <div className="options-wrapper">
+      <div id="options-wrapper">
         <div className="options-content">
           <Link
             className="usr-account-login-btn"
