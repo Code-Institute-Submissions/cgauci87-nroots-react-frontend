@@ -2195,9 +2195,10 @@ button:active {
 
 
 
-.header-style-1 .header-right .mini-content .mini-cart-items {
+.App .header-style-1 .header-right .mini-content .mini-cart-items {
     padding: 25px 20px;
-    height: 30vh;
+    min-height: 12vh;
+    max-height: 42vh;
     overflow: auto;
 }
 
@@ -2907,10 +2908,13 @@ button:active {
 }
 
 @media (max-width: 1199px) {
+    /* %% */
 
     .featured-products-section .details {
         left: 25px;
         bottom: 40px;
+        min-width: 100%;
+
     }
 }
 
@@ -4898,26 +4902,32 @@ button:active {
         width: 100%;
         float: none;
     }
+
     .contact-pg-section .contact-info li {
         padding-left: 65px;
     }
+
     .contact-pg-section .contact-info i:before {
         font-size: 50px;
         font-size: 3.34rem;
     }
+
     .contact-pg-section .contact-form-col {
         width: 100%;
         float: none;
         padding: 0 15px;
         margin-top: 60px;
     }
+
     .contact-map-section {
         margin-bottom: 100px;
     }
+
     .about-section .about-area .info h2 {
         font-size: 35px;
         font-size: 2.34rem;
     }
+
     .about-section .mission-vision-area h3 {
         font-size: 25px;
         font-size: 1.67rem;
@@ -4931,6 +4941,7 @@ button:active {
         inline-size: 150px;
         overflow-wrap: break-word;
     }
+
     .shop-single-section .product-details {
         margin-top: 45px;
         padding: 40px 30px;
@@ -4940,10 +4951,12 @@ button:active {
         margin-top: 45px;
         padding: 40px 30px;
     }
+
     .shop-single-section .product-details .price {
         font-size: 20px;
         font-size: 1.34rem;
     }
+
     .shop-single-section .product-details .price .old {
         font-size: 18px;
         font-size: 1.2rem;
@@ -5470,8 +5483,9 @@ button:active {
         font-size: 16px;
     }
 
-    .header-style-1 .header-right .mini-content .mini-cart-items {
-        height: 35vh;
+    .App .header-style-1 .header-right .mini-content .mini-cart-items {
+        min-height: 12vh;
+        max-height: 38vh;
     }
 
 
@@ -5484,6 +5498,44 @@ button:active {
 
 
 @media (max-width: 991px) and (orientation: landscape) {
+
+    .App ul.products.default-column {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-left: 20%;
+    }
+
+    .App .shop-single-section {
+        margin-left: 28%;
+    }
+
+
+    .App .mobile-show form.search #ti-search {
+        left: 470px;
+    }
+
+    .App input {
+        font-size: 14px;
+    }
+
+    .App .shop-section .ecom-content-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+
+    .App div.slick-slide img {
+        max-height: 270px;
+    }
+
+
+    .App .shop-single-section .product-details {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-left: -34%;
+    }
+
+
 
     .App .site-header #navbar ul li a {
         display: block;
@@ -5526,8 +5578,9 @@ button:active {
         margin-top: 0px;
     }
 
-    .header-style-1 .header-right .mini-content .mini-cart-items {
-        height: 64vh;
+    .App .header-style-1 .header-right .mini-content .mini-cart-items {
+        min-height: 12vh;
+        max-height: 38vh;
         font-size: 12px;
         padding-top: 5px;
     }
