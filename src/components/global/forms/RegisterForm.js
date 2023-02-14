@@ -182,7 +182,7 @@ function RegisterForm() {
           <Input.Password prefix={<LockOutlined className="text-primary" />} />
         </Form.Item>
 
-        <Form.Item className="ecom-text-box">
+        <Form.Item>
           <p>
             An email confirming your registration will be sent to your email
             address.
@@ -190,7 +190,7 @@ function RegisterForm() {
         </Form.Item>
         <Form.Item className="container-1210">
           <Button
-            className="ecom-Button ecom-button button ecom-form-register__submit"
+            className="ecom-button"
             type="Submit"
             htmlType="submit"
             loading={loading} // set loading

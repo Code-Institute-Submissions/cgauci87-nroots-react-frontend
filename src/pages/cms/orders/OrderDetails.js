@@ -158,9 +158,9 @@ function OrderDetails({ options }) {
                   </table>
                   <div id="payment" className="ecom-checkout-payment">
                     <ul className="wc_payment_methods payment_methods methods">
-                      <li className="wc_payment_method payment_method_cheque">
+                      <li className="wc_payment_method payment_cod">
                         <input
-                          id="payment_method_cheque"
+                          id="payment_cod"
                           type="radio"
                           className="input-radio"
                           name="payment_method"
@@ -171,8 +171,8 @@ function OrderDetails({ options }) {
                         {/*grop add span for radio button style*/}
                         <span className="grop-woo-radio-style" />
                         {/*custom change*/}
-                        <label htmlFor="payment_method_cheque">
-                          Cash On Delivery{" "}
+                        <label htmlFor="payment_cod">
+                          Cash On Delivery
                         </label>
                       </li>
                     </ul>

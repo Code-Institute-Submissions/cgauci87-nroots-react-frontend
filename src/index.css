@@ -326,12 +326,10 @@ select {
 
 
 /*** ecom ***/
-.ecom-Button,
 .ecom-button {
     background: rgba(0, 0, 0, 0.9);
+    font-family: "Gothic A1", sans-serif;
     font-size: 12px;
-    font-size: 0.8rem;
-    font-weight: 500;
     font-weight: 500;
     padding: 12px 30px;
     color: #fff;
@@ -347,18 +345,24 @@ select {
 
 }
 
-.ecom-Button:hover,
+
+.ecom-button:focus,
 .ecom-button:hover {
-    background: #000;
+    color: rgb(144, 238, 144);
 }
 
-.ecom-info:before {
+.ecom .registration-otf:before {
     display: none;
 }
 
+.ecom .registration-otf {
+    margin-top: 25px;
+}
+
 .ecom-text-box {
-    inline-size: 400px;
-    overflow-wrap: break-word;
+    inline-size: 400px; 
+    overflow-wrap: break-word !important;
+    max-width: 100%;
 }
 
 .ecom-privacy-policy-text a {
@@ -368,21 +372,21 @@ select {
 }
 
 .ecom-error a,
-.ecom-info a,
+.registration-otf a,
 .ecom-message a,
 .lost_password a {
     color: #787878;
 }
 
 .ecom-error a:hover,
-.ecom-info a:hover,
+.registration-otf a:hover,
 .ecom-message a:hover,
 .lost_password a:hover {
     text-decoration: underline;
 }
 
 .ecom-error,
-.ecom-info,
+.registration-otf,
 .ecom-message {
     font-family: "futura-pt-demi", sans-serif;
     background-color: rgba(191, 171, 112, 0.1);
@@ -397,48 +401,30 @@ select {
     word-wrap: break-word;
 }
 
-@media (max-width: 767px) {
-
-    .ecom-error,
-    .ecom-info,
-    .ecom-message {
-        padding: 15px;
-    }
+.registration-otf button {
+    margin-left: 10px;
 }
 
-.ecom form.checkout_coupon,
-.ecom form.login,
-.ecom form.register {
-    padding: 34px 35px 33px;
-    border: 1px solid #E5E5E5;
-    margin: 19px 0;
-    text-align: left;
-    border-radius: 0;
+
+.payment_cod {
+    border: 1px solid rgba(191, 171, 112, 0.2);
+    padding: 5px;
 }
 
-@media (max-width: 767px) {
-
-    .ecom form.checkout_coupon,
-    .ecom form.login,
-    .ecom form.register {
-        padding: 34px 20px 33px;
-    }
+.payment_cod label {
+    margin-left: 10px;
 }
 
-.ecom form .form-row .required {
-    color: red;
-    font-weight: 600;
-    border: 0;
+
+
+
+.registration-otf button:focus,
+.registration-otf button:hover {
+    color: rgb(144, 238, 144) !important;
+    background-color: #000;
 }
 
-.ecom form.login>p:not(.form-row) {
-    margin-bottom: 2em;
-}
 
-#customer_login form.login>p:not(.form-row) {
-    margin-top: 2em;
-    margin-bottom: 0;
-}
 
 .ecom form.login input[type="submit"],
 .ecom #respond input#submit,
@@ -451,7 +437,7 @@ select {
     font-size: 12px;
     font-size: 0.8rem;
     font-weight: 500;
-    padding: 14px 35px;
+    padding: 4px 35px;
     text-transform: uppercase;
     letter-spacing: 2px;
     display: inline-block;
@@ -463,11 +449,11 @@ select {
 .button-sm,
 .ant-btn {
     font-family: "futura-pt-demi", sans-serif;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: #fff !important;
     font-size: 10px;
     font-weight: 500;
-    padding: 7px 17.5px;
+    padding: 0.5px 10px 1px 10px !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: inline-block;
@@ -475,6 +461,12 @@ select {
     border-radius: 0;
     outline: 0;
 }
+
+.ant-btn:focus,
+.ant-btn:hover {
+    color: rgb(144, 238, 144) !important;
+}
+
 
 .label-sm {
     font-family: "futura-pt-demi", sans-serif;
@@ -3054,12 +3046,6 @@ button:active {
     color: #000;
 }
 
-.my-account-section .ecom-form.ecom-form-login,
-.my-account-section .ecom-form.ecom-form-register.register {
-    border: 0 !important;
-    padding: 0;
-}
-
 .ecom form .form-row {
     margin-bottom: 15px;
 }
@@ -3411,25 +3397,6 @@ button:active {
     width: 100%;
 }
 
-#add_payment_method .wc-proceed-to-checkout,
-.ecom-cart .wc-proceed-to-checkout,
-.ecom-checkout .wc-proceed-to-checkout {
-    padding: 0;
-    text-align: right;
-}
-
-#add_payment_method .wc-proceed-to-checkout,
-.ecom-cart .wc-proceed-to-checkout,
-.ecom-checkout .wc-proceed-to-checkout {
-    padding: 0;
-}
-
-#add_payment_method .wc-proceed-to-checkout a.checkout-button,
-.ecom-cart .wc-proceed-to-checkout a.checkout-button,
-.ecom-checkout .wc-proceed-to-checkout a.checkout-button {
-    margin-bottom: 0;
-    margin-top: 16px;
-}
 
 .ecom-cart .actions input[name="update_cart"] {
     background-color: #dcdcdc;
@@ -4896,6 +4863,16 @@ button:active {
 /* ===================== £991 ======================*/
 
 @media (max-width: 991px) {
+
+
+    .ecom-cart .ecom table.shop_table .cart_item td.product-remove {
+        width: 25px !important;
+        font-size: 14px;
+    }
+
+    .shop-single-section .product-details .product-option {
+        margin-left: 18%;
+    }
 
 
     .contact-pg-section .contact-info {

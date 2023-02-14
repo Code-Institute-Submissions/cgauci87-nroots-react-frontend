@@ -85,7 +85,7 @@ function ForgotPasswordForm() {
         </Form.Item>
         <Form.Item className="container-1210">
           <Button
-            className="ecom-Button ecom-button button ecom-form-register__submit"
+            className="ecom-button"
             type="Submit"
             htmlType="submit"
             loading={loading} // set loading

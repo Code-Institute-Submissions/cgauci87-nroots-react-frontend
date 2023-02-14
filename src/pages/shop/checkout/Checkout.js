@@ -40,13 +40,10 @@ function Checkout({ options }) {
   } = CartState();
 
   // saving input values inside of state and set total price according to the calculation
-  const [total, setTotal] = useState(null);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     setTotal(
-      cart.reduce(
-        (total, item) => parseFloat(total + item.price * item.qty).toFixed(2),
-        0
-      )
+      cart.reduce((total, item) => parseFloat(total + item.price * item.qty), 0)
     );
   }, [cart]);
 
@@ -240,7 +237,7 @@ function Checkout({ options }) {
                                 <span className="ecom-Price-currencySymbol">
                                   €
                                 </span>
-                                {item.qty * item.price}
+                                {(item.qty * item.price).toFixed(2)}
                               </span>
                             </td>
                           </tr>
@@ -254,7 +251,7 @@ function Checkout({ options }) {
                               <span className="ecom-Price-currencySymbol">
                                 €
                               </span>
-                              {total}
+                              {total.toFixed(2)}
                             </span>
                           </td>
                         </tr>
@@ -290,7 +287,7 @@ function Checkout({ options }) {
                   </div>
                 </form>
                 {user.is_active || newUser ? null : (
-                  <div className="ecom-info">
+                  <div className="registration-otf">
                     <span>
                       Would you like to save your shipping details and order
                       history for next time?
@@ -326,9 +323,9 @@ function Checkout({ options }) {
 
               <div id="payment" className="ecom-checkout-payment">
                 <ul className="wc_payment_methods payment_methods methods">
-                  <li className="wc_payment_method payment_method_cheque">
+                  <li className="wc_payment_method payment_cod">
                     <input
-                      id="payment_method_cheque"
+                      id="payment_cod"
                       type="radio"
                       className="input-radio"
                       name="payment_method"
@@ -338,15 +335,15 @@ function Checkout({ options }) {
                     />
 
                     <span className="grop-woo-radio-style" />
-                    <label htmlFor="payment_method_cheque">
-                      Cash On Delivery{" "}
-                    </label>
-                    <div className="payment_box payment_method_cheque">
+                    <label htmlFor="payment_cod">Cash On Delivery </label>
+                    <div className="payment_box payment_cod">
                       <p>
                         When you place an order with us, you will receive an
-                        instant email with your order summary. We delivery same
-                        day for orders submitted before noon. Kindly expect a
-                        call from our team to coordinate delivery.
+                        instant email with your order summary.
+                        <br/>
+                        We delivery same day for orders submitted before noon.
+                        Kindly expect a call from our team to coordinate
+                        delivery.
                       </p>
                     </div>
                   </li>
@@ -355,7 +352,7 @@ function Checkout({ options }) {
                   <button
                     type="button"
                     onClick={handleOrderSubmit} // This will handle order submit function -> 2 API Calls with conditional rendering
-                    className="ecom-Button ecom-button button ecom-form-register__submit"
+                    className="ecom-button"
                     name="update"
                     defaultValue="Update"
                   >

@@ -59,11 +59,11 @@ function HeaderRightShop({ options }) {
     state: { cart },
   } = CartState(); // Check Cart State
 
-  const [total, setTotal] = useState(null);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     setTotal(
       cart.reduce(
-        (total, item) => parseFloat(total + item.price * item.qty).toFixed(2),
+        (total, item) => parseFloat(total + item.price * item.qty),
         0
       )
     ); // Set cart total according to the state
@@ -209,7 +209,7 @@ function HeaderRightShop({ options }) {
               ))}
             </div>
             <div className="mini-cart-action clearfix">
-              <span className="mini-checkout-price">Subtotal: € {total}</span>
+              <span className="mini-checkout-price">Subtotal: € {total.toFixed(2)}</span>
               <Link
                 className="view-btn"
                 to="/cart"

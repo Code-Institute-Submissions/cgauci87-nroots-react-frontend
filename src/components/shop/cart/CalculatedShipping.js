@@ -35,8 +35,8 @@ function CalculatedShipping({currencySymbol, price}) {
                     </tr>
                     </tbody>
                 </table>
-                <div className="wc-proceed-to-checkout">
-                    <Link className="checkout-button button alt wc-forward" to="/checkout">
+                <div>
+                    <Link className="ecom-button" to="/checkout">
                         Proceed to Checkout
                     </Link>
                 </div>

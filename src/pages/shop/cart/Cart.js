@@ -15,8 +15,6 @@ import CalculatedShipping from "../../../components/shop/cart/CalculatedShipping
 // import Context API for cart state
 import { CartState } from "../../../contexts/CartContext";
 
-
-
 // Cart Page
 function Cart({ options }) {
   const navigate = useNavigate();
@@ -41,15 +39,17 @@ function Cart({ options }) {
   // =======================================================================
   // set total price  based on the below calculation
 
-
   const [total, setTotal] = useState(0);
-  
+
   useEffect(() => {
     setTotal(
-      // cart.reduce((acc, curr) => acc + Number.parseFloat(curr.price).toFixed(2) * curr.qty, 0)
-      cart.reduce((total, item) => (parseFloat((total + item.price * item.qty)).toFixed(2)),0)
+      cart.reduce((total, item) => {
+        return total + parseFloat(item.price) * item.qty;
+      }, 0)
     );
   }, [cart]);
+
+  console.log(cart, total);
   // =======================================================================
 
   return cart.length > 0 ? ( // if card is empty - then navigate to /shop
@@ -177,7 +177,7 @@ function Cart({ options }) {
                                 <span className="ecom-Price-currencySymbol">
                                   €
                                 </span>
-                                {total}
+                                {(item.price * item.qty).toFixed(2)}
                               </span>
                             </td>
                           </tr>
@@ -187,7 +187,10 @@ function Cart({ options }) {
                   </table>
                 </form>
                 <div className="cart-collaterals">
-                  <CalculatedShipping currencySymbol="€" price={total} />
+                  <CalculatedShipping
+                    currencySymbol="€"
+                    price={total.toFixed(2)}
+                  />
                 </div>
               </div>
             </div>

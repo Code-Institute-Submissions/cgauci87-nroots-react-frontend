@@ -6,7 +6,7 @@ import PageTitle from "../../../components/global/pageTitle/PageTitle";
 import Footer from "../../../components/shop/footer/Footer";
 
 // import RegisterForm
-import RegisterForm from "../../../components/global/forms/RegisterForm"
+import RegisterForm from "../../../components/global/forms/RegisterForm";
 
 // Register Page
 export default function Register({ options }) {
@@ -25,7 +25,7 @@ export default function Register({ options }) {
               <div className="ecom">
                 <div className="ecom-notices-wrapper" />
                 <div className="u-columns col2-set">
-                  <div className="u-column2 col-2">
+                  <div className="u-column1 col-1">
                     <RegisterForm />
                   </div>
                 </div>

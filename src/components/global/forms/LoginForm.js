@@ -113,7 +113,7 @@ function LoginForm() {
         </Form.Item>
         <Form.Item className="container-1310">
           <Button
-            className="ecom-button button ecom-form-login__submit"
+            className="ecom-button"
             type="Submit"
             htmlType="submit"
             loading={loading} // set loading
