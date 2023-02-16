@@ -119,15 +119,13 @@ function Checkout({ options }) {
     const comment = commentData.comment;
     const checkout_type = myState;
 
-    console.log(checkout_type, "<<<<<<  this is checkout_type >>> FINAL ");
-
     try {
       const order = await jsonAxios.post(
         "/order/", // API
         JSON.stringify({
           // converts to a JSON string
           items: items,
-          total,
+          total: total.toFixed(2),
           comment,
           first_name,
           last_name,
@@ -138,9 +136,9 @@ function Checkout({ options }) {
           city,
           address_type: "S",
           checkout_type,
-        })
+        }),
+        localStorage.removeItem("cart", JSON.stringify(cart))
       );
-      console.log(order.data);
 
       if (user.is_active || newUser.id) {
         // If user is logged-in or user just registered now (using registration on the fly during the checkout process); save shipping address
@@ -160,6 +158,7 @@ function Checkout({ options }) {
           })
         );
         setMyState(); // This function will ensure that if a user has registered on the fly during checkout process - the state will be updated accordingly
+        localStorage.removeItem("cart", JSON.stringify(cart));
       }
     } catch (error) {
       console.log(error);
@@ -277,7 +276,7 @@ function Checkout({ options }) {
                                 <span className="ecom-Price-currencySymbol">
                                   €
                                 </span>
-                                {total}
+                                {total.toFixed(2)}
                               </span>
                             </strong>
                           </td>
@@ -298,9 +297,11 @@ function Checkout({ options }) {
                   </div>
                 )}
                 {newUser ? (
-                  <div>
-                    You have successfully registered and logged in as{" "}
-                    {newUser.email}
+                  <div className="registration-otf">
+                    <span>
+                      You have successfully registered and logged in as{" "}
+                      {newUser.email}
+                    </span>
                   </div>
                 ) : null}
                 <Modal
@@ -340,7 +341,7 @@ function Checkout({ options }) {
                       <p>
                         When you place an order with us, you will receive an
                         instant email with your order summary.
-                        <br/>
+                        <br />
                         We delivery same day for orders submitted before noon.
                         Kindly expect a call from our team to coordinate
                         delivery.

@@ -70,12 +70,16 @@ function ShippingFields({ shippingData }) {
   const form = shippingData; // Form will get data from shippingData
   const { user } = useAuth(); // Get user from useAuth function
 
-  // =Modal handling======================================================
+  // = Modal handling events ======================================================
 
   const [open, setOpen] = useState(false);
   const showModal = () => {
     // Show Modal if "My Addresses" button is clicks
     setOpen(true);
+  };
+  const handleOk = (e) => {
+    console.log(e);
+    setOpen(false);
   };
   const handleCancel = (e) => {
     // Close Modal if user clicks Cancel
@@ -83,7 +87,7 @@ function ShippingFields({ shippingData }) {
     setOpen(false);
   };
 
-  // =Get Address data=============================================================
+  // = Get Address data =============================================================
 
   const axiosPrivate = useAxiosPrivate();
   const setFormValues = (values) => {
@@ -93,7 +97,7 @@ function ShippingFields({ shippingData }) {
   const getAddressInfo = async () => {
     try {
       const response = await axiosPrivate.get("/auth/user/profile/addresses/");
-      const currentDefault = response.data.find((i) => i.default);
+      const currentDefault = response.data.results((i) => i.default);
       //
       if (currentDefault) {
         setFormValues(currentDefault); // set default address
@@ -140,23 +144,23 @@ function ShippingFields({ shippingData }) {
         <div className="ecom-billing-fields">
           <h3>Shipping Details</h3>
           {showButton}
-          <Modal
-            bodyStyle={{ overflowY: "auto", maxHeight: "calc(100vh - 200px)" }}
-            title="My Addresses"
-            open={open}
-            onCancel={handleCancel} // close the model handling
-            okButtonProps={{
-              disabled: false,
-            }}
-            cancelButtonProps={{
-              disabled: false,
-            }}
-          >
-            {/* get address from ShippingAddresses component */}
-            <div>
-              <ShippingAddresses getAddress={getAddress} />
-            </div>
-          </Modal>
+            <Modal
+              title="My Addresses"
+              open={open}
+              onOk={handleOk}
+              onCancel={handleCancel} // close the model handling
+              okButtonProps={{
+                disabled: false,
+              }}
+              cancelButtonProps={{
+                disabled: false,
+              }}
+            >
+              {/* get address from ShippingAddresses component */}
+              <div>
+                <ShippingAddresses getAddress={getAddress} />
+              </div>
+            </Modal>
           <Form
             name="shipping-address-form"
             layout="vertical"

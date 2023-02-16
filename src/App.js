@@ -89,6 +89,7 @@ function App() {
     setShowMobileNav(!showMobileNav);
     setShowUsrAccount(false)
     setShowMiniCart(false);
+ 
     // setTimeout(() => {
     //   setShowMobileNav(false);
     // }, 6000);

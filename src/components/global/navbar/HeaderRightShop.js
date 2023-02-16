@@ -140,6 +140,7 @@ function HeaderRightShop({ options }) {
 
   /* ################################################################################################*/
 
+
   return (
     <Fragment>
       <div className="header-right">
@@ -164,7 +165,7 @@ function HeaderRightShop({ options }) {
             className={
               "usr-account-options-content " +
               (options.usrAccount ? "mini-content-toggle" : "")
-            }
+            } 
           >
             {/* display options for user depends if user is logged in. */}
             {/* If user is logged in, display loggedInLinks - otherwise display loggedOutLinks */}

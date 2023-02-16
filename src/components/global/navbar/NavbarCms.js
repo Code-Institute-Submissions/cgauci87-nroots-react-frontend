@@ -9,13 +9,16 @@ import "./navBar.css";
 
 // NavbarCms component
 function NavbarCms({ options }) {
+  const mobNavClasses =
+    "navbar-collapse collapse navigation-holder " +
+    (options.mobileNav ? "slideInn" : "");
+
   return (
     <Fragment>
       <div
         id="navbar"
         className={
-          "navbar-collapse collapse navigation-holder " +
-          (options.mobileNav ? "slideInn" : "")
+          mobNavClasses // show mobile nav on mobile/portable devices
         }
       >
         <button onClick={options.onMobileNavClick} className="close-navbar">
@@ -24,6 +27,7 @@ function NavbarCms({ options }) {
         <ul className="nav navbar-nav">
           <li>
             <NavLink
+              onClick={options.onMobileNavClick}
               to="/cms/products/product-list"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
@@ -34,6 +38,7 @@ function NavbarCms({ options }) {
           </li>
           <li>
             <NavLink
+              onClick={options.onMobileNavClick}
               to="/cms/products/add-product"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
@@ -47,6 +52,7 @@ function NavbarCms({ options }) {
 
           <li>
             <NavLink
+              onClick={options.onMobileNavClick}
               to="/cms/orders/order-list"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
@@ -58,6 +64,7 @@ function NavbarCms({ options }) {
 
           <li>
             <NavLink
+              onClick={options.onMobileNavClick}
               to="/"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"

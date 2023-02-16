@@ -6,7 +6,7 @@ import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 
 // import antD components
 import { NumericFormat } from "react-number-format";
-import { Layout, Card, Table, Select, Input, Button, Menu } from "antd";
+import { Layout, Card, Table, Input, Button, Menu } from "antd";
 import { EyeOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 
 // import components

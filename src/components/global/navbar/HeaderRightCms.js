@@ -19,6 +19,9 @@ function HeaderRightCms({ options }) {
     navigate("/");
   }
 
+  console.log(options.usrAccount, "<<< UsrAccount has been invoked")
+  // debugger;
+  
   return (
     <Fragment>
       <div className="header-right">

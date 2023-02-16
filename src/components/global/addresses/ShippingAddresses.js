@@ -16,8 +16,8 @@ function ShippingAddresses({ ordering, getAddress }) {
   // Get all addresses which are associated with the current logged-in user
   const getAddressInfo = async () => {
     const response = await axiosPrivate.get("/auth/user/profile/addresses/");
-    setAddressData(response.data);
-    const currentDefault = response.data.find((i) => i.default);
+    setAddressData(response.data.results);
+    const currentDefault = response.data.results((i) => i.default);
     const currentDefaultId = currentDefault ? currentDefault.id : false;
     setDefaultId(currentDefaultId);
   };
@@ -84,9 +84,14 @@ function ShippingAddresses({ ordering, getAddress }) {
                         />
                       </Tooltip>
                     </div>
+                    <h4>{item.first_name}</h4>
+                    <h4>{item.last_name}</h4>
                     <h4>{item.apartment_address}</h4>
                     <h4> {item.street_address}</h4>
                     <h4>{item.city}</h4>
+                    <h4>{item.phone_number}</h4>
+                    <h4>{item.email}</h4>
+
                     <br></br>
                     {getAddress ? (
                       <button

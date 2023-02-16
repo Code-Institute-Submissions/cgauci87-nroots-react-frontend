@@ -6,7 +6,7 @@ import { NumericFormat } from "react-number-format";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // import antD components
-import { Card, Table, Input, Button, Menu } from "antd";
+import { Card, Table, Layout, Input, Menu } from "antd";
 import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 
 // import components
@@ -15,6 +15,9 @@ import HeaderCms from "../../../components/global/navbar/HeaderCms";
 // import utils
 import EllipsisDropdown from "../../../components/cms/utils/EllipsisDropdown";
 import Flex from "../../../components/cms/utils/Flex";
+
+const { Content } = Layout;
+
 
 // OrderList page
 function OrderList(options) {
@@ -27,7 +30,9 @@ function OrderList(options) {
 
   const getOrderList = async () => {
     try {
-      const response = await axiosPrivate.get(`/order/?page=${currentPage}&search=${searchTerm}&ordering=${orderField}`); // API
+      const response = await axiosPrivate.get(
+        `/order/?page=${currentPage}&search=${searchTerm}&ordering=${orderField}`
+      ); // API
       let data = response.data.results;
       setCount(response.data.count);
       setOrders(data);
@@ -47,7 +52,7 @@ function OrderList(options) {
   const navigate = useNavigate();
   const viewDetails = (row) => {
     navigate(`/cms/orders/view/order/${row.id}`); // navigate to order details of that specific order, once button of viewDetails is clicked
-  }
+  };
 
   // ==========================================================================
 
@@ -133,32 +138,40 @@ function OrderList(options) {
   return (
     <Fragment>
       <HeaderCms options={options} />
-      <Card>
-        <Flex alignItems="center" justifyContent="between" mobileFlex={false}>
-          <Flex className="mb-1" mobileFlex={false}>
-            <div className="mr-md-3 mb-3">
-              <Input
-                placeholder="Search by Order ID"
-                prefix={<SearchOutlined />}
-                onChange={(e) => onSearch(e)}
+      <Layout>
+        <Content>
+          <Card>
+            <Flex
+              alignItems="center"
+              justifyContent="between"
+              mobileFlex={false}
+            >
+              <Flex className="mb-1" mobileFlex={false}>
+                <div className="mr-md-3 mb-3">
+                  <Input
+                    placeholder="Search by Order ID"
+                    prefix={<SearchOutlined />}
+                    onChange={(e) => onSearch(e)}
+                  />
+                </div>
+              </Flex>
+            </Flex>
+            <div className="table-responsive">
+              <Table
+                pagination={{
+                  defaultPageSize: 12,
+                  total: count,
+                  onChange: onPaginationChange,
+                }}
+                onChange={onTableChange}
+                columns={tableColumns}
+                dataSource={OrderListData}
+                rowKey="id"
               />
             </div>
-          </Flex>
-        </Flex>
-        <div className="table-responsive">
-          <Table
-            pagination={{
-              defaultPageSize: 12,
-              total: count,
-              onChange: onPaginationChange,
-            }}
-            onChange={onTableChange}
-            columns={tableColumns}
-            dataSource={OrderListData}
-            rowKey="id"
-          />
-        </div>
-      </Card>
+          </Card>
+        </Content>
+      </Layout>
     </Fragment>
   );
 }

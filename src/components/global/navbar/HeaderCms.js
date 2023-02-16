@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import NavbarCms from "./NavbarCms";
 import HeaderRightCms from "./HeaderRightCms";
 
+
 // HeaderCms component
 function HeaderCms({ options }) {
   return (
     <Fragment>
       {/* Start header */}
       <header id="header" className="site-header header-style-1">
-        <nav className="navigation-cms navbar navbar-default">
+        <nav className="navigation navigation-cms navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
               <button
