@@ -136,7 +136,7 @@ function OrderList(options) {
       <Card>
         <Flex alignItems="center" justifyContent="between" mobileFlex={false}>
           <Flex className="mb-1" mobileFlex={false}>
-            <div className="mr-md-3 mb-3" style={{ marginLeft: 250 }}>
+            <div className="mr-md-3 mb-3">
               <Input
                 placeholder="Search by Order ID"
                 prefix={<SearchOutlined />}
@@ -145,7 +145,7 @@ function OrderList(options) {
             </div>
           </Flex>
         </Flex>
-        <div className="table-responsive" style={{ marginLeft: 250 }}>
+        <div className="table-responsive">
           <Table
             pagination={{
               defaultPageSize: 12,

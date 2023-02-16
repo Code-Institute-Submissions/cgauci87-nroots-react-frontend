@@ -153,7 +153,6 @@ function ProductForm(props) {
   return (
     <>
       <Form
-        style={{ marginLeft: 250 }}
         layout="vertical"
         name="advanced_search"
         className="ant-advanced-search-form"
@@ -172,7 +171,7 @@ function ProductForm(props) {
               alignItems="center"
             >
               {/* conditional rendering depends on the mode */}
-              <h2 className="mb-3">
+              <h2 className="mb-3" style={{marginTop:"50px"}}>
                 {mode === "ADD" ? "Add New Product" : `Product Details`}{" "}
               </h2>
             </Flex>
@@ -181,7 +180,6 @@ function ProductForm(props) {
         <div className="container">
           <Tabs
             defaultActiveKey="1"
-            style={{ marginTop: 30 }}
             items={[
               {
                 label: "General",

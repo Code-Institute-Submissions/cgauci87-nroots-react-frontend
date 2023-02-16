@@ -348,7 +348,7 @@ select {
 
 .ecom-button:focus,
 .ecom-button:hover {
-    color: rgb(144, 238, 144);
+    color: #c2572b;
 }
 
 .ecom .registration-otf:before {
@@ -360,7 +360,7 @@ select {
 }
 
 .ecom-text-box {
-    inline-size: 400px; 
+    inline-size: 400px;
     overflow-wrap: break-word !important;
     max-width: 100%;
 }
@@ -851,10 +851,7 @@ button:active {
     border-color: #000;
 }
 
-.usr-account-login-btn,
-.usr-account-reg-btn,
-.view-btn,
-.checkout-btn {
+.options-btn {
     font-family: "futura-pt-demi", sans-serif;
     background: #000;
     width: 100%;
@@ -874,8 +871,7 @@ button:active {
 /* wwv*/
 
 
-.usr-account-login-btn,
-.usr-account-reg-btn {
+.options-btn {
     width: 50%;
     font-size: 10px;
     font-weight: 500;
@@ -886,11 +882,16 @@ button:active {
 
 .view-btn,
 .checkout-btn {
+    background: #000;
+    color: #fff;
     height: 50%;
     font-size: 10px;
     font-weight: 500;
-    padding: 5px 10px;
-    letter-spacing: 4px;
+    padding: 10px 20px;
+    margin: 5px;
+    letter-spacing: 2px;
+    text-align: left;
+    text-transform: uppercase;
 }
 
 
@@ -901,14 +902,11 @@ button:active {
     color: #fff;
 }
 
-.checkout-btn,
-.usr-account-reg-btn {
+.distinct-btn {
     background-color: #545454;
 }
 
-.checkout-btn:hover,
-.usr-account-login-btn:hover,
-.usr-account-reg-btn:hover {
+.options-btn:hover {
     background-color: #c2572b;
     color: #fff;
 }
@@ -1581,7 +1579,8 @@ button:active {
     /*navbar collaps less then 992px*/
 }
 
-.site-header .navigation {
+.site-header .navigation,
+.site-header .navigation-cms {
     background-color: #fff;
     margin-bottom: 0;
     border: 0;
@@ -1593,6 +1592,10 @@ button:active {
 }
 
 .site-header .navigation>.container {
+    position: relative;
+}
+
+.site-header .navigation-cms>.container {
     position: relative;
 }
 
@@ -1852,12 +1855,19 @@ button:active {
         z-index: 10;
     }
 
-    .header-style-1 .navigation {
+    .header-style-1 .navigation,
+    .header-style-1 .navigation-cms {
         background-color: #fff;
     }
 
+
     .header-style-1 .navigation>.container-fluid {
         min-height: 100px;
+    }
+
+    .header-style-1 .navigation-cms>.container-fluid {
+        min-height: 100px;
+        margin-top: 15px;
     }
 
     .header-style-1 #navbar>ul>li>a {
@@ -1907,12 +1917,17 @@ button:active {
         padding-bottom: 0px;
     }
 
-    #options-wrapper {
+    .usr-account-options-content .options-wrapper {
         margin-top: -31px;
         margin-left: 110px;
         width: 100%;
     }
 
+    .usr-account-options-content .options-cms-wrapper {
+        margin-top: -31px;
+        margin-left: 0;
+        width: 100%;
+    }
 }
 
 
@@ -2150,7 +2165,7 @@ button:active {
     text-transform: uppercase;
 }
 
-
+/* qz */
 .header-style-1 .header-right .usr-account-options-content {
     background: transparent;
     width: 300px;
@@ -2955,6 +2970,10 @@ button:active {
     overflow: hidden;
     padding: 110px 0;
     margin: 0 -15px;
+}
+
+.myAddresses-btn {
+    margin: 45px;
 }
 
 .my-account-section .u-column1,
@@ -4860,14 +4879,29 @@ button:active {
     display: none;
 }
 
+.header-style-1 .header-right .greeting-loggedin-user h4 span {
+    color: green;
+}
+
 /* ===================== £991 ======================*/
 
 @media (max-width: 991px) {
 
+    .header-style-1 .header-right .greeting-loggedin-user {
+        margin-top: -25px;
+        max-width: 220px;
+        padding-left: 100px;
+        text-align: center;
+    }
+
+    .header-style-1 .header-right .greeting-loggedin-user h4 span {
+        font-size: 16px;
+    }
 
     .ecom-cart .ecom table.shop_table .cart_item td.product-remove {
         width: 25px !important;
         font-size: 14px;
+
     }
 
     .shop-single-section .product-details .product-option {
@@ -5058,8 +5092,8 @@ button:active {
         left: 30px;
     }
 
+
     .header-style-1 .header-right {
-        right: 80px;
         top: 20px !important;
     }
 
@@ -5071,7 +5105,8 @@ button:active {
         top: 63px;
     }
 
-    .header-style-1 .navigation {
+    .header-style-1 .navigation,
+    .header-style-1 .navigation-cms {
         background: #fff;
         padding: 0px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -5215,7 +5250,6 @@ button:active {
     }
 
     .site-header #navbar>ul>li>a {
-        /* wip */
         padding: 40px 15px 40px 35px;
     }
 
@@ -5225,6 +5259,8 @@ button:active {
 
     .site-header #navbar.slideInn {
         right: 0;
+        position: absolute;
+        z-index: 999999;
     }
 
     .site-header #navbar>ul .mega-menu,
@@ -5525,8 +5561,7 @@ button:active {
     }
 
 
-    .usr-account-login-btn,
-    .usr-account-reg-btn {
+    .options-btn {
         width: 50%;
         font-size: 10px;
         font-weight: 500;
@@ -5537,6 +5572,8 @@ button:active {
 
     .view-btn,
     .checkout-btn {
+        background: #000;
+        color: #fff;
         height: 50%;
         font-size: 10px;
         font-weight: 500;
@@ -5545,7 +5582,7 @@ button:active {
     }
 
 
-    #options-wrapper {
+    .usr-account-options-content .options-wrapper {
         margin-top: -31px;
         margin-left: 190px;
         width: 100%;
@@ -5563,7 +5600,7 @@ button:active {
     }
 
     .header-style-1 .header-right .mini-content .mini-cart-action {
-        padding: 0;
+        padding: 5px;
         margin: 0;
     }
 

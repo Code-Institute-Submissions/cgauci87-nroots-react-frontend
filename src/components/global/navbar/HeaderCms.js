@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // import components
 import NavbarCms from "./NavbarCms";
-import HeaderRightCms from './HeaderRightCms';
+import HeaderRightCms from "./HeaderRightCms";
 
 // HeaderCms component
 function HeaderCms({ options }) {
@@ -11,23 +11,29 @@ function HeaderCms({ options }) {
     <Fragment>
       {/* Start header */}
       <header id="header" className="site-header header-style-1">
-        <nav className="navigation navbar navbar-default">
+        <nav className="navigation-cms navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
               <button
                 type="button"
                 className="open-btn"
-                onClick={options.onMobleNavClick}
+                onClick={options.onMobileNavClick}
+                style={{
+                  background: "transparent"
+                }}
               >
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
+                <img style={{maxWidth: "28px"}}
+                  src={
+                    process.env.PUBLIC_URL +
+                    "/assets/icons/admin-panel-icon-64px.png"
+                  }
+                  alt="admin"
+                />
               </button>
               <Link className="mobile-only navbar-brand" to="/">
                 <img
-                  src={process.env.PUBLIC_URL + "/assets/images/logo.png"}
-                  alt=""
+                  src={process.env.PUBLIC_URL + "/logo64px.png"}
+                  alt="logo"
                 />
               </Link>
             </div>

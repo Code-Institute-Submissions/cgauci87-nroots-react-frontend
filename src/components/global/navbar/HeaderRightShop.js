@@ -62,10 +62,7 @@ function HeaderRightShop({ options }) {
   const [total, setTotal] = useState(0);
   useEffect(() => {
     setTotal(
-      cart.reduce(
-        (total, item) => parseFloat(total + item.price * item.qty),
-        0
-      )
+      cart.reduce((total, item) => parseFloat(total + item.price * item.qty), 0)
     ); // Set cart total according to the state
   }, [cart]);
 
@@ -88,17 +85,17 @@ function HeaderRightShop({ options }) {
 
   const loggedOutLinks = (
     <>
-      <div id="options-wrapper">
+      <div className="options-wrapper">
         <div className="options-content">
           <Link
-            className="usr-account-login-btn"
+            className="options-btn"
             to="/auth/login"
             onClick={options.onLoginClick}
           >
             Login
           </Link>
           <Link
-            className="usr-account-reg-btn"
+            className="options-btn distinct-btn"
             to="/auth/register"
             onClick={options.onRegisterClick}
           >
@@ -113,27 +110,31 @@ function HeaderRightShop({ options }) {
   // Logged in links defined to display links according if user is logged in or out
   const loggedInLinks = (
     <>
-      <Link
-        className="view-btn"
-        to="/auth/my-account"
-        onClick={options.onMyAccountClick}
-      >
-        My Account
-      </Link>
-      <Link className="view-btn" onClick={onLogout}>
-        Logout
-      </Link>
-      {user && user.is_staff ? (
-        <Link
-          className="checkout-btn"
-          to="/cms/products/product-list"
-          onClick={options.onCmsClick}
-        >
-          CMS
-        </Link>
-      ) : (
-        <span></span>
-      )}
+      <div className="options-wrapper">
+        <div className="options-content">
+          <Link
+            className="options-btn"
+            to="/auth/my-account"
+            onClick={options.onMyAccountClick}
+          >
+            My Account
+          </Link>
+          <Link className="options-btn" onClick={onLogout}>
+            Logout
+          </Link>
+          {user && user.is_staff ? (
+            <Link
+              className="options-btn distinct-btn"
+              to="/cms/products/product-list"
+              onClick={options.onCmsClick}
+            >
+              CMS
+            </Link>
+          ) : (
+            <span></span>
+          )}
+        </div>
+      </div>
     </>
   );
 
@@ -209,7 +210,9 @@ function HeaderRightShop({ options }) {
               ))}
             </div>
             <div className="mini-cart-action clearfix">
-              <span className="mini-checkout-price">Subtotal: € {total.toFixed(2)}</span>
+              <span className="mini-checkout-price">
+                Subtotal: € {total.toFixed(2)}
+              </span>
               <Link
                 className="view-btn"
                 to="/cart"

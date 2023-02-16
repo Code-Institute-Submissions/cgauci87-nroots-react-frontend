@@ -49,7 +49,7 @@ function MyAccount({ options }) {
   let showButton = <span></span>;
   if (user.is_active) {
     showButton = (
-      <Button className="label-sm" onClick={showModal}>
+      <Button className="label-sm myAddresses-btn" onClick={showModal}>
         My Addresses
       </Button>
     );
@@ -69,7 +69,7 @@ function MyAccount({ options }) {
 
       {/* start my-account-section */}
       <section className="my-account-section">
-        <div className="form-horizontal">
+        <div className="container">
           <div className="row">
             <div className="col-xs-12">
               <div className="ecom">

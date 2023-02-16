@@ -5,19 +5,9 @@ import HeaderRightShop from "./HeaderRightShop";
 import data from "../../../../src/data/topbar-text.json";
 import NavbarShop from "./NavbarShop";
 
-import useScrollDirection from "../../../hooks/useScrollDirection"
-
 // HeaderShop Component
 
 function HeaderShop({ options }) {
-
-  const scrollDirection = useScrollDirection();
-
-  const scrollNavClasses =
-  "navigation navbar navbar-default " +
-  (scrollDirection === "down" ? "-top-24" : "top-0");
-
-
   return (
     <Fragment>
       {/* start header */}
@@ -29,7 +19,7 @@ function HeaderShop({ options }) {
           </div>
         </div>
         {/* end topbar */}
-        <nav className={scrollNavClasses}>
+        <nav className="navigation navbar navbar-default ">
           <div className="container-fluid">
             <div className="navbar-header">
               {/* toogle navigation for mobile devices */}
@@ -44,7 +34,10 @@ function HeaderShop({ options }) {
               </button>
               <Link className="mobile-only navbar-brand" to="/">
                 {/* dispaying logo */}
-                <img src={process.env.PUBLIC_URL + "/logo64px.png"} alt="logo" />
+                <img
+                  src={process.env.PUBLIC_URL + "/logo64px.png"}
+                  alt="logo"
+                />
               </Link>
             </div>
 
