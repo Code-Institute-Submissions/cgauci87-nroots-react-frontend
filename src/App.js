@@ -28,8 +28,9 @@ import About from "./pages/shop/about/About";
 import ShopWithLeftSideBar from "./pages/shop/shopView/ShopWithLeftSideBar";
 import ProductDetails from "./pages/shop/shopView/ProductDetails";
 
-import Checkout from "./pages/shop/checkout/Checkout";
 import Cart from "./pages/shop/cart/Cart";
+import Checkout from "./pages/shop/checkout/Checkout";
+import PostCheckout from "./pages/shop/checkout/PostCheckout";
 
 // import CMS Pages:
 
@@ -87,9 +88,9 @@ function App() {
    */
   const HandleMobileNavStatus = () => {
     setShowMobileNav(!showMobileNav);
-    setShowUsrAccount(false)
+    setShowUsrAccount(false);
     setShowMiniCart(false);
- 
+
     // setTimeout(() => {
     //   setShowMobileNav(false);
     // }, 6000);
@@ -200,10 +201,13 @@ function App() {
               />
             </Route>
             <Route path="/checkout" element={<Checkout options={options} />} />
+            <Route
+              path="order-submitted"
+              element={<PostCheckout options={options} />}
+            />
             <Route path="/cart" element={<Cart options={options} />} />
             <Route
               path="/shop"
-              
               element={<ShopWithLeftSideBar options={options} />}
             />
             <Route

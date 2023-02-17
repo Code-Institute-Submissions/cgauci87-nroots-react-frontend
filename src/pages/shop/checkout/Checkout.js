@@ -1,5 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Button, Modal, Form } from "antd";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // import components
 import HeaderShop from "../../../components/global/navbar/HeaderShop";
@@ -106,10 +108,12 @@ function Checkout({ options }) {
     getCheckOutState(); // call this function asynchronous
   }, []);
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleOrderSubmit = async () => {
-    console.log(form);
     const items = cartData;
-    const first_name = form.getFieldValue("first_name"); // getFieldValue - Built in function of antD
+    const first_name = form.getFieldValue("first_name"); // getFieldValue - Built in function of antD form
     const last_name = form.getFieldValue("last_name");
     const email = form.getFieldValue("email");
     const phone_number = form.getFieldValue("phone_number");
@@ -119,8 +123,9 @@ function Checkout({ options }) {
     const comment = commentData.comment;
     const checkout_type = myState;
 
+    setLoading(true); // set loading to true as soon as the Submit Order is invoked
     try {
-      const order = await jsonAxios.post(
+      await jsonAxios.post(
         "/order/", // API
         JSON.stringify({
           // converts to a JSON string
@@ -136,14 +141,19 @@ function Checkout({ options }) {
           city,
           address_type: "S",
           checkout_type,
-        }),
-        localStorage.removeItem("cart", JSON.stringify(cart))
+        })
       );
+      setTimeout(() => {
+        setLoading(false), // set loading to false on success response
+          navigate("/order-submitted"), // navigate to homepage
+          localStorage.clear(), // clear local storage to remove items in cart upon successful order submission
+          window.location.reload(); // reload page to refresh after clear
+      }, 1500);
 
       if (user.is_active || newUser.id) {
         // If user is logged-in or user just registered now (using registration on the fly during the checkout process); save shipping address
         const id = user.is_active ? user.id : newUser.id;
-        const userInfo = await jsonAxios.post(
+        await jsonAxios.post(
           "/auth/user/profile/addresses/", // API
           JSON.stringify({
             user: id,
@@ -157,11 +167,23 @@ function Checkout({ options }) {
             address_type,
           })
         );
-        setMyState(); // This function will ensure that if a user has registered on the fly during checkout process - the state will be updated accordingly
-        localStorage.removeItem("cart", JSON.stringify(cart));
+        setTimeout(() => {
+          setLoading(false), // set loading to false on success response
+            navigate("/order-submitted"), // navigate to homepage
+            localStorage.clear(), // clear local storage to remove items in cart upon successful order submission
+            window.location.reload(); // reload page to refresh after clear
+        }, 1500);
       }
     } catch (error) {
-      console.log(error);
+      // Error Handling
+      if (error.response.status === 500) {
+        toast.error(`${error.response.data.detail}`);
+      } else if (error.response.status === 400) {
+        toast.error(
+          "Please make sure all required fields are filled in correctly."
+        ); // display toast message on error 400
+        setLoading(false); // set loading to false
+      } else return Promise.reject({ ...error });
     }
   };
 
@@ -181,8 +203,6 @@ function Checkout({ options }) {
                   name="checkout"
                   method="post"
                   className="checkout ecom-checkout"
-                  action="/?page_id=6"
-                  encType="multipart/form-data"
                 >
                   <div className="col2-set" id="customer_details">
                     {/* Get shippingData from ShippingFields */}
@@ -269,7 +289,7 @@ function Checkout({ options }) {
                           </td>
                         </tr>
                         <tr className="order-total">
-                          <th>Total</th>
+                          <th>Grand Total</th>
                           <td>
                             <strong>
                               <span className="ecom-Price-amount amount">
@@ -288,8 +308,8 @@ function Checkout({ options }) {
                 {user.is_active || newUser ? null : (
                   <div className="registration-otf">
                     <span>
-                      Would you like to save your shipping details and order
-                      history for next time?
+                      Would you like to save your shipping details for next
+                      time?
                     </span>
                     <Button className="label-sm" onClick={showModal}>
                       Register
@@ -298,10 +318,11 @@ function Checkout({ options }) {
                 )}
                 {newUser ? (
                   <div className="registration-otf">
-                    <span>
+                    <span style={{ color: "green" }}>
                       You have successfully registered and logged in as{" "}
                       {newUser.email}
                     </span>
+                    <span>You may now proceed to submit order.</span>
                   </div>
                 ) : null}
                 <Modal
@@ -350,15 +371,14 @@ function Checkout({ options }) {
                   </li>
                 </ul>
                 <div className="form-row place-order">
-                  <button
-                    type="button"
-                    onClick={handleOrderSubmit} // This will handle order submit function -> 2 API Calls with conditional rendering
+                  <Button
+                    type="Submit"
                     className="ecom-button"
-                    name="update"
-                    defaultValue="Update"
+                    onClick={handleOrderSubmit} // This will handle order submit function -> 2 API Calls with conditional rendering
+                    loading={loading} // set loading
                   >
                     Submit Order
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

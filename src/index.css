@@ -545,6 +545,13 @@ abbr[title] {
 }
 
 
+.section-padding.email-verification-section {
+    padding-top: 200px;
+}
+
+
+
+
 /** for popup image ***/
 .mfp-wrap {
     background-color: rgba(0, 0, 0, 0.9);
@@ -3170,13 +3177,13 @@ button:active {
 
 @media screen and (min-width: 992px) {
     .checkout-section .checkout.ecom-checkout .col2-set {
-        width: 70%;
+        width: 60%;
         float: left;
         padding-right: 85px;
     }
 
     .checkout-section .checkout.ecom-checkout .ecom-checkout-review-order {
-        width: 30%;
+        max-width: 40%;
         float: right;
     }
 
@@ -3805,12 +3812,10 @@ button:active {
 
 .shop-section .shop-action a i:before {
     font-size: 15px;
-    font-size: 1rem;
 }
 
 .shop-section .shop-action>li:first-child i:before {
     font-size: 16px;
-    font-size: 1.0666666667rem;
 }
 
 .shop-section .shop-action>li:nth-child(2) a {
