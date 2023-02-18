@@ -160,9 +160,11 @@ form select,
 textarea {
     font-family: "Gothic A1", sans-serif;
     width: 100%;
+    max-height: 60px;
     border: 1px solid #ddd;
     border-radius: 0;
     padding: 12px 15px;
+    resize: none;
 }
 
 
@@ -385,6 +387,7 @@ select {
     text-decoration: underline;
 }
 
+#order-notes,
 .ecom-error,
 .registration-otf,
 .ecom-message {
@@ -400,6 +403,7 @@ select {
     list-style: none;
     word-wrap: break-word;
 }
+
 
 .registration-otf button {
     margin-left: 10px;
@@ -3444,11 +3448,6 @@ button:active {
     margin: 0;
 }
 
-/* www */
-
-
-
-
 
 
 
@@ -3837,7 +3836,7 @@ button:active {
     max-width: 440px;
 }
 
-.ant-modal-content  .ant-modal-body {
+.ant-modal-content .ant-modal-body {
     overflow-y: auto !important;
     overflow-x: hidden !important;
     max-width: 800px;
@@ -4897,9 +4896,46 @@ button:active {
     color: green;
 }
 
+
+.order-details {
+    margin-top: -80px;
+}
+
+#order-notes {
+    margin-top: -100px;
+    margin-bottom: 40px;
+    width: fit-content;
+    height: fit-content;
+}
+
+
+.ant-input{
+    color: green;
+}
+
+.ant-input-affix-wrapper-disabled .ant-input[disabled] {
+    color: green;
+}
+
+
+
+.ant-select-selection-item {
+    color: green;
+    font-weight: bolder;
+}
+
 /* ===================== £991 ======================*/
 
 @media (max-width: 991px) {
+
+    #order-notes {
+        margin-top: 10px;
+        min-width: 100%;
+    }
+
+    .order-details {
+        margin-top: 20px;
+    }
 
     .header-style-1 .header-right .greeting-loggedin-user {
         margin-top: -25px;

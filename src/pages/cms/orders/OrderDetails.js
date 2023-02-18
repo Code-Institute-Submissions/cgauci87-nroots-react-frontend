@@ -5,7 +5,6 @@ import { Form } from "antd";
 
 // import components
 import HeaderCms from "../../../components/global/navbar/HeaderCms";
-import PageTitle from "../../../components/global/pageTitle/PageTitle";
 import ShippingFields from "../../../components/global/forms/ShippingFields";
 
 // import hooks
@@ -47,17 +46,33 @@ function OrderDetails({ options }) {
 
   // =====================================================================================
 
+  let showOrderNotes = <span>No special notes specified for this order</span>;
+  if (item.comment) {
+    /* Display order notes if there is any, otherwise show the span */
+    showOrderNotes = (
+      <p className="form-row form-row notes" id="order_comments_field">
+        <label htmlFor="order_comments">Order Notes</label>
+        <textarea
+          name="comment"
+          className="input-text "
+          id="order_comments"
+          placeholder="Notes about your order, e.g. special notes for delivery."
+          rows={2}
+          cols={5}
+          defaultValue={item.comment}
+        />
+      </p>
+    );
+  }
+
   return (
     <Fragment>
       <HeaderCms options={options} />
-
-      <PageTitle name="Order Details" />
-
       {/* start OrderDetails-section */}
-      <section className="checkout-section section-padding">
+      <section className="checkout-section order-details section-padding">
         <div className="container">
           <div className="row">
-            <div className="col col-xs-12">
+            <div className="col col-sm-10">
               <form
                 name="checkout"
                 method="post"
@@ -65,10 +80,12 @@ function OrderDetails({ options }) {
               >
                 <div className="col2-set" id="customer_details">
                   {/* get shipping data from form */}
-                  <ShippingFields shippingData={form} />
+                  <ShippingFields shippingData={form} enabled={false} />
                 </div>
                 <p id="order_review_heading">
+                  <h3>Order Details</h3>
                   <strong>Order ID:</strong> {item.order_id}
+                  <br></br>
                   <strong>Order Status:</strong> {item.order_status}
                   <br />
                   <strong>Order Date:</strong> {item.created_at}
@@ -171,26 +188,13 @@ function OrderDetails({ options }) {
                         {/*grop add span for radio button style*/}
                         <span className="grop-woo-radio-style" />
                         {/*custom change*/}
-                        <label htmlFor="payment_cod">
-                          Cash On Delivery
-                        </label>
+                        <label htmlFor="payment_cod">Cash On Delivery</label>
                       </li>
                     </ul>
                   </div>
                 </div>
               </form>
-              <p className="form-row form-row notes" id="order_comments_field">
-                <label htmlFor="order_comments">Order Notes</label>
-                <textarea
-                  name="comment"
-                  className="input-text "
-                  id="order_comments"
-                  placeholder="Notes about your order, e.g. special notes for delivery."
-                  rows={2}
-                  cols={5}
-                  defaultValue={item.comment}
-                />
-              </p>
+              <div id="order-notes">{showOrderNotes}</div>
             </div>
           </div>
         </div>

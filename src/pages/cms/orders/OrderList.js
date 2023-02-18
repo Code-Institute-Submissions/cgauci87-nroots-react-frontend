@@ -20,7 +20,9 @@ const { Content } = Layout;
 
 
 // OrderList page
-function OrderList(options) {
+function OrderList({options}) {
+
+  //const options = params.options
   const axiosPrivate = useAxiosPrivate();
   const [OrderListData, setOrders] = useState([]);
   const [count, setCount] = useState(1);

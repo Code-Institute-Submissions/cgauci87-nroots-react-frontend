@@ -5,7 +5,7 @@ import ProductForm from "../../../../components/cms/forms/ProductForm";
 import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 
 
-function AddProduct(options) {
+function AddProduct({options}) {
   return (
     <Fragment>
       <HeaderCms options={options} />

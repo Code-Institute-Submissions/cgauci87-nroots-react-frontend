@@ -7,7 +7,7 @@ import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 
 
 
-function EditProduct(options) {
+function EditProduct({options}) {
   const params = useParams(); // for ID
 
   return (

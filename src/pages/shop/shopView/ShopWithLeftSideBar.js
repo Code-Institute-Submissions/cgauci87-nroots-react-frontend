@@ -66,7 +66,7 @@ function ShopWithLeftSideBar({ options }) {
                       <Ordering setOrdering={setOrdering} />
                     </div>
 
-                    <div class='mobile-show'>
+                    <div className="mobile-show">
                       <ProductSearchWidget
                         setQuery={setQuery}
                         setFilter={setFilter}

@@ -144,10 +144,10 @@ function Checkout({ options }) {
         })
       );
       setTimeout(() => {
-        setLoading(false), // set loading to false on success response
-          navigate("/order-submitted"), // navigate to homepage
-          localStorage.clear(), // clear local storage to remove items in cart upon successful order submission
-          window.location.reload(); // reload page to refresh after clear
+        setLoading(false); // set loading to false on success response
+        navigate("/order-submitted"); // navigate to homepage
+        localStorage.clear(); // clear local storage to remove items in cart upon successful order submission
+        window.location.reload(); // reload page to refresh after clear
       }, 1500);
 
       if (user.is_active || newUser.id) {
@@ -168,26 +168,34 @@ function Checkout({ options }) {
           })
         );
         setTimeout(() => {
-          setLoading(false), // set loading to false on success response
-            navigate("/order-submitted"), // navigate to homepage
-            localStorage.clear(), // clear local storage to remove items in cart upon successful order submission
-            window.location.reload(); // reload page to refresh after clear
+          setLoading(false); // set loading to false on success response
+          navigate("/order-submitted");
+
+          localStorage.clear(); // clear local storage to remove items in cart upon successful order submission
+          window.location.reload(); // reload page to refresh after clear
         }, 1500);
       }
     } catch (error) {
       // Error Handling
+      debugger;
       if (error.response.status === 500) {
         toast.error(`${error.response.data.detail}`);
       } else if (error.response.status === 400) {
+        const addressAlreadyExists =
+          error.response.data.non_field_errors &&
+          error.response.data.non_field_errors[0] ==
+            "The address already exists so it won't be saved again";
+        if (addressAlreadyExists) {
+          return;
+        }
         toast.error(
           "Please make sure all required fields are filled in correctly."
         ); // display toast message on error 400
-        setLoading(false); // set loading to false
       } else return Promise.reject({ ...error });
     }
   };
 
-  return (
+  return cart.length > 0 ? ( // if card is empty - then navigate to /shop
     <Fragment>
       <HeaderShop options={options} />
 
@@ -206,15 +214,16 @@ function Checkout({ options }) {
                 >
                   <div className="col2-set" id="customer_details">
                     {/* Get shippingData from ShippingFields */}
-                    <ShippingFields shippingData={form} />
+                    <ShippingFields shippingData={form} enabled={true} />
                     <div>
                       <textarea
                         name="comment"
                         className="input-text"
                         id="order_comments"
                         placeholder="Notes about your order, e.g. special notes for delivery."
-                        rows={2}
-                        cols={5}
+                        rows="2"
+                        cols="4"
+                        maxlength="100"
                         defaultValue={commentData.comment}
                         onChange={handleInputChange} // saving an input value inside of state
                       />
@@ -389,6 +398,10 @@ function Checkout({ options }) {
 
       <Footer />
     </Fragment>
+  ) : (
+    setTimeout(() => {
+      navigate("/shop"); // navigate to /shop if cart is empty
+    }, 1500)
   );
 }
 

@@ -66,7 +66,7 @@ const rules = {
   ],
 };
 // Shipping Fields Page
-function ShippingFields({ shippingData }) {
+function ShippingFields({ shippingData, enabled }) {
   const form = shippingData; // Form will get data from shippingData
   const { user } = useAuth(); // Get user from useAuth function
 
@@ -137,6 +137,7 @@ function ShippingFields({ shippingData }) {
     showButton = <h4></h4>;
   }
   // =============================================================================
+  const disabled = !enabled
 
   return (
     <Fragment>
@@ -178,6 +179,7 @@ function ShippingFields({ shippingData }) {
                 placeholder="John"
                 prefix={<UserOutlined className="text-primary" />}
                 className="input-text"
+                disabled={disabled}
               />
             </Form.Item>
             <Form.Item
@@ -191,6 +193,7 @@ function ShippingFields({ shippingData }) {
                 placeholder="Doe"
                 prefix={<UserOutlined className="text-primary" />}
                 className="input-text"
+                disabled={disabled}
               />
             </Form.Item>
 
@@ -205,6 +208,7 @@ function ShippingFields({ shippingData }) {
                 placeholder="john.doe@example.com"
                 prefix={<MailOutlined className="text-primary" />}
                 className="input-text"
+                disabled={disabled}
               />
             </Form.Item>
             <Form.Item
@@ -218,6 +222,7 @@ function ShippingFields({ shippingData }) {
                 placeholder="79858593"
                 prefix={<PhoneOutlined className="text-primary" />}
                 className="input-text"
+                disabled={disabled}
               />
             </Form.Item>
 
@@ -232,6 +237,7 @@ function ShippingFields({ shippingData }) {
                 placeholder="58, St Mary Court, Block C, Flat 4"
                 prefix={<ApartmentOutlined className="text-primary" />}
                 className="input-text"
+                disabled={disabled}
               />
             </Form.Item>
 
@@ -246,6 +252,7 @@ function ShippingFields({ shippingData }) {
                 placeholder="Triq il-Faqqiegh"
                 prefix={<ApartmentOutlined className="text-primary" />}
                 className="input-text"
+                disabled={disabled}
               />
             </Form.Item>
 
@@ -264,6 +271,7 @@ function ShippingFields({ shippingData }) {
                   </React.Fragment>
                 }
                 className="input-text"
+                disabled={disabled}
               >
                 <Option value="Dublin">Dublin</Option>
                 <Option value="Cork">Cork</Option>
