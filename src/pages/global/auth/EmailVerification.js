@@ -23,11 +23,15 @@ export default function EmailVerification({ options }) {
 
               <div className="border border-success">
                 <h2>You're Almost There...</h2>
-                <h3>
+                <hr></hr>
+                <p>
                   An email with a link has been sent to your registered email
-                  address. Please follow the instructions in the email to
-                  complete the reset password process.
-                </h3>
+                  address.
+                </p>
+                <p>
+                  Please follow the instructions in the email to complete the
+                  reset password process.
+                </p>
               </div>
             </div>
           </div>

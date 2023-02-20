@@ -82,7 +82,7 @@ function ResetPasswordForm() {
   }, []);
   // ===========================================================================================
 
-  return (
+  return data.reset_token != null ? ( // if token is empty - navigate to /home
     <Fragment>
       <h3>Input Your New Password</h3>
       <Form
@@ -140,6 +140,10 @@ function ResetPasswordForm() {
         </Form.Item>
       </Form>
     </Fragment>
+  ) : (
+    setTimeout(() => {
+      navigate("/home"); // navigate to /home if token is empty
+    }, 1500)
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { toast } from "react-toastify";
 
@@ -121,7 +121,7 @@ function RegisterForm() {
             updateData(regData); // saving an input value inside of state
           }}
         >
-          <Input />
+          <Input prefix={<UserOutlined className="text-primary" />} />
         </Form.Item>
         <Form.Item
           name="last_name"
@@ -135,7 +135,7 @@ function RegisterForm() {
             updateData(regData); // saving an input value inside of state
           }}
         >
-          <Input />
+          <Input prefix={<UserOutlined className="text-primary" />} />
         </Form.Item>
 
         <Form.Item

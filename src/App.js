@@ -23,6 +23,7 @@ import NotFound from "./pages/global/404/NotFound";
 
 import HomeDefault from "./pages/shop/home/HomeDefault";
 import ContactUs from "./pages/shop/contactUs/ContactUs";
+import PostContactUs from "./pages/shop/contactUs/PostContactUs";
 import About from "./pages/shop/about/About";
 
 import ShopWithLeftSideBar from "./pages/shop/shopView/ShopWithLeftSideBar";
@@ -180,6 +181,10 @@ function App() {
             />
             <Route path="/home" element={<HomeDefault options={options} />} />
             <Route path="/contact" element={<ContactUs options={options} />} />
+            <Route
+              path="contact-form-submitted"
+              element={<PostContactUs options={options} />}
+            />
             <Route path="/about" element={<About options={options} />} />
             <Route path="/auth">
               <Route path="login" element={<Login options={options} />} />
