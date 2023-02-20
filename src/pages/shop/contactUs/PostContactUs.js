@@ -11,7 +11,7 @@ export default function PostContactUs({ options }) {
     <Fragment>
       <HeaderShop options={options} />
 
-      {/* start emailverification-layout */}
+      {/* start layout */}
       <section className="email-verification-section section-padding">
         <div className="container">
           <div className="form-horizontal">
@@ -31,7 +31,7 @@ export default function PostContactUs({ options }) {
           </div>
         </div>
       </section>
-      {/* end emailverification-layout */}
+      {/* end layout */}
 
       <Footer />
     </Fragment>
