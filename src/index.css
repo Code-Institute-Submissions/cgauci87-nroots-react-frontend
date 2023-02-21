@@ -862,6 +862,13 @@ button:active {
     border-color: #000;
 }
 
+
+
+.usr-account-options-content .options-cms-wrapper {
+    background-color: #fff ;
+}
+
+
 .options-btn {
     font-family: "futura-pt-demi", sans-serif;
     background: #000;
@@ -1630,6 +1637,7 @@ button:active {
 }
 
 @media screen and (min-width: 992px) {
+
     .site-header #navbar {
         /*** hover effect ***/
     }
@@ -4899,6 +4907,13 @@ button:active {
     color: green;
 }
 
+.header-style-1 .header-right .greeting-loggedin-user {
+    margin-top: -10px;
+}
+
+.App .cms .greeting-loggedin-user {
+    margin-top: 0;
+}
 
 .order-details {
     margin-top: -80px;
@@ -4927,9 +4942,17 @@ button:active {
     font-weight: bolder;
 }
 
-/* ===================== £991 ======================*/
 
 @media (max-width: 991px) {
+
+    .page-title h2 {
+        font-size: 22px;
+    }
+    
+
+    .App #king-icon {
+        margin-top: -4.5px;
+    }
 
     #order-notes {
         margin-top: 10px;
@@ -5417,8 +5440,7 @@ button:active {
     }
 
     .page-title .breadcrumb li {
-        font-size: 16px;
-        font-size: 1.067rem;
+        font-size: 14px;
     }
 
     .page-title {

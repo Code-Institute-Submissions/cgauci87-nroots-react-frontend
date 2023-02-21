@@ -44,7 +44,7 @@ function NavbarCms({ options }) {
                 navData.isActive ? "current-menu-item" : "none"
               }
             >
-              Add
+              Add Product
             </NavLink>
           </li>
 
@@ -65,12 +65,12 @@ function NavbarCms({ options }) {
           <li>
             <NavLink
               onClick={options.onMobileNavClick}
-              to="/"
+              to="/shop"
               className={(navData) =>
                 navData.isActive ? "current-menu-item" : "none"
               }
             >
-              Mailbox
+              Shop
             </NavLink>
           </li>
         </ul>

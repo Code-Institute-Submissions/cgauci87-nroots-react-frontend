@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // hooks
 import useLogout from "../../../hooks/useLogout";
+import useAuth from "../../../hooks/useAuth";
 
 // import style
 import "./navbarRight.css";
@@ -19,18 +20,54 @@ function HeaderRightCms({ options }) {
     navigate("/");
   }
 
-  console.log(options.usrAccount, "<<< UsrAccount has been invoked")
-  // debugger;
-  
+  // ################################################################################################
+
+  const { user } = useAuth();
+
+  let timeOfDay; /* Greeting to be displayed according the time of the day */
+  const date = new Date();
+  const hours = date.getHours();
+
+  if (hours < 12) {
+    timeOfDay = "morning";
+  } else if (hours >= 12 && hours < 18) {
+    timeOfDay = "afternoon";
+  } else if (hours >= 12 && hours < 23) {
+    timeOfDay = "evening";
+  } else {
+    timeOfDay = "night";
+  }
+
+  let showGreeting = <span></span>;
+  if (user.is_staff) {
+    /* Display greeting if user is logged in, display first name to enhance personalization */
+    showGreeting = (
+      <span>
+        Good {timeOfDay}, {user.first_name}!
+      </span>
+    );
+  }
+
+  // ################################################################################################
+
   return (
     <Fragment>
-      <div className="header-right">
+      <div className="header-right cms">
+        <div className="greeting-loggedin-user">
+          {/* display the greeting message */}
+          <h4> {showGreeting}</h4>
+        </div>
+
+        {/* ################################################################################################*/}
+
         <div className="my-account-link">
-          <button
-            className="toggle-btn"
-            onClick={options.onUsrAccountClick}
-          >
-            <i className="icon-user" />
+          <button className="toggle-btn" onClick={options.onUsrAccountClick}>
+            <img
+              id="king-icon"
+              style={{ maxWidth: "28px" }}
+              src={process.env.PUBLIC_URL + "/assets/icons/king-icon-64px.png"}
+              alt="admin account"
+            />
           </button>
           <div
             className={

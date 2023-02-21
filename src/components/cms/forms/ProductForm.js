@@ -53,7 +53,7 @@ function ProductForm(props) {
       }
       setCategories(_categories);
     });
-  }, []);
+  }, [axiosPrivate, form]);
 
   useEffect(() => {
     axiosPrivate.get("/tags").then((response) => {
@@ -65,31 +65,31 @@ function ProductForm(props) {
       }
       setTags(_tags);
     });
-  }, []);
-
-  // ======================================================================
-
-  const getProductList = async () => {
-    try {
-      const response = await axiosPrivate.get("/products");
-      let data = response.data.results;
-      const productData = data.find((product) => product.id === +id);
-      if (productData) {
-        form.setFieldsValue(productData); // set values of product data
-        setImage(productData.uploadedImg); // set image
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [axiosPrivate, form]);
 
   // ======================================================================
 
   useEffect(() => {
-    if (mode === EDIT) {
-      getProductList(); // Fetch data if edit is clicked
-    }
-  }, []);
+    const getProductList = async () => {
+      try {
+        const response = await axiosPrivate.get("/products");
+        let data = response.data.results;
+        const productData = data.find((product) => product.id === +id);
+        if (productData) {
+          form.setFieldsValue(productData); // set values of product data
+          setImage(productData.uploadedImg); // set image
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      if (mode === EDIT) {
+        getProductList(); // Fetch data if edit is clicked
+      }
+    };
+  });
+
+  // ======================================================================
 
   // ======================================================================
 
@@ -98,10 +98,8 @@ function ProductForm(props) {
 
     // ======================================================================
 
-    var formData;
-    let results = form.getFieldsValue();
-    formData = results;
-
+  
+    const results = form.getFieldsValue();
     results.uploadedImg = uploadedImg;
     // if uploadedImg has not been updated in the edit-product form; then delete results.uploadedImg
     if (results.uploadedImg && results.uploadedImg.includes("http")) {

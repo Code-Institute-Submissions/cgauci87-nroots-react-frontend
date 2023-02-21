@@ -80,7 +80,10 @@ function ProductDetails({ options }) {
     setQuickViewData({});
   };
 
-  // =============================================================================================================
+  // ==============================================================================================================
+  //----------------------------------------CONDIONTIONAL RENDERING----------------------------------------------//
+  // ==============================================================================================================
+
 
   // display category if there is any, otherwise do not display
   let showCategory = <span></span>;
@@ -114,7 +117,15 @@ function ProductDetails({ options }) {
     );
   }
 
-  // =============================================================================================================
+  //=============================================================================================================
+
+  let showOldPrice = <span></span>;
+  if (item.comparePrice > 0.00) {
+    /* Display old price if not blank - otherwise do not display */
+    showOldPrice = <span className="old"> €{item.comparePrice}</span>;
+  }
+
+  // ============================================================================================================
   if (loading) {
     <div>
       <Loading />
@@ -160,7 +171,7 @@ function ProductDetails({ options }) {
                   <h2>{item.title}</h2>
                   <div className="price">
                     <span className="current"> € {item.price}</span>
-                    <span className="old"> €{item.comparePrice}</span>
+                    {showOldPrice}
                   </div>
                   <p>{item.description}</p>
                   <div>

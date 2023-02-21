@@ -28,7 +28,7 @@ function HeaderCms({ options }) {
                     process.env.PUBLIC_URL +
                     "/assets/icons/admin-panel-icon-64px.png"
                   }
-                  alt="admin"
+                  alt="admin panel"
                 />
               </button>
               <Link className="mobile-only navbar-brand" to="/">

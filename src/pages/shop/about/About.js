@@ -27,7 +27,7 @@ function About({ options }) {
                       process.env.PUBLIC_URL +
                       "/assets/images/aboutus/about-us-644x797.webp"
                     }
-                    alt="about us picture"
+                    alt="about us"
                   />
                 </div>
               </div>
@@ -37,22 +37,24 @@ function About({ options }) {
                 <div>
                   <h3>Our mission</h3>
                   <p>
-                    Pitifully thin compared with the size of the rest of him,
-                    waved about helplessly as he looked. "What's happened to me
-                    gregor then turned to look out the window at the dull
-                    weather deal to the day
+                    Dedicated to growing an outstanding assortment of superior
+                    house plants and provide our customers with sterling
+                    service. Create for our employees a stimulating, safe,
+                    challenging and rewarding environment. Strive for business
+                    excellence by building lasting relationships with our
+                    customers.
                   </p>
                 </div>
                 <div>
                   <h3>Goal of our business</h3>
                   <p>
-                    Pitifully thin compared with the size of the rest of him,
-                    waved about helplessly as he looked. "What's happened to me
-                    gregor then turned to look out the window at the dull
-                    weather deal to the day
+                    We are a family business, focused on exceeding customer
+                    expectations on quality and service. It is our primary aim
+                    to further develop the site and establish our position in
+                    the market as a leading provider of house plants.
                   </p>
                 </div>
-                <NavLink to="/shop-full-width" className="theme-btn">
+                <NavLink to="/shop" className="theme-btn">
                   Go to shop
                 </NavLink>
               </div>

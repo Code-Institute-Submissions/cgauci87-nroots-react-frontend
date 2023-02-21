@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
 
 // Footer Component
-function Footer({currentPage}) {
+function Footer({ currentPage }) {
   return (
     <Fragment>
       {/* start site-footer */}
@@ -13,12 +12,16 @@ function Footer({currentPage}) {
               <div className="col-xs-12">
                 <div className="lower-footer-inner clearfix">
                   <div>
-                    <p>© 2022, All Rights Reserved</p>
+                    <p>© 2023, CG All Rights Reserved</p>
                   </div>
                   <div className="social">
                     <ul className="clearfix">
                       <li>
-                        <Link to="https://facebook.com/"   target="_blank" rel="noopener noreferrer">
+                        <a
+                          href="https://facebook.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <img
                             src={
                               process.env.PUBLIC_URL +
@@ -26,11 +29,14 @@ function Footer({currentPage}) {
                             }
                             alt="facebook"
                           />
-                        </Link>
-                      
+                        </a>
                       </li>
                       <li>
-                      <Link to="https://instagram.com/"   target="_blank" rel="noopener noreferrer">
+                        <a
+                          href="https://instagram.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <img
                             src={
                               process.env.PUBLIC_URL +
@@ -38,8 +44,7 @@ function Footer({currentPage}) {
                             }
                             alt="instagram"
                           />
-                        </Link>
-                      
+                        </a>
                       </li>{" "}
                     </ul>
                   </div>
