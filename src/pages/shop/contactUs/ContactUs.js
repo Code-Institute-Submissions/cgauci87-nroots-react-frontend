@@ -10,10 +10,6 @@ import ContactUsForm from "../../../components/global/forms/ContactUsForm";
 
 // ContactUs Page
 function ContactUs({ options }) {
-  const onSubmitForm = (e) => {
-    e.preventDefault();
-  };
-
   /*data for address*/
   const contactUsData = {
     address: "UA6 Grenogue Ind. Est., Dublin",

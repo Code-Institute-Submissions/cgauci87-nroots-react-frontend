@@ -150,7 +150,7 @@ function ContactUsForm() {
           <Form.Item
             name="message"
             label="Message"
-            rules={rules.message}
+            rules={rules.message} 
             hasFeedback
             value={data.message}
             onChange={(e) => {

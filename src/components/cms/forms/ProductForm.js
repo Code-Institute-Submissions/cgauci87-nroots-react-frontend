@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import PageHeaderAlt from "../../cms/pageHeader/PageHeaderAlt";
 import Flex from "../../cms/utils/Flex";
 import GeneralField from "./GeneralField";
+import Loading from "../utils/Loading";
 
 // import hooks
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -18,6 +19,14 @@ const EDIT = "EDIT";
 
 // ProductForm component (for ADD & EDIT)
 function ProductForm(props) {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
   const axiosPrivate = useAxiosPrivate();
   const { mode = ADD } = props; // props passed are for add product
 
@@ -150,66 +159,71 @@ function ProductForm(props) {
 
   // =======================================================================================
 
-  return (
-    <>
-      <Form
-        layout="vertical"
-        name="advanced_search"
-        className="ant-advanced-search-form"
-        value={{
-          heightUnit: "cm",
-          widthUnit: "cm",
-          weightUnit: "kg",
-        }}
-      >
-        <PageHeaderAlt className="border-bottom" overlap>
+  if (loading) {
+    <div>
+      <Loading />
+    </div>;
+  } else
+    return (
+      <>
+        <Form
+          layout="vertical"
+          name="advanced_search"
+          className="ant-advanced-search-form"
+          value={{
+            heightUnit: "cm",
+            widthUnit: "cm",
+            weightUnit: "kg",
+          }}
+        >
+          <PageHeaderAlt className="border-bottom" overlap>
+            <div className="container">
+              <Flex
+                className="py-2"
+                mobileFlex={false}
+                justifyContent="between"
+                alignItems="center"
+              >
+                {/* conditional rendering depends on the mode */}
+                <h2 className="mb-3" style={{ marginTop: "50px" }}>
+                  {mode === "ADD" ? "Add New Product" : `Product Details`}{" "}
+                </h2>
+              </Flex>
+            </div>
+          </PageHeaderAlt>
           <div className="container">
-            <Flex
-              className="py-2"
-              mobileFlex={false}
-              justifyContent="between"
-              alignItems="center"
-            >
-              {/* conditional rendering depends on the mode */}
-              <h2 className="mb-3" style={{marginTop:"50px"}}>
-                {mode === "ADD" ? "Add New Product" : `Product Details`}{" "}
-              </h2>
-            </Flex>
+            <Tabs
+              defaultActiveKey="1"
+              items={[
+                {
+                  label: "General",
+                  key: "1",
+                  children: (
+                    <GeneralField
+                      setImage={setImage}
+                      imageUrl={uploadedImg}
+                      categories={categories}
+                      tags={tags}
+                      data={form}
+                    />
+                  ),
+                },
+              ]}
+            />
           </div>
-        </PageHeaderAlt>
-        <div className="container">
-          <Tabs
-            defaultActiveKey="1"
-            items={[
-              {
-                label: "General",
-                key: "1",
-                children: (
-                  <GeneralField
-                    setImage={setImage}
-                    imageUrl={uploadedImg}
-                    categories={categories}
-                    tags={tags}
-                    data={form}
-                  />
-                ),
-              },
-            ]}
-          />
-        </div>
-        <div className="cms-button">
-          <Button
-            type="file"
-            onClick={() => onFinish()}
-            htmlType="submit"
-            loading={submitLoading}
-          >
-            {mode === "ADD" ? "Add" : `Save`}
-          </Button>
-        </div>
-      </Form>
-    </>
-  );
+          <div className="cms-button">
+            <Button
+              type="file"
+              onClick={() => onFinish()}
+              htmlType="submit"
+              loading={submitLoading}
+            >
+              {mode === "ADD" ? "Add" : `Save`}
+            </Button>
+          </div>
+        </Form>
+      </>
+    );
 }
 
 export default ProductForm;

@@ -15,14 +15,24 @@ import HeaderCms from "../../../components/global/navbar/HeaderCms";
 // import utils
 import EllipsisDropdown from "../../../components/cms/utils/EllipsisDropdown";
 import Flex from "../../../components/cms/utils/Flex";
+import Loading from "../../../components/cms/utils/Loading";
 
 const { Content } = Layout;
 
-
 // OrderList page
-function OrderList({options}) {
+function OrderList({ options }) {
+  // =====================================================================================
 
-  //const options = params.options
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
+  // =====================================================================================
+
   const axiosPrivate = useAxiosPrivate();
   const [OrderListData, setOrders] = useState([]);
   const [count, setCount] = useState(1);
@@ -44,12 +54,10 @@ function OrderList({options}) {
   };
 
   useEffect(() => {
-    getOrderList(); // Fetch list upon update
+    getOrderList(); // Get list upon update
   }, [currentPage, searchTerm, orderField]);
 
   // ==========================================================================
-
-  const [list, setList] = useState(OrderListData);
 
   const navigate = useNavigate();
   const viewDetails = (row) => {
@@ -136,46 +144,51 @@ function OrderList({options}) {
     setOrderField(`${order}${column}`);
     return false;
   };
-
-  return (
-    <Fragment>
-      <HeaderCms options={options} />
-      <Layout>
-        <Content>
-          <Card>
-            <Flex
-              alignItems="center"
-              justifyContent="between"
-              mobileFlex={false}
-            >
-              <Flex className="mb-1" mobileFlex={false}>
-                <div className="mr-md-3 mb-3">
-                  <Input
-                    placeholder="Search by Order ID"
-                    prefix={<SearchOutlined />}
-                    onChange={(e) => onSearch(e)}
-                  />
-                </div>
+  // =========================================================================================
+  if (loading) {
+    <div>
+      <Loading />
+    </div>;
+  } else
+    return (
+      <Fragment>
+        <HeaderCms options={options} />
+        <Layout>
+          <Content>
+            <Card>
+              <Flex
+                alignItems="center"
+                justifyContent="between"
+                mobileFlex={false}
+              >
+                <Flex className="mb-1" mobileFlex={false}>
+                  <div className="mr-md-3 mb-3">
+                    <Input
+                      placeholder="Search by Order ID"
+                      prefix={<SearchOutlined />}
+                      onChange={(e) => onSearch(e)}
+                    />
+                  </div>
+                </Flex>
               </Flex>
-            </Flex>
-            <div className="table-responsive">
-              <Table
-                pagination={{
-                  defaultPageSize: 12,
-                  total: count,
-                  onChange: onPaginationChange,
-                }}
-                onChange={onTableChange}
-                columns={tableColumns}
-                dataSource={OrderListData}
-                rowKey="id"
-              />
-            </div>
-          </Card>
-        </Content>
-      </Layout>
-    </Fragment>
-  );
+              <div className="table-responsive">
+                <Table
+                  pagination={{
+                    defaultPageSize: 12,
+                    total: count,
+                    onChange: onPaginationChange,
+                  }}
+                  onChange={onTableChange}
+                  columns={tableColumns}
+                  dataSource={OrderListData}
+                  rowKey="id"
+                />
+              </div>
+            </Card>
+          </Content>
+        </Layout>
+      </Fragment>
+    );
 }
 
 export default OrderList;

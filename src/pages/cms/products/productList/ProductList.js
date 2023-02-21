@@ -11,6 +11,7 @@ import { EyeOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 
 // import components
 import HeaderCms from "../../../../components/global/navbar/HeaderCms";
+import Loading from "../../../../components/cms/utils/Loading";
 
 // import utils
 import AvatarStatus from "../../../../components/cms/utils/AvatarStatus";
@@ -21,6 +22,17 @@ const { Content } = Layout;
 
 // ProductList Page
 function ProductList({ options }) {
+  // ==========================================================================
+
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+  // ====================================================================
+
   const axiosPrivate = useAxiosPrivate();
   // ====================================================================
   // get product list data from API
@@ -200,77 +212,82 @@ function ProductList({ options }) {
   };
 
   // =========================================================================================
-  return (
-    <Fragment>
-      <HeaderCms options={options} />
-      <Layout>
-        <Content>
-          <Card>
-            <Flex
-              alignItems="center"
-              justifyContent="between"
-              mobileFlex={false}
-            >
-              <Flex className="mb-1" mobileFlex={false}>
-                <div className="mr-md-3 mb-3">
-                  <Input
-                    placeholder="Search by Product / Category / Tag"
-                    prefix={<SearchOutlined />}
-                    onChange={(e) => onSearch(e)}
-                  />
+  if (loading) {
+    <div>
+      <Loading />
+    </div>;
+  } else
+    return (
+      <Fragment>
+        <HeaderCms options={options} />
+        <Layout>
+          <Content>
+            <Card>
+              <Flex
+                alignItems="center"
+                justifyContent="between"
+                mobileFlex={false}
+              >
+                <Flex className="mb-1" mobileFlex={false}>
+                  <div className="mr-md-3 mb-3">
+                    <Input
+                      placeholder="Search by Product / Category / Tag"
+                      prefix={<SearchOutlined />}
+                      onChange={(e) => onSearch(e)}
+                    />
+                  </div>
+                </Flex>
+                <div>
+                  {deleteAll && (
+                    <Button
+                      onClick={() => {
+                        const response = window.confirm(
+                          // confirm prior deletion
+                          "Are you sure you want to delete selected products?"
+                        );
+                        console.log({ response });
+                        if (response) {
+                          axiosPrivate
+                            .delete("/products/bulk_delete/", {
+                              // bulk_delete API for bulk deletion
+                              data: selectedRows.map((i) => i.id),
+                            })
+                            .then(() => {
+                              getProductList(); // Fetch data upon deletion to get the latest
+                            });
+                        }
+                      }}
+                      type="secondary"
+                    >
+                      Delete Selected
+                    </Button>
+                  )}
                 </div>
               </Flex>
-              <div>
-                {deleteAll && (
-                  <Button
-                    onClick={() => {
-                      const response = window.confirm(
-                        // confirm prior deletion
-                        "Are you sure you want to delete selected products?"
-                      );
-                      console.log({ response });
-                      if (response) {
-                        axiosPrivate
-                          .delete("/products/bulk_delete/", {
-                            // bulk_delete API for bulk deletion
-                            data: selectedRows.map((i) => i.id),
-                          })
-                          .then(() => {
-                            getProductList(); // Fetch data upon deletion to get the latest
-                          });
-                      }
-                    }}
-                    type="secondary"
-                  >
-                    Delete Selected
-                  </Button>
-                )}
+              <div className="table-responsive">
+                <Table
+                  pagination={{
+                    defaultPageSize: 12,
+                    total: count,
+                    onChange: onPaginationChange,
+                  }}
+                  onChange={onTableChange}
+                  columns={tableColumns}
+                  dataSource={ProductListData} //payload
+                  rowKey="id"
+                  rowSelection={{
+                    selectedRowKeys: selectedRowKeys,
+                    type: "checkbox",
+                    preserveSelectedRowKeys: false,
+                    ...rowSelection,
+                  }}
+                />
               </div>
-            </Flex>
-            <div className="table-responsive">
-              <Table
-                pagination={{
-                  defaultPageSize: 12,
-                  total: count,
-                  onChange: onPaginationChange,
-                }}
-                onChange={onTableChange}
-                columns={tableColumns}
-                dataSource={ProductListData} //payload
-                rowKey="id"
-                rowSelection={{
-                  selectedRowKeys: selectedRowKeys,
-                  type: "checkbox",
-                  preserveSelectedRowKeys: false,
-                  ...rowSelection,
-                }}
-              />
-            </div>
-          </Card>
-        </Content>
-      </Layout>
-    </Fragment>
-  );
+            </Card>
+          </Content>
+        </Layout>
+      </Fragment>
+    );
 }
 
 export default ProductList;

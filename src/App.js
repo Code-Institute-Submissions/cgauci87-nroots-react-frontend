@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // import components
 import PersistLogin from "./components/global/persistLogin/PersistLogin";
+import Loading from "./components/cms/utils/Loading";
 
 // import hooks
 import useAuth from "./hooks/useAuth";
@@ -41,7 +42,16 @@ import EditProduct from "./pages/cms/products/editProduct/EditProduct";
 import OrderList from "./pages/cms/orders/OrderList";
 import OrderDetails from "./pages/cms/orders/OrderDetails";
 
+
 function App() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
   /**
    * mini cart state
    * left side info state
@@ -103,7 +113,7 @@ function App() {
     setShowMobileNav(false);
     setShowSideInfo(false);
   };
-  console.log('showuserAccount ', showUsrAccount)
+  console.log("showuserAccount ", showUsrAccount);
 
   const options = {
     sideInfo: showSideInfo,
@@ -169,62 +179,75 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          {/* ========================== SHOP ROUTING ============================= */}
-          <Route path="/" element={<PersistLogin />}>
-            <Route
-              index
-              exact
-              path="/"
-              element={<HomeDefault options={options} />}
-            />
-            <Route path="/home" element={<HomeDefault options={options} />} />
-            <Route path="/contact" element={<ContactUs options={options} />} />
-            <Route
-              path="contact-form-submitted"
-              element={<PostContactUs options={options} />}
-            />
-            <Route path="/about" element={<About options={options} />} />
-            <Route path="/auth">
-              <Route path="login" element={<Login options={options} />} />
-              <Route path="register" element={<Register options={options} />} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Router>
+          <Routes>
+            {/* ========================== SHOP ROUTING ============================= */}
+            <Route path="/" element={<PersistLogin />}>
               <Route
-                path="forgot-password"
-                element={<ForgotPassword options={options} />}
+                index
+                exact
+                path="/"
+                element={<HomeDefault options={options} />}
+              />
+              <Route path="/home" element={<HomeDefault options={options} />} />
+              <Route
+                path="/contact"
+                element={<ContactUs options={options} />}
               />
               <Route
-                path="email-verification"
-                element={<EmailVerification options={options} />}
+                path="contact-form-submitted"
+                element={<PostContactUs options={options} />}
+              />
+              <Route path="/about" element={<About options={options} />} />
+              <Route path="/auth">
+                <Route path="login" element={<Login options={options} />} />
+                <Route
+                  path="register"
+                  element={<Register options={options} />}
+                />
+                <Route
+                  path="forgot-password"
+                  element={<ForgotPassword options={options} />}
+                />
+                <Route
+                  path="email-verification"
+                  element={<EmailVerification options={options} />}
+                />
+                <Route
+                  path="reset-password"
+                  element={<ResetPassword options={options} />}
+                />
+                <Route
+                  path="my-account"
+                  element={<MyAccount options={options} />}
+                />
+              </Route>
+              <Route
+                path="/checkout"
+                element={<Checkout options={options} />}
               />
               <Route
-                path="reset-password"
-                element={<ResetPassword options={options} />}
+                path="order-submitted"
+                element={<PostCheckout options={options} />}
+              />
+              <Route path="/cart" element={<Cart options={options} />} />
+              <Route
+                path="/shop"
+                element={<ShopWithLeftSideBar options={options} />}
               />
               <Route
-                path="my-account"
-                element={<MyAccount options={options} />}
+                path="/shop/product-details/:id"
+                element={<ProductDetails options={options} />}
               />
+              <Route path="*" element={<NotFound options={options} />} />
+              {adminRoutes}
             </Route>
-            <Route path="/checkout" element={<Checkout options={options} />} />
-            <Route
-              path="order-submitted"
-              element={<PostCheckout options={options} />}
-            />
-            <Route path="/cart" element={<Cart options={options} />} />
-            <Route
-              path="/shop"
-              element={<ShopWithLeftSideBar options={options} />}
-            />
-            <Route
-              path="/shop/product-details/:id"
-              element={<ProductDetails options={options} />}
-            />
-            <Route path="*" element={<NotFound options={options} />} />
-            {adminRoutes}
-          </Route>
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      )}
     </div>
   );
 }

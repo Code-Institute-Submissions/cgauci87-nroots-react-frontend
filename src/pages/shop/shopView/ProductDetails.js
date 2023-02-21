@@ -2,7 +2,6 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Carousel } from "antd";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
-import { LoadingOutlined } from "@ant-design/icons";
 
 // import layout components
 import HeaderShop from "../../../components/global/navbar/HeaderShop";
@@ -11,6 +10,7 @@ import Footer from "../../../components/shop/footer/Footer";
 
 // import lazy loading
 import LazyLoad from "react-lazy-load";
+import Loading from "../../../components/cms/utils/Loading";
 
 // import product components
 import QuickView from "../../../components/shop/products/QuickView";
@@ -41,7 +41,13 @@ function ProductDetails({ options }) {
   // ====================================================================================================
   // Get product details from API by id
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     const handleMount = async () => {
@@ -111,7 +117,7 @@ function ProductDetails({ options }) {
   // =============================================================================================================
   if (loading) {
     <div>
-      <LoadingOutlined />
+      <Loading />
     </div>;
   } else
     return (
