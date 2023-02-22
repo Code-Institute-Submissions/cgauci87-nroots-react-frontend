@@ -12,6 +12,7 @@ import { EyeOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 // import components
 import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 import Loading from "../../../../components/cms/utils/Loading";
+import { toast } from "react-toastify";
 
 // import utils
 import AvatarStatus from "../../../../components/cms/utils/AvatarStatus";
@@ -50,20 +51,20 @@ function ProductList({ options }) {
       let data = response.data.results;
       setCount(response.data.count);
       setProducts(data);
-      console.log(data);
     } catch (error) {
-      console.log(error);
+      toast.error("Unable to get products right now... Please try again later"); // the error will trigger if backend is down
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     getProductList(); // Fetch product list whenever the list updates (asynchronous)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, searchTerm, orderField]);
 
   // ====================================================================
 
   const navigate = useNavigate();
-  const [list, setList] = useState(ProductListData);
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -107,14 +108,14 @@ function ProductList({ options }) {
       selectedRows.forEach((elm) => {
         const objKey = "id";
         let data = axiosPrivate.delete(objKey, elm);
-        setList(data);
+        setProducts(data);
         setSelectedRows([]);
         axiosPrivate
           .delete(
             "/products/bulk_delete/", // bulk delete API
             (data = selectedRows.map((i) => i.id))
           )
-          .then((response) => {
+          .then(() => {
             getProductList();
           });
       });
@@ -188,9 +189,7 @@ function ProductList({ options }) {
     setCurrentPage(e);
   };
 
-  const onTableChange = (paginationConfig, filters, sorter) => {
-    console.log(paginationConfig, filters, sorter);
-
+  const onTableChange = (sorter) => {
     const order = sorter.order !== "ascend" ? "-" : "";
     const column = sorter.field;
     setOrderField(`${order}${column}`);
@@ -245,7 +244,6 @@ function ProductList({ options }) {
                           // confirm prior deletion
                           "Are you sure you want to delete selected products?"
                         );
-                        console.log({ response });
                         if (response) {
                           axiosPrivate
                             .delete("/products/bulk_delete/", {

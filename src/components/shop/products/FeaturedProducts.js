@@ -17,7 +17,7 @@ function FeaturedProducts() {
       const response = await axiosReq.get(`/products/?tag=Featured`);
       setFeaturedProductsData(response.data.results);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -64,7 +64,7 @@ function FeaturedProducts() {
                           <Link to={`/shop/product-details/${item.id}`}>
                             <img id="imgStyle"
                               src={item.uploadedImg}
-                              alt="product image"
+                              alt="product"
                               style={imgStyle}
                             />
                           </Link>

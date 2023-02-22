@@ -49,7 +49,6 @@ function Cart({ options }) {
     );
   }, [cart]);
 
-  console.log(cart, total);
   // =======================================================================
 
   return cart.length > 0 ? ( // if card is empty - then navigate to /shop
@@ -95,7 +94,7 @@ function Cart({ options }) {
                           <tr className="cart_item">
                             <td className="product-remove">
                               <a
-                                href="#"
+                                href="/#"
                                 onClick={() =>
                                   //  on click -> remoeve item
                                   dispatch(
@@ -127,7 +126,7 @@ function Cart({ options }) {
                             <td className="product-name" data-title="Product">
                               <Link to={`/shop/product-details/${item.id}`}>
                                 <a
-                                  href="#"
+                                  href="/#"
                                   title="See Product Details!"
                                   data-tip="Product Details"
                                 >

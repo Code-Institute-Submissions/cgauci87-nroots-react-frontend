@@ -62,7 +62,6 @@ function ContactUsForm() {
   });
 
   const updateData = (cfData) => {
-    console.log(cfData);
     setData(cfData);
   };
 

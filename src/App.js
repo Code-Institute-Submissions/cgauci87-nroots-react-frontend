@@ -42,7 +42,6 @@ import EditProduct from "./pages/cms/products/editProduct/EditProduct";
 import OrderList from "./pages/cms/orders/OrderList";
 import OrderDetails from "./pages/cms/orders/OrderDetails";
 
-
 function App() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -70,9 +69,9 @@ function App() {
     setShowMiniCart(!showMiniCart);
     setShowUsrAccount(false);
     setShowMobileNav(false);
-    // setTimeout(() => {
-    //   setShowMiniCart(false);
-    // }, 10000);
+    setTimeout(() => {
+      setShowMiniCart(false);
+    }, 10000);
   };
 
   /**
@@ -82,9 +81,9 @@ function App() {
     setShowUsrAccount(!showUsrAccount);
     setShowMiniCart(false);
     setShowMobileNav(false);
-    // setTimeout(() => {
-    //   setShowUsrAccount(false);
-    // }, 6000);
+    setTimeout(() => {
+      setShowUsrAccount(false);
+    }, 6000);
   };
 
   /**
@@ -101,10 +100,9 @@ function App() {
     setShowMobileNav(!showMobileNav);
     setShowUsrAccount(false);
     setShowMiniCart(false);
-
-    // setTimeout(() => {
-    //   setShowMobileNav(false);
-    // }, 6000);
+    setTimeout(() => {
+      setShowMobileNav(false);
+    }, 6000);
   };
 
   const HandleOverlayStatus = () => {
@@ -113,7 +111,6 @@ function App() {
     setShowMobileNav(false);
     setShowSideInfo(false);
   };
-  console.log("showuserAccount ", showUsrAccount);
 
   const options = {
     sideInfo: showSideInfo,

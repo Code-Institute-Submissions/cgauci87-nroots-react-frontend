@@ -46,7 +46,6 @@ function LoginForm() {
   });
 
   const updateData = (regData) => {
-    console.log(regData);
     setData(regData);
   };
 

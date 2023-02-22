@@ -106,7 +106,7 @@ function Checkout({ options }) {
       }
     }
     getCheckOutState(); // call this function asynchronous
-  }, []);
+  }, [user.is_active]);
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -176,14 +176,12 @@ function Checkout({ options }) {
         }, 1500);
       }
     } catch (error) {
-      // Error Handling
-      debugger;
       if (error.response.status === 500) {
         toast.error(`${error.response.data.detail}`);
       } else if (error.response.status === 400) {
         const addressAlreadyExists =
           error.response.data.non_field_errors &&
-          error.response.data.non_field_errors[0] ==
+          error.response.data.non_field_errors[0] ===
             "The address already exists so it won't be saved again";
         if (addressAlreadyExists) {
           return;
@@ -192,6 +190,7 @@ function Checkout({ options }) {
           "Please make sure all required fields are filled in correctly."
         ); // display toast message on error 400
       } else return Promise.reject({ ...error });
+      setLoading(false);
     }
   };
 

@@ -7,6 +7,7 @@ import PageHeaderAlt from "../../cms/pageHeader/PageHeaderAlt";
 import Flex from "../../cms/utils/Flex";
 import GeneralField from "./GeneralField";
 import Loading from "../utils/Loading";
+import { toast } from "react-toastify";
 
 // import hooks
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -80,14 +81,15 @@ function ProductForm(props) {
           setImage(productData.uploadedImg); // set image
         }
       } catch (error) {
-        console.log(error);
-      }
-
-      if (mode === EDIT) {
-        getProductList(); // Fetch data if edit is clicked
+        toast.error(
+          "Unable to get product right now... Please try again later"
+        ); // the error will trigger if backend is down
       }
     };
-  });
+    if (mode === EDIT) {
+      getProductList(); // Fetch data if edit is clicked
+    }
+  }, [mode, axiosPrivate, form, id]);
 
   // ======================================================================
 
@@ -98,7 +100,6 @@ function ProductForm(props) {
 
     // ======================================================================
 
-  
     const results = form.getFieldsValue();
     results.uploadedImg = uploadedImg;
     // if uploadedImg has not been updated in the edit-product form; then delete results.uploadedImg
@@ -124,11 +125,14 @@ function ProductForm(props) {
             setSubmitLoading(false);
             message.success(`Created ${results.title} to product list`);
           }, 1500);
-          console.log(response);
         })
-        .catch(function (response) {
-          //handle error
-          console.log(response);
+        .catch(function (error) {
+          if (error.response.status === 400) {
+            toast.error(
+              "Please make sure all required fields are filled in correctly."
+            ); // display toast message on error 400
+            setSubmitLoading(false); // set loading to false
+          }
         });
     } else {
       // referring to mode === EDIT, if admin/is_staff edit a product
@@ -143,14 +147,16 @@ function ProductForm(props) {
         .then(function (response) {
           setTimeout(() => {
             setSubmitLoading(false);
-            message.success(`Product saved`);
+            message.success(`Changes of ${results.title} saved`);
           }, 1500);
-          console.log(response);
         })
-        .catch(function (response) {
-          //handle error
-          setSubmitLoading(false);
-          console.log(response);
+        .catch(function (error) {
+          if (error.response.status === 400) {
+            toast.error(
+              "Please make sure all required fields are filled in correctly."
+            ); // display toast message on error 400
+            setSubmitLoading(false); // set loading to false
+          }
         });
     }
   };

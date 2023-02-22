@@ -23,7 +23,7 @@ export default function PersistLogin() {
                 const { data } = await axiosPrivate.get('auth/user')
                 setUser(data)
             } catch (error) {
-                console.log(error?.response)
+                // console.log(error.response)
             } finally {
                 isMounted && setLoading(false)
             }
@@ -34,7 +34,7 @@ export default function PersistLogin() {
         return () => {
             isMounted = false
         }
-    }, [])
+    }, [accessToken, axiosPrivate, refresh, setUser])
 
     return (
         loading ? "Loading" : <Outlet />

@@ -78,12 +78,10 @@ function ShippingFields({ shippingData, enabled }) {
     setOpen(true);
   };
   const handleOk = (e) => {
-    console.log(e);
     setOpen(false);
   };
   const handleCancel = (e) => {
     // Close Modal if user clicks Cancel
-    console.log(e);
     setOpen(false);
   };
 
@@ -93,34 +91,34 @@ function ShippingFields({ shippingData, enabled }) {
   const setFormValues = (values) => {
     form.setFieldsValue(values); // set dynamic field values
   };
-
-  const getAddressInfo = async () => {
-    try {
-      const response = await axiosPrivate.get("/auth/user/profile/addresses/");
-      const currentDefault = response.data.results((i) => i.default);
-      //
-      if (currentDefault) {
-        setFormValues(currentDefault); // set default address
+  useEffect(() => {
+    const getAddressInfo = async () => {
+      try {
+        const response = await axiosPrivate.get(
+          "/auth/user/profile/addresses/"
+        );
+        const currentDefault = response.data.results((i) => i.default);
+        if (currentDefault) {
+          setFormValues(currentDefault); // set default address
+        }
+      } catch (error) {
+        // console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+    if (shippingData !== undefined) {
+      console.log("No Address is found");
+    } else getAddressInfo();
+    // eslint-disable-next-line
+  }, [axiosPrivate, shippingData]);
+  // =============================================================================
 
   const getAddress = (payload) => {
     setFormValues(payload); // get address from payload newly updated data
   };
 
-  useEffect(() => {
-    if (shippingData != undefined) {
-      console.log("No Address is found");
-    } else getAddressInfo();
-  }, []);
-  // =============================================================================
-
   // = 'My Addresses' button ===================================================
 
-  let showButton = <h4></h4>;
+  let showButton = <span></span>;
   if (user.is_active) {
     // Show button only if user is logged in
     showButton = (
@@ -134,10 +132,10 @@ function ShippingFields({ shippingData, enabled }) {
   }
   if (user.is_staff) {
     // Disable button if user.is_staff
-    showButton = <h4></h4>;
+    showButton = <span></span>;
   }
   // =============================================================================
-  const disabled = !enabled
+  const disabled = !enabled;
 
   return (
     <Fragment>
@@ -145,23 +143,23 @@ function ShippingFields({ shippingData, enabled }) {
         <div className="ecom-billing-fields">
           <h3>Shipping Details</h3>
           {showButton}
-            <Modal
-              title="My Addresses"
-              open={open}
-              onOk={handleOk}
-              onCancel={handleCancel} // close the model handling
-              okButtonProps={{
-                disabled: false,
-              }}
-              cancelButtonProps={{
-                disabled: false,
-              }}
-            >
-              {/* get address from ShippingAddresses component */}
-              <div>
-                <ShippingAddresses getAddress={getAddress} />
-              </div>
-            </Modal>
+          <Modal
+            title="My Addresses"
+            open={open}
+            onOk={handleOk}
+            onCancel={handleCancel} // close the model handling
+            okButtonProps={{
+              disabled: false,
+            }}
+            cancelButtonProps={{
+              disabled: false,
+            }}
+          >
+            {/* get address from ShippingAddresses component */}
+            <div>
+              <ShippingAddresses getAddress={getAddress} />
+            </div>
+          </Modal>
           <Form
             name="shipping-address-form"
             layout="vertical"

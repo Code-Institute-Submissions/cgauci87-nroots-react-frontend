@@ -6,6 +6,9 @@ import { Button, Form, Input } from "antd";
 // import hooks
 import { authAxios } from "../../../api/axiosDefaults";
 
+// import toast
+import { toast } from "react-toastify";
+
 // ===============================================================================
 // Validation rules - antd form
 
@@ -47,14 +50,13 @@ function ResetPasswordForm() {
   });
 
   const updateData = (regData) => {
-    console.log(regData);
     setData(regData);
   };
 
   const onSend = async () => {
     setLoading(true); // set loading to true as soon as the onSend is invoked
     try {
-      const response = await authAxios.patch(
+      await authAxios.patch(
         "/auth/forgot-password", // API
         JSON.stringify({
           ...data, // using spread syntax to be included
@@ -66,8 +68,10 @@ function ResetPasswordForm() {
         navigate("/auth/login"); // navigate to /auth/login
       }, 1500);
     } catch (error) {
+      toast.error(
+        "Token invalid or expired. Please initiate the password reset process again"
+      );
       setLoading(false);
-      console.log(error);
     }
   };
 

@@ -46,15 +46,13 @@ function MyAccount({ options }) {
   /*============START========================== MyAddresses  Modal =============================START===============*/
 
   const [open, setOpen] = useState(false);
-  const showModal = () => {
+  const showModal = () => { // handling events
     setOpen(true);
   };
   const handleOk = (e) => {
-    console.log(e);
     setOpen(false);
   };
   const handleCancel = (e) => {
-    console.log(e);
     setOpen(false);
   };
 

@@ -7,6 +7,7 @@ import { Form } from "antd";
 import HeaderCms from "../../../components/global/navbar/HeaderCms";
 import ShippingFields from "../../../components/global/forms/ShippingFields";
 import Loading from "../../../components/cms/utils/Loading";
+import { toast } from "react-toastify";
 
 // import hooks
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -27,10 +28,6 @@ function OrderDetails({ options }) {
   const axiosPrivate = useAxiosPrivate();
   const [form] = Form.useForm();
 
-  const setFormValues = (values) => {
-    form.setFieldsValue(values); // Set field values in the form
-  };
-
   const [item, setItem] = useState(false);
 
   const { id } = useParams();
@@ -39,17 +36,22 @@ function OrderDetails({ options }) {
 
   useEffect(() => {
     const handleMount = async () => {
+      const setFormValues = (values) => {
+        form.setFieldsValue(values); // Set field values in the form
+      };
       try {
         const { data: order } = await axiosPrivate.get(`/order/${id}/`); // Get order of a specific id
         setItem(order);
         setFormValues(order);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        toast.error(
+          "Unable to get product right now... Please try again later"
+        ); // the error will trigger if backend is down
       }
     };
 
     handleMount();
-  }, [id]); // handleMount - will trigger only when order ID is changed.
+  }, [id, axiosPrivate, form]); // handleMount - will trigger only when order ID is changed.
 
   // =====================================================================================
 
@@ -93,8 +95,7 @@ function OrderDetails({ options }) {
             <div className="row">
               <div className="col col-sm-10">
                 <form
-                  name="checkout"
-                  method="post"
+                  name="order-details"
                   className="checkout ecom-checkout"
                 >
                   <div className="col2-set" id="customer_details">

@@ -33,14 +33,13 @@ function ForgotPasswordForm() {
   });
 
   const updateData = (regData) => {
-    console.log(regData);
     setData(regData);
   };
 
   const onSend = async () => {
     setLoading(true); // set loading to true as soon as the onSend is invoked
     try {
-      const response = await authAxios.post(
+      await authAxios.post(
         "/auth/forgot-password", // API
         JSON.stringify({
           ...data, // using spread syntax to be included
@@ -53,7 +52,7 @@ function ForgotPasswordForm() {
       }, 1500);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      // console.log(error);
     }
   };
 

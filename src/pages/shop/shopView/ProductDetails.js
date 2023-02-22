@@ -56,9 +56,11 @@ function ProductDetails({ options }) {
         const { data: product } = await axiosReq.get(`/products/${id}/`);
         setLoading(false);
         setItem(product);
-      } catch (err) {
+      } catch (error) {
         setLoading(false);
-        console.log(err);
+        toast.error(
+          "Unable to get product right now... Please try again later"
+        ); // the error will trigger if backend is down
       }
     };
     handleMount();
@@ -83,7 +85,6 @@ function ProductDetails({ options }) {
   // ==============================================================================================================
   //----------------------------------------CONDIONTIONAL RENDERING----------------------------------------------//
   // ==============================================================================================================
-
 
   // display category if there is any, otherwise do not display
   let showCategory = <span></span>;
@@ -120,7 +121,7 @@ function ProductDetails({ options }) {
   //=============================================================================================================
 
   let showOldPrice = <span></span>;
-  if (item.comparePrice > 0.00) {
+  if (item.comparePrice > 0.0) {
     /* Display old price if not blank - otherwise do not display */
     showOldPrice = <span className="old"> €{item.comparePrice}</span>;
   }

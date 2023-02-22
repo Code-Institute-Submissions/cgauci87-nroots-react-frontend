@@ -1,12 +1,11 @@
 import React, { Fragment, useState } from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input } from "antd";
+import { toast } from "react-toastify";
 
 // hooks
 import { authAxios } from "../../../api/axiosDefaults";
 import useAuth from "../../../hooks/useAuth";
-
-
 
 // ==============================================================
 // validation rules - antd form
@@ -70,7 +69,6 @@ function RegisterAndLoginForm({ onSuccess }) {
   });
 
   const updateData = (regData) => {
-    console.log(regData);
     setData(regData);
   };
 
@@ -80,7 +78,8 @@ function RegisterAndLoginForm({ onSuccess }) {
   const onSignUp = async () => {
     setLoading(true);
     try {
-      const reg_response = await authAxios.post( // Register user
+      const reg_response = await authAxios.post(
+        // Register user
         "auth/register", // API
         JSON.stringify({
           ...data,
@@ -89,7 +88,8 @@ function RegisterAndLoginForm({ onSuccess }) {
       setTimeout(() => {
         setLoading(false);
       }, 1500);
-      const response = await authAxios.post( // Login user
+      const response = await authAxios.post(
+        // Login user
         "auth/login", // API
         JSON.stringify({
           ...data,
@@ -102,8 +102,11 @@ function RegisterAndLoginForm({ onSuccess }) {
         setCSRFToken(response.headers["x-csrftoken"]);
       }, 1500);
     } catch (error) {
-      setLoading(false); // on error: set loading to false and log error
-      console.log(error);
+      // Error Handling
+      if (error.response.status === 400) {
+        toast.error("Account with this email already exists."); // display toast message on error 400
+        setLoading(false); // set loading to false
+      }
     }
   };
   // ==============================================================

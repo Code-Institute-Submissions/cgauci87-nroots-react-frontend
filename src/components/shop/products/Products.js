@@ -21,29 +21,25 @@ function Products({ gridOrdering, ordering, filter, query }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  const getProducts = async () => {
-    setLoading(true); // set loading to true as soon as getProducts is invoked
-    try {
-      const response = await axiosReq.get(
-        `/products/?${filter}&search=${query}${ordering}&page=${currentPage}`
-      );
-      setProducts(response.data.results);
-      setTotalProducts(response.data.count);
-      setLoading(false);
-    } catch (error) {
-      // Error Handling
-      {
+  useEffect(() => {
+    const getProducts = async () => {
+      setLoading(true); // set loading to true as soon as getProducts is invoked
+      try {
+        const response = await axiosReq.get(
+          `/products/?${filter}&search=${query}${ordering}&page=${currentPage}`
+        );
+        setProducts(response.data.results);
+        setTotalProducts(response.data.count);
+        setLoading(false);
+      } catch (error) {
         toast.error(
           "Unable to get products right now... Please try again later"
-        ); // display toast message if backend is down
-        setLoading(false); // set loading to false
+        ); // the error will trigger if backend is down
+        setLoading(false);
       }
-    }
-  };
-
-  useEffect(() => {
+    };
     getProducts();
-  }, [filter, query, ordering, currentPage]); // Get products from API & filter whenever it changes
+  }, [setProducts, filter, query, ordering, currentPage]); // Get products from API & filter whenever it changes
 
   const {
     state: { cart },
@@ -65,11 +61,11 @@ function Products({ gridOrdering, ordering, filter, query }) {
         <ul
           className={
             "products " +
-            (gridOrdering == 1 // grid ordering defined
+            (gridOrdering === 1 // grid ordering defined
               ? "default-column"
-              : gridOrdering == 2
+              : gridOrdering === 2
               ? "three-column"
-              : gridOrdering == 3
+              : gridOrdering === 3
               ? "list-view"
               : "")
           }
@@ -81,7 +77,7 @@ function Products({ gridOrdering, ordering, filter, query }) {
                 <LazyLoad height={220} width={220}>
                   {/* link to product details of the selected product */}
                   <Link to={`/shop/product-details/${item.id}`}>
-                    <img src={item.uploadedImg} alt="product image" />
+                    <img src={item.uploadedImg} alt="product" />
                   </Link>
                 </LazyLoad>
                 <div className="shop-action-wrap">
@@ -89,7 +85,7 @@ function Products({ gridOrdering, ordering, filter, query }) {
                     <li>
                       <Link to={`/shop/product-details/${item.id}`}>
                         <a
-                          href="#"
+                          href="/#"
                           title="See Product Details!"
                           data-tip="Product Details"
                         >
@@ -108,6 +104,7 @@ function Products({ gridOrdering, ordering, filter, query }) {
                         }
                       >
                         <a
+                          href="/#"
                           style={{ background: "#000", color: "green" }}
                           title="Remove from cart!"
                           data-tip="Remove from cart!"
@@ -125,7 +122,7 @@ function Products({ gridOrdering, ordering, filter, query }) {
                           )
                         }
                       >
-                        <a title="Add to cart!" data-tip="Add to cart!">
+                        <a href="/#" title="Add to cart!" data-tip="Add to cart!">
                           <i className="fi flaticon-shopping-cart" />
                         </a>
                       </li>
