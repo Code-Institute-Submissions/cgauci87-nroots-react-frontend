@@ -17,13 +17,13 @@ export default function ForgotPassword({ options }) {
 
       {/* start forgotpassword-layout */}
       <section className="forgot-password-section">
-        <div className="container-1310">
+        <div className="container-1410">
           <div className="row">
             <div className="col-xs-12">
               <div className="ecom">
                 <div className="ecom-notices-wrapper" />
                 <div className="u-columns col2-set">
-                  <div className="u-column2 col-2">
+                  <div className="u-column1 col-1">
                     <ForgotPasswordForm />
                   </div>
                 </div>

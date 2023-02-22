@@ -148,7 +148,7 @@ function HeaderRightShop({ options }) {
             onClick={options.onUsrAccountClick}
           >
             {/* display icon of user */}
-            <Tooltip title="Profile">
+            <Tooltip title="Profile" placement="left">
               <i className="icon-user" />
             </Tooltip>
           </button>
@@ -176,7 +176,7 @@ function HeaderRightShop({ options }) {
               cart.length === 0 ? null : options.onMiniCartClick()
             }
           >
-            <Tooltip title="Cart">
+            <Tooltip title="Cart" placement="right">
               <i className="icon-large-paper-bag" />
             </Tooltip>
             <span className="cart-count">{cart.length}</span>

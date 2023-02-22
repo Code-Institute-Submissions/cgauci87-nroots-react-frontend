@@ -65,7 +65,7 @@ function HeaderRightCms({ options }) {
 
         <div className="my-account-link">
           <button className="toggle-btn" onClick={options.onUsrAccountClick}>
-            <Tooltip title="My Admin Profile">
+            <Tooltip title="My Admin Profile" placement="left">
               <img
                 id="king-icon"
                 style={{ maxWidth: "28px" }}

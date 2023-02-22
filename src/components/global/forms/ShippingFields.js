@@ -217,7 +217,7 @@ function ShippingFields({ shippingData, enabled }) {
               hasFeedback
             >
               <Input
-                placeholder="79858593"
+                placeholder="77251987"
                 prefix={<PhoneOutlined className="text-primary" />}
                 className="input-text"
                 disabled={disabled}
@@ -232,7 +232,7 @@ function ShippingFields({ shippingData, enabled }) {
               hasFeedback
             >
               <Input
-                placeholder="58, St Mary Court, Block C, Flat 4"
+                placeholder="58, St Mary Court, Block C, Apt 4"
                 prefix={<ApartmentOutlined className="text-primary" />}
                 className="input-text"
                 disabled={disabled}
@@ -247,7 +247,7 @@ function ShippingFields({ shippingData, enabled }) {
               hasFeedback
             >
               <Input
-                placeholder="Triq il-Faqqiegh"
+                placeholder="Irish Road"
                 prefix={<ApartmentOutlined className="text-primary" />}
                 className="input-text"
                 disabled={disabled}

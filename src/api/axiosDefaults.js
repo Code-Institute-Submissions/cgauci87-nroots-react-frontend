@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios  from "axios";
 
 let baseUrl = "https://nroots-drf-api.herokuapp.com/"; // DRF API PRODUCTION
 // let baseUrl = "https://8080-cgauci87-nrootsdrfapi-6m4oduklif1.ws-eu87.gitpod.io/";
