@@ -865,7 +865,7 @@ button:active {
 
 
 .usr-account-options-content .options-cms-wrapper {
-    background-color: #fff ;
+    background-color: #fff;
 }
 
 
@@ -3803,7 +3803,7 @@ button:active {
     margin-left: 5px;
 }
 
-.shop-section .shop-action li a {
+#tooltip-add, #tooltip-details, #tooltip-remove {
     background-color: #fff;
     width: 45px;
     height: 45px;
@@ -3814,12 +3814,12 @@ button:active {
     box-shadow: 0px 3px 6.58px 0.42px rgba(0, 0, 0, 0.08);
 }
 
-.shop-section .shop-action li a:hover {
+#tooltip-add:hover, #tooltip-details:hover, #tooltip-remove:hover {
     background-color: #000;
     color: #fff;
 }
 
-.shop-section .shop-action a i:before {
+#tooltip-add i:before, #tooltip-details i:before, #tooltip-remove i:before{
     font-size: 15px;
 }
 
@@ -4379,7 +4379,7 @@ button:active {
     margin-left: 5px;
 }
 
-.shop-single-section .shop-action li a {
+#tooltip-add, #tooltip-details, #tooltip-remove {
     background-color: #fff;
     width: 45px;
     height: 45px;
@@ -4390,14 +4390,13 @@ button:active {
     box-shadow: 0px 3px 6.58px 0.42px rgba(0, 0, 0, 0.08);
 }
 
-.shop-single-section .shop-action li a:hover {
+#tooltip-add:hover, #tooltip-details:hover, #tooltip-remove:hover {
     background-color: #000;
     color: #fff;
 }
 
-.shop-single-section .shop-action a i:before {
+#tooltip-add i:before, #tooltip-details i:before, #tooltip-remove i:before {
     font-size: 15px;
-    font-size: 1rem;
 }
 
 .shop-single-section .shop-action>li:first-child i:before {
@@ -4891,7 +4890,6 @@ button:active {
     text-transform: uppercase;
     letter-spacing: 3px;
     border: 0;
-    float: right;
 
 }
 
@@ -4927,7 +4925,7 @@ button:active {
 }
 
 
-.ant-input{
+.ant-input {
     color: green;
 }
 
@@ -4948,7 +4946,7 @@ button:active {
     .page-title h2 {
         font-size: 22px;
     }
-    
+
 
     .App #king-icon {
         margin-top: -4.5px;
@@ -5055,7 +5053,7 @@ button:active {
         visibility: visible;
     }
 
-    .shop-section .shop-action li a {
+    #tooltip-add, #tooltip-details, #tooltip-remove {
         width: 45px;
         height: 45px;
         line-height: 45px;

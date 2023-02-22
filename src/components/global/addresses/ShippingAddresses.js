@@ -7,7 +7,6 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 // ShippingAddresses Component
 function ShippingAddresses({ ordering, getAddress }) {
   const [addressData, setAddressData] = useState([]);
-  const [defaultId, setDefaultId] = useState([]);
 
   // hook function
   const axiosPrivate = useAxiosPrivate();
@@ -17,26 +16,14 @@ function ShippingAddresses({ ordering, getAddress }) {
   const getAddressInfo = async () => {
     const response = await axiosPrivate.get("/auth/user/profile/addresses/");
     setAddressData(response.data.results);
-    const currentDefault = response.data.results((i) => i.default);
-    const currentDefaultId = currentDefault ? currentDefault.id : false;
-    setDefaultId(currentDefaultId);
   };
   useEffect(() => {
     getAddressInfo();
+    // eslint-disable-next-line
   }, []);
 
   // ====================================================================================
 
-  // Set new default id if user clicks set default to a preferred address
-  const setNewDefault = async (newDefaultId) => {
-    await axiosPrivate.patch(`/auth/user/profile/addresses/${newDefaultId}/`, {
-      default: true,
-    });
-    await axiosPrivate.patch(`/auth/user/profile/addresses/${defaultId}/`, {
-      default: false,
-    });
-    setDefaultId(newDefaultId);
-  };
   // ====================================================================================
   // User can delete a selected address of his own
 
@@ -55,11 +42,11 @@ function ShippingAddresses({ ordering, getAddress }) {
             className={
               // ordering
               "addressData " +
-              (ordering == 1
+              (ordering === 1
                 ? "default-column"
-                : ordering == 2
+                : ordering === 2
                 ? "three-column"
-                : ordering == 3
+                : ordering === 3
                 ? "list-view"
                 : "")
             }

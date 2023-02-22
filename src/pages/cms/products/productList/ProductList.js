@@ -59,7 +59,7 @@ function ProductList({ options }) {
 
   useEffect(() => {
     getProductList(); // Fetch product list whenever the list updates (asynchronous)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [currentPage, searchTerm, orderField]);
 
   // ====================================================================

@@ -1,10 +1,13 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "antd";
 
 // hooks
 import useLogout from "../../../hooks/useLogout";
 import useAuth from "../../../hooks/useAuth";
+
+
 
 // import style
 import "./navbarRight.css";
@@ -62,12 +65,16 @@ function HeaderRightCms({ options }) {
 
         <div className="my-account-link">
           <button className="toggle-btn" onClick={options.onUsrAccountClick}>
-            <img
-              id="king-icon"
-              style={{ maxWidth: "28px" }}
-              src={process.env.PUBLIC_URL + "/assets/icons/king-icon-64px.png"}
-              alt="admin account"
-            />
+            <Tooltip title="My Admin Profile">
+              <img
+                id="king-icon"
+                style={{ maxWidth: "28px" }}
+                src={
+                  process.env.PUBLIC_URL + "/assets/icons/king-icon-64px.png"
+                }
+                alt="admin account"
+              />
+            </Tooltip>
           </button>
           <div
             className={

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoadingOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 
 // import context
 import { axiosReq } from "../../../api/axiosDefaults";
@@ -82,19 +83,15 @@ function Products({ gridOrdering, ordering, filter, query }) {
                 </LazyLoad>
                 <div className="shop-action-wrap">
                   <ul className="shop-action">
-                    <li>
+                    <li id="tooltip-details">
                       <Link to={`/shop/product-details/${item.id}`}>
-                        <a
-                          href="/#"
-                          title="See Product Details!"
-                          data-tip="Product Details"
-                        >
+                        <Tooltip title="See Product Details!">
                           <i className="fi flaticon-view" />
-                        </a>
+                        </Tooltip>
                       </Link>
                     </li>
                     {cart.some((p) => p.id === item.id) ? (
-                      <li
+                      <li id="tooltip-remove"  style={{ background: "#000", color: "green" }}
                         onClick={() =>
                           // on click remove item from cart
                           dispatch(
@@ -103,28 +100,25 @@ function Products({ gridOrdering, ordering, filter, query }) {
                           )
                         }
                       >
-                        <a
-                          href="/#"
-                          style={{ background: "#000", color: "green" }}
+                        <Tooltip
                           title="Remove from cart!"
-                          data-tip="Remove from cart!"
                         >
                           <i className="fi flaticon-shopping-cart" />
-                        </a>
+                        </Tooltip>
                       </li>
                     ) : (
                       <li
+                        id="tooltip-add"
                         onClick={() =>
-                          // on click add item to cart
                           dispatch(
                             { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
                             toast.info("Item has been added to the cart")
                           )
                         }
                       >
-                        <a href="/#" title="Add to cart!" data-tip="Add to cart!">
+                        <Tooltip title="Add to cart!">
                           <i className="fi flaticon-shopping-cart" />
-                        </a>
+                        </Tooltip>
                       </li>
                     )}
                   </ul>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./navbarRight.css";
 import { Link } from "react-router-dom";
 import { CartState } from "../../../contexts/CartContext";
+import { Tooltip } from "antd";
 
 // hooks
 import useLogout from "../../../hooks/useLogout";
@@ -21,12 +22,9 @@ function HeaderRightShop({ options }) {
     }
 
     getUser(); // Get user to perform conditional rendering
-  }, []);
+  }, [axiosPrivate, setUser]);
 
-  {
-    /* ################################################################################################*/
-  }
-
+  // ============================================================================================
   let timeOfDay; /* Greeting to be displayed according the time of the day */
   const date = new Date();
   const hours = date.getHours();
@@ -51,10 +49,6 @@ function HeaderRightShop({ options }) {
     );
   }
 
-  {
-    /* ################################################################################################*/
-  }
-
   const {
     state: { cart },
   } = CartState(); // Check Cart State
@@ -66,9 +60,7 @@ function HeaderRightShop({ options }) {
     ); // Set cart total according to the state
   }, [cart]);
 
-  {
-    /* ################################################################################################*/
-  }
+  // ============================================================================================
 
   const logout = useLogout();
   const navigate = useNavigate();
@@ -79,7 +71,7 @@ function HeaderRightShop({ options }) {
     navigate("/");
   }
 
-  /* ################################################################################################*/
+  // ============================================================================================
 
   // Logged out links defined to display links according if user is logged in or out
 
@@ -105,8 +97,8 @@ function HeaderRightShop({ options }) {
       </div>
     </>
   );
+  // ============================================================================================
 
-  /* ################################################################################################*/
   // Logged in links defined to display links according if user is logged in or out
   const loggedInLinks = (
     <>
@@ -138,8 +130,7 @@ function HeaderRightShop({ options }) {
     </>
   );
 
-  /* ################################################################################################*/
-
+  // ============================================================================================
 
   return (
     <Fragment>
@@ -149,8 +140,6 @@ function HeaderRightShop({ options }) {
           <h4> {showGreeting}</h4>
         </div>
 
-        {/* ################################################################################################*/}
-
         <div className="my-account-link">
           {/* USER */}
           <button
@@ -159,13 +148,15 @@ function HeaderRightShop({ options }) {
             onClick={options.onUsrAccountClick}
           >
             {/* display icon of user */}
-            <i className="icon-user" />
+            <Tooltip title="Profile">
+              <i className="icon-user" />
+            </Tooltip>
           </button>
           <div
             className={
               "usr-account-options-content " +
               (options.usrAccount ? "mini-content-toggle" : "")
-            } 
+            }
           >
             {/* display options for user depends if user is logged in. */}
             {/* If user is logged in, display loggedInLinks - otherwise display loggedOutLinks */}
@@ -182,10 +173,12 @@ function HeaderRightShop({ options }) {
             // on click - call options.onMiniCartClick() function to display items in cart
             // on click -  if cart is empty -  do not call options.onMiniCartClick() function
             onClick={(e) =>
-              cart.length == 0 ? null : options.onMiniCartClick()
+              cart.length === 0 ? null : options.onMiniCartClick()
             }
           >
-            <i className="icon-large-paper-bag" />
+            <Tooltip title="Cart">
+              <i className="icon-large-paper-bag" />
+            </Tooltip>
             <span className="cart-count">{cart.length}</span>
           </button>
           <div
