@@ -222,7 +222,7 @@ function Checkout({ options }) {
                         placeholder="Notes about your order, e.g. special notes for delivery."
                         rows="2"
                         cols="4"
-                        maxlength="100"
+                        maxLength="100"
                         defaultValue={commentData.comment}
                         onChange={handleInputChange} // saving an input value inside of state
                       />
@@ -241,7 +241,7 @@ function Checkout({ options }) {
                       </thead>
                       <tbody>
                         {cart.map((item) => (
-                          <tr className="cart_item">
+                          <tr key="cart-item" className="cart_item">
                             <td className="product-name" data-title="Product">
                               {item.title}
                             </td>

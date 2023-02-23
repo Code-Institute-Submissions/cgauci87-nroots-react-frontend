@@ -53,7 +53,7 @@ function ShopWithLeftSideBar({ options }) {
           <div className="row">
             <div className="col col-xs-12">
               <div className="shop-area clearfix">
-                <div className="ecom-content-wrap">
+                <div id="ecom-content-wrap">
                   <div className="ecom-content-inner">
                     <div className="ecom-toolbar-top">
                       <p className="ecom-result-count"></p>

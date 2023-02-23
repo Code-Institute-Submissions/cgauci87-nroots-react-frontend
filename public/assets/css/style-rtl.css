@@ -416,12 +416,8 @@ select {
 .about-section .about-area .img-holder{
     text-align: left;
 }
-.testimonials-section {
-    background: url(../images/testimonials-rtl.jpg) center top/cover no-repeat local;
-}
-.section-title-s4 {
-    text-align: right;
-}
+
+
 /* About End */
 
 

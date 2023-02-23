@@ -10,7 +10,7 @@ function ProductSearchWidget({ query, setQuery, setFilter }) {
     <Fragment>
       <div className="widget search-widget">
         <form onSubmit={(event) => event.preventDefault()} class="search">
-          <div>
+          <div id="search-input">
             <input
               type="text"
               value={query}
