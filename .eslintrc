@@ -10,7 +10,7 @@
       "plugin:jsx-a11y/strict",
       "plugin:react/recommended",
       "plugin:prettier/recommended",
-      "prettier/react",
+      "prettier",
       "plugin:compat/recommended",
       "plugin:cypress/recommended"
     ],
