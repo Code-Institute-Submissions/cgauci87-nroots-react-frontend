@@ -12,6 +12,7 @@ import Footer from "../../../components/shop/footer/Footer";
 import { CartState } from "../../../contexts/CartContext";
 import { jsonAxios } from "../../../api/axiosDefaults";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // import ShippingFields for Addresses
 import ShippingFields from "../../../components/global/forms/ShippingFields";
@@ -19,9 +20,11 @@ import ShippingFields from "../../../components/global/forms/ShippingFields";
 // import RegisterAndLoginForm for Registration on the fly
 import RegisterAndLoginForm from "../../../components/global/forms/RegisterAndLoginForm";
 
+
 // Checkout Page
 function Checkout({ options }) {
   // states  ==================================================================
+  const axiosPrivate = useAxiosPrivate();
   const [myState, setMyState] = useState({});
   useEffect(() => {
     setMyState(); // setMyState is called to update the state if a user has registered on the fly during checkout process
@@ -153,7 +156,7 @@ function Checkout({ options }) {
       if (user.is_active || newUser.id) {
         // If user is logged-in or user just registered now (using registration on the fly during the checkout process); save shipping address
         const id = user.is_active ? user.id : newUser.id;
-        await jsonAxios.post(
+        await axiosPrivate.post( // use axiosPrivate to send headers as the api view is restricted
           "/auth/user/profile/addresses/", // API
           JSON.stringify({
             user: id,
@@ -170,7 +173,6 @@ function Checkout({ options }) {
         setTimeout(() => {
           setLoading(false); // set loading to false on success response
           navigate("/order-submitted");
-
           localStorage.clear(); // clear local storage to remove items in cart upon successful order submission
           window.location.reload(); // reload page to refresh after clear
         }, 1500);

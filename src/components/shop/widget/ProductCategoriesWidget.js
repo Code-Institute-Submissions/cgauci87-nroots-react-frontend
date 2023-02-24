@@ -7,8 +7,7 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
         <h3>Filter by Product categories</h3>
         <ul className="product-categories">
           <li className="cloud">
-            <a
-              href="#"
+            <button
               className="cloud-link"
               onClick={(e) => setFilter("")}
               style={{
@@ -17,11 +16,10 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               All Products
-            </a>
+            </button>
           </li>
           <li className="cloud">
-            <a
-              href="#"
+            <button
               className="cloud-link"
               onClick={(e) => setFilter("category=Tiny-Plants")}
               style={{
@@ -32,12 +30,11 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Tiny Plants
-            </a>
+            </button>
           </li>
 
           <li className="cloud">
-            <a
-              href="#"
+            <button
               className="cloud-link"
               onClick={(e) => setFilter("category=Large-Plants")}
               style={{
@@ -50,11 +47,10 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Large Plants
-            </a>
+            </button>
           </li>
           <li className="cloud">
-            <a
-              href="#"
+            <button
               className="cloud-link"
               onClick={(e) => setFilter("category=Planters")}
               style={{
@@ -65,11 +61,10 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Planters
-            </a>
+            </button>
           </li>
           <li className="cloud">
-            <a
-              href="#"
+            <button
               className="cloud-link"
               onClick={(e) => setFilter("category=Plant-Care")}
               style={{
@@ -80,7 +75,7 @@ function ProductCategoriesWidget({ setFilter, currentFilter }) {
               }}
             >
               Plant Care
-            </a>
+            </button>
           </li>
         </ul>
       </div>

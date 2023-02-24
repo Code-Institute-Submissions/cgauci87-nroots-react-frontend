@@ -45,7 +45,7 @@ export default function useAxiosPrivate() {
       authPrivateAxios.interceptors.request.eject(requestIntercept);
       authPrivateAxios.interceptors.response.eject(responseIntercept);
     };
-  }, [accessToken, user]);
+  }, [accessToken, user, csrftoken, refresh, setAccessToken]);
 
   return authPrivateAxios;
 }

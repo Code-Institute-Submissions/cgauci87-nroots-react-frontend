@@ -54,10 +54,10 @@ function ShippingAddresses({ ordering, getAddress }) {
             {addressData.map(
               (
                 item,
-                index // an array of data to render all addresses of the user.
+                ind
               ) => (
                 <div className="address-info">
-                  <li key={index}>
+                  <li key={ind}>
                     <div>
                       {" "}
                       <Tooltip

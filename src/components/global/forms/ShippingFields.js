@@ -1,18 +1,18 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Button, Modal, Form, Input, Select } from 'antd';
+import React, { Fragment, useEffect, useState } from "react";
+import { Button, Modal, Form, Input, Select } from "antd";
 import {
   UserOutlined,
   MailOutlined,
   PhoneOutlined,
   ApartmentOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 // import ShippingAddresses to get/save a user shipping
-import ShippingAddresses from '../addresses/ShippingAddresses';
+import ShippingAddresses from "../addresses/ShippingAddresses";
 
 // import hooks
-import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
-import useAuth from '../../../hooks/useAuth';
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useAuth from "../../../hooks/useAuth";
 
 const { Option } = Select;
 // Validation Rules - antd form
@@ -20,48 +20,48 @@ const rules = {
   first_name: [
     {
       required: true,
-      message: 'Please input your first name',
+      message: "Please input your first name",
     },
   ],
   last_name: [
     {
       required: true,
-      message: 'Please input your last name',
+      message: "Please input your last name",
     },
   ],
   email: [
     {
       required: true,
-      message: 'Please input your email address',
+      message: "Please input your email address",
     },
     {
-      type: 'email',
-      message: 'Please enter a valid email!',
+      type: "email",
+      message: "Please enter a valid email!",
     },
   ],
   phone_number: [
     {
-      pattern: '[1-9][0-9]',
+      pattern: "[1-9][0-9]",
       required: true,
-      message: 'Please input your phone number',
+      message: "Please input your phone number",
     },
   ],
   apartment_address: [
     {
       required: true,
-      message: 'Please input your flat/house number or/and name',
+      message: "Please input your flat/house number or/and name",
     },
   ],
   street_address: [
     {
       required: true,
-      message: 'Please input your street name in Maltese',
+      message: "Please input your street name in Maltese",
     },
   ],
   city: [
     {
       required: true,
-      message: 'Please select your city',
+      message: "Please select your city",
     },
   ],
 };
@@ -95,7 +95,7 @@ function ShippingFields({ shippingData, enabled }) {
     const getAddressInfo = async () => {
       try {
         const response = await axiosPrivate.get(
-          '/auth/user/profile/addresses/',
+          "/auth/user/profile/addresses/"
         );
         const currentDefault = response.data.results((i) => i.default);
         if (currentDefault) {
@@ -106,7 +106,7 @@ function ShippingFields({ shippingData, enabled }) {
       }
     };
     if (shippingData !== undefined) {
-      console.log('No Address is found');
+      console.log("No Address is found");
     } else getAddressInfo();
     // eslint-disable-next-line
   }, [axiosPrivate, shippingData]);
@@ -160,7 +160,7 @@ function ShippingFields({ shippingData, enabled }) {
               <ShippingAddresses getAddress={getAddress} />
             </div>
           </Modal>
-          <div
+          <Form
             name="shipping-address-form"
             layout="vertical"
             autoComplete="off"
@@ -264,7 +264,7 @@ function ShippingFields({ shippingData, enabled }) {
               <Select
                 placeholder={
                   <React.Fragment>
-                    <ApartmentOutlined style={{ color: '#4E89FF' }} />
+                    <ApartmentOutlined style={{ color: "#4E89FF" }} />
                     &nbsp; Select a City
                   </React.Fragment>
                 }
@@ -290,7 +290,7 @@ function ShippingFields({ shippingData, enabled }) {
                 <Option value="Ros Comáin">Ros Comáin</Option>
               </Select>
             </Form.Item>
-          </div>
+          </Form>
         </div>
       </div>
     </Fragment>

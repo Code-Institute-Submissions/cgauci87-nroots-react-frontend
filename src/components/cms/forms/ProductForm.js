@@ -215,15 +215,17 @@ function ProductForm(props) {
               ]}
             />
           </div>
-          <div className="cms-button">
-            <Button
-              type="file"
-              onClick={() => onFinish()}
-              htmlType="submit"
-              loading={submitLoading}
-            >
-              {mode === "ADD" ? "Add" : `Save`}
-            </Button>
+          <div className="container">
+            <div className="cms-button">
+              <Button
+                type="file"
+                onClick={() => onFinish()}
+                htmlType="submit"
+                loading={submitLoading}
+              >
+                {mode === "ADD" ? "Add" : `Save`}
+              </Button>
+            </div>
           </div>
         </Form>
       </>

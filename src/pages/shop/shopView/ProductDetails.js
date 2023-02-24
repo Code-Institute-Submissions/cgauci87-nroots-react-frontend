@@ -12,9 +12,6 @@ import Footer from "../../../components/shop/footer/Footer";
 import LazyLoad from "react-lazy-load";
 import Loading from "../../../components/cms/utils/Loading";
 
-// import product components
-import QuickView from "../../../components/shop/products/QuickView";
-
 //import contexts
 import { axiosReq } from "../../../api/axiosDefaults";
 import { CartState } from "../../../contexts/CartContext";
@@ -66,21 +63,6 @@ function ProductDetails({ options }) {
     handleMount();
   }, [id]); // handleMount will be called whenever a new product is being selected to render it's details
 
-  /**
-   * states
-   */
-  const [showQuickView, setShowQuickView] = useState(false);
-  const [quickViewData, setQuickViewData] = useState({});
-
-  /**
-   * Handel Quick View Close
-   */
-  const HandelQuickViewClose = (e) => {
-    // close quick view
-    e.preventDefault();
-    setShowQuickView(false);
-    setQuickViewData({});
-  };
 
   // ==============================================================================================================
   //----------------------------------------CONDIONTIONAL RENDERING----------------------------------------------//
@@ -134,14 +116,6 @@ function ProductDetails({ options }) {
   } else
     return (
       <Fragment>
-        {showQuickView ? (
-          <QuickView
-            data={quickViewData}
-            onQuickViewCloseClick={HandelQuickViewClose}
-          />
-        ) : (
-          ""
-        )}
 
         <HeaderShop options={options} />
 
