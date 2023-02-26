@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MailOutlined from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
+import { toast } from "react-toastify";
 
 // import hooks
 import { authAxios } from "../../../api/axiosDefaults";
@@ -51,8 +52,13 @@ function ForgotPasswordForm() {
         navigate("/auth/email-verification"); // navigate to /auth/email-verification
       }, 1500);
     } catch (error) {
-      setLoading(false);
-      // console.log(error);
+      // Error Handling
+      if (error.response.status === 404) {
+        toast.error(
+          "Account not found"
+        ); // display toast message on error 404
+        setLoading(false); // set loading to false
+      }
     }
   };
 
