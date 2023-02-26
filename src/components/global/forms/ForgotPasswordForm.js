@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MailOutlined from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import { toast } from "react-toastify";
 
 // import hooks
 import { authAxios } from "../../../api/axiosDefaults";
@@ -52,11 +51,8 @@ function ForgotPasswordForm() {
         navigate("/auth/email-verification"); // navigate to /auth/email-verification
       }, 1500);
     } catch (error) {
-      // Error Handling
-      if (error.response.status === 404) {
-        toast.error("Account not found"); // display toast message on error 404
-        setLoading(false); // set loading to false
-      }
+      setLoading(false);
+      // console.log(error);
     }
   };
 
@@ -84,7 +80,7 @@ function ForgotPasswordForm() {
           <Input prefix={<MailOutlined className="text-primary" />} />
         </Form.Item>
         <Form.Item className="ecom-text-box">
-          <p>An email with a link will be sent to your email address.</p>
+          <p>If an account with the provided email exists, a link will be sent to complete the password reset process.</p>
         </Form.Item>
         <Form.Item className="container-1210">
           <Button
