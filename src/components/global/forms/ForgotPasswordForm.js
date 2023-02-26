@@ -54,9 +54,7 @@ function ForgotPasswordForm() {
     } catch (error) {
       // Error Handling
       if (error.response.status === 404) {
-        toast.error(
-          "Account not found"
-        ); // display toast message on error 404
+        toast.error("Account not found"); // display toast message on error 404
         setLoading(false); // set loading to false
       }
     }
