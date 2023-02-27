@@ -144,6 +144,7 @@ function HeaderRightShop({ options }) {
           {/* USER */}
           <button
             className="toggle-btn"
+            aria-label="profile"
             // on click display options for user
             onClick={options.onUsrAccountClick}
           >
@@ -170,6 +171,7 @@ function HeaderRightShop({ options }) {
           {/* MINI CART */}
           <button
             className="toggle-btn"
+            aria-label="cart"
             // on click - call options.onMiniCartClick() function to display items in cart
             // on click -  if cart is empty -  do not call options.onMiniCartClick() function
             onClick={(e) =>

@@ -2,6 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Carousel } from "antd";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
+import { Tooltip } from "antd";
 
 // import layout components
 import HeaderShop from "../../../components/global/navbar/HeaderShop";
@@ -63,7 +64,6 @@ function ProductDetails({ options }) {
     handleMount();
   }, [id]); // handleMount will be called whenever a new product is being selected to render it's details
 
-
   // ==============================================================================================================
   //----------------------------------------CONDIONTIONAL RENDERING----------------------------------------------//
   // ==============================================================================================================
@@ -116,7 +116,6 @@ function ProductDetails({ options }) {
   } else
     return (
       <Fragment>
-
         <HeaderShop options={options} />
 
         <PageTitle name={item.title} previouspage="Shop" />
@@ -157,35 +156,39 @@ function ProductDetails({ options }) {
                   <div className="product-option">
                     <div className="product-row">
                       <div className="touchspin-wrap"></div>
+
                       <div className="product-qty">
                         {cart.some((p) => p.id === item.id) ? (
                           <>
-                            <span>
-                              <b>Quantity</b>
-                            </span>
-                            <select
-                              style={{
-                                width: "40px",
-                                textAlign: "center",
-                              }}
-                              value={item.qty}
-                              onChange={(e) => {
-                                dispatch({
-                                  type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
-                                  payload: {
-                                    id: item.id,
-                                    qty: e.target.value,
-                                  },
-                                });
-                                toast.info("Item quantity has been updated"); // toast message upon change of qty
-                              }}
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                            </select>
+                            <Tooltip title="Change Qty" placement="top">
+                              <span>
+                                <b>Quantity</b>
+                              </span>
+
+                              <select
+                                style={{
+                                  width: "40px",
+                                  textAlign: "center",
+                                }}
+                                value={item.qty}
+                                onChange={(e) => {
+                                  dispatch({
+                                    type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
+                                    payload: {
+                                      id: item.id,
+                                      qty: e.target.value,
+                                    },
+                                  });
+                                  toast.info("Item quantity has been updated"); // toast message upon change of qty
+                                }}
+                              >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                            </Tooltip>
                             <button
                               onClick={() =>
                                 // on click remove from cart

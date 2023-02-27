@@ -15,63 +15,70 @@
 	#home-default
 ----------------------------------------------------------------
 #1.1	feature-product-section
-#1.6	category-section-area
+#1.2	category-section-area
 
 
 ----------------------------------------------------------------
 	#my account
 ----------------------------------------------------------------
-#4.1	my-account-section
+#2.1	my-account-section
 
 
 ----------------------------------------------------------------
 	#error-404
 ----------------------------------------------------------------
-#7.1	error-404-section
+#3.1	error-404-section
 
 
 ----------------------------------------------------------------
 	#checkout-page
 ----------------------------------------------------------------
-#8.1	checkout-section
+#4.1	checkout-section
 
 
 ----------------------------------------------------------------
 	 #cart
 ----------------------------------------------------------------
-#9.1    cart-section
+#5.1    cart-section
 
 
 ----------------------------------------------------------------
 	#shop-page
 ----------------------------------------------------------------
-#10.1	shop-section
+#6.1	shop-section
 
 
 ----------------------------------------------------------------
 	#shop-single-page
 ----------------------------------------------------------------
-#11.1	shop-single-section
+#7.1	shop-single-section
 
 
 ----------------------------------------------------------------
 	#contact page
 ----------------------------------------------------------------
-#12.1	contact-pg-section
+#8.1	contact-pg-section
 
 
 ----------------------------------------------------------------
 	#about-page
 ----------------------------------------------------------------
-#13.1	feature-section
-#13.2	about-section
+#9.1	feature-section
+#9.2	about-section
 
 ----------------------------------------------------------------
 	#CMS
 ----------------------------------------------------------------
-#14.1 CMS - Antd
+#10.1 CMS
 
 ----------------------------------------------------------------*/
+
+/*---------------------------
+#11.1	Media Queries
+----------------------------*/
+
+
+
 /*---------------------------
 	Fonts
 ----------------------------*/
@@ -325,6 +332,8 @@ select {
 
 .ecom .registration-otf {
     margin-top: 25px;
+    max-height: fit-content;
+    max-width: fit-content;
 }
 
 .ecom-text-box {
@@ -359,7 +368,8 @@ select {
 .ecom-message {
     font-family: "futura-pt-demi", sans-serif;
     background-color: rgba(191, 171, 112, 0.1);
-    width: auto;
+    max-width: fit-content !important;
+    max-height: fit-content !important;
     padding: 15px 20px;
     border: 1px solid rgba(191, 171, 112, 0.2);
     padding: 15px 15px 15px 35px;
@@ -865,7 +875,7 @@ button:active {
 }
 
 .page-title h2 {
-    font-size: 28px;
+    font-size: 24px;
     color: #000;
     margin-top: 10px;
     text-transform: capitalize;
@@ -1075,7 +1085,8 @@ button:active {
     color: #fff;
 }
 
-.flaticon-back, .flaticon-next {
+.flaticon-back,
+.flaticon-next {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1385,12 +1396,13 @@ button:active {
     list-style: none;
 }
 
-.cloud button, .cloud a {
+.cloud button,
+.cloud a {
     margin: 0 8px 8px 0;
     font-family: "Gothic A1", sans-serif;
     font-size: 11px;
     font-weight: 800;
-    text-transform:none;
+    text-transform: none;
     letter-spacing: 1px;
     display: inline-block;
     padding: 2.5px 5px;
@@ -1399,7 +1411,8 @@ button:active {
     border-radius: 2px;
 }
 
-.cloud button:hover, .cloud a:hover {
+.cloud button:hover,
+.cloud a:hover {
     background: #000;
     color: #fff;
     border-color: #000;
@@ -2079,7 +2092,7 @@ button:active {
 
 
 /*--------------------------------------------------------------
-#1.6	category-section-area
+#1.2	category-section-area
 --------------------------------------------------------------*/
 .category-section-area {
     padding-top: 0;
@@ -2200,7 +2213,7 @@ button:active {
 	#my account
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#4.1	my-account-section
+#2.1	my-account-section
 --------------------------------------------------------------*/
 .my-account-section #customer_login {
     overflow: hidden;
@@ -2290,7 +2303,7 @@ button:active {
 	#error-404
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#7.1	error-404-section
+#3.1	error-404-section
 --------------------------------------------------------------*/
 .error-404-section {
     border-top: 1px solid #eaeaea;
@@ -2349,7 +2362,7 @@ button:active {
 	#checkout-page
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#8.1	checkout-section
+#4.1	checkout-section
 --------------------------------------------------------------*/
 
 
@@ -2381,7 +2394,7 @@ button:active {
     #cart
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#9.1    cart-section
+#5.1    cart-section
 --------------------------------------------------------------*/
 .ecom-cart .grop-page-content_warp .ecom {
     margin-top: 20px;
@@ -2626,7 +2639,7 @@ button:active {
 	#shop-page
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#10.1	shop-section
+#6.1	shop-section
 --------------------------------------------------------------*/
 
 .shop-section .ecom-toolbar-top {
@@ -3021,7 +3034,7 @@ button:active {
 	#shop-single-page
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#11.1	shop-single-section
+#7.1	shop-single-section
 --------------------------------------------------------------*/
 .shop-single-section {
     padding-bottom: 80px;
@@ -3086,7 +3099,6 @@ button:active {
 
 .shop-single-section .product-details {
     padding: 50px 30px 93px;
-    /*** product option ***/
 }
 
 .email-verification-section {
@@ -3139,14 +3151,14 @@ button:active {
     display: block;
     position: absolute;
     margin-top: 0px;
-    margin-left: -60px;
+    margin-left: -30px;
 }
 
 .shop-single-section .product-details .product-option .product-qty select {
     display: block;
     position: absolute;
     margin-top: 27px;
-    margin-left: -60px;
+    margin-left: -30px;
 }
 
 
@@ -3352,7 +3364,6 @@ button:active {
 }
 
 
-
 .shop-single-section .shop-action>li {
     float: left;
     text-align: center;
@@ -3380,6 +3391,7 @@ button:active {
 #tooltip-remove:hover {
     background-color: #000;
     color: #fff;
+    cursor: pointer;
 }
 
 #tooltip-add i:before,
@@ -3447,7 +3459,7 @@ button:active {
 	#contact page
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#12.1	contact-pg-section
+#8.1	contact-pg-section
 --------------------------------------------------------------*/
 .contact-pg-section .contact-info {
     width: 370px;
@@ -3553,7 +3565,7 @@ button:active {
 	#about-page
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
-#13.1	feature-section
+#9.1	feature-section
 --------------------------------------------------------------*/
 .feature-section {
     background-color: #f5f5f5;
@@ -3599,7 +3611,7 @@ button:active {
 }
 
 /*--------------------------------------------------------------
-#13.2.	about-section
+#9.2.	about-section
 --------------------------------------------------------------*/
 
 .about-section .about-area {
@@ -3661,7 +3673,7 @@ button:active {
 }
 
 /*--------------------------------------------------------------
-#14.1 CMS
+#10.1 CMS
 --------------------------------------------------------------*/
 
 .cms-button {
@@ -3721,13 +3733,12 @@ button:active {
 }
 
 
-
 .ant-select-selection-item {
     color: green;
     font-weight: bolder;
 }
 
-/*£============================================================================================================*/
+/*= #11.1 =====================================================================================================*/
 /*######################################### MEDIA QUERIES ##################################################### */
 /*=============================================================================================================*/
 
@@ -3913,7 +3924,7 @@ button:active {
 
 /*$====================================================================*/
 
-@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+@media only screen and (min-width: 481px) and (max-width: 1024px) and (orientation:portrait) {
     .container-1410 {
         width: 750px;
     }
@@ -4182,13 +4193,13 @@ button:active {
     }
 
     .checkout-section .checkout.ecom-checkout .col2-set {
-        width: 60%;
+        width: 55%;
         float: left;
         padding-right: 85px;
     }
 
     .checkout-section .checkout.ecom-checkout .ecom-checkout-review-order {
-        max-width: 40%;
+        max-width: 45%;
         float: right;
     }
 
@@ -4390,12 +4401,22 @@ button:active {
 
 @media (max-width: 991px) {
 
+
+    .App .checkout-section .checkout.ecom-checkout .col2-set {
+        width: 100%;
+    }
+
+    .App .checkout-section .checkout.ecom-checkout .ecom-checkout-review-order {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
     .section-padding.email-verification-section {
         padding-top: 10px;
     }
 
     .page-title h2 {
-        font-size: 22px;
+        font-size: 18px;
     }
 
 
@@ -4475,7 +4496,6 @@ button:active {
         grid-template-columns: 1fr;
     }
 
-    /*£*/
     .App .shop-section .products {
         display: grid;
         grid-template-columns: 1fr;
@@ -4876,7 +4896,7 @@ button:active {
         text-align: left;
     }
 
-    .pagination-wrapper .pg-pagination li button  {
+    .pagination-wrapper .pg-pagination li button {
         font-size: 15px;
     }
 
@@ -5052,7 +5072,6 @@ button:active {
         grid-template-columns: 1fr;
     }
 
-    /*£*/
     .App .shop-section .products {
         display: grid;
         grid-template-columns: 1fr;

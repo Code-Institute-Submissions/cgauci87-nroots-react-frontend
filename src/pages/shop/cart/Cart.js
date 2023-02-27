@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Tooltip } from "antd";
+
 
 // import css for cart
 import "./cart.css";
@@ -147,28 +149,30 @@ function Cart({ options }) {
                               data-title="Quantity"
                             >
                               <div className="quantity">
-                                <select
-                                  value={item.qty}
-                                  onChange={(e) => {
-                                    // change qty according to the selected option
-                                    dispatch({
-                                      type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
-                                      payload: {
-                                        id: item.id,
-                                        qty: e.target.value,
-                                      },
-                                    });
-                                    toast.info(
-                                      "Item quantity has been updated"
-                                    ); // toast message upon change of qty
-                                  }}
-                                >
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                                </select>
+                                <Tooltip title="Change Qty" placement="top">
+                                  <select
+                                    value={item.qty}
+                                    onChange={(e) => {
+                                      // change qty according to the selected option
+                                      dispatch({
+                                        type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
+                                        payload: {
+                                          id: item.id,
+                                          qty: e.target.value,
+                                        },
+                                      });
+                                      toast.info(
+                                        "Item quantity has been updated"
+                                      ); // toast message upon change of qty
+                                    }}
+                                  >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                  </select>
+                                </Tooltip>
                               </div>
                             </td>
                             <td className="product-subtotal" data-title="Total">
