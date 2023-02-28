@@ -45,7 +45,7 @@ function ProductForm(props) {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    axiosPrivate.get("/categories").then((response) => {
+    axiosPrivate.get("categories").then((response) => {
       let _categories = response.data.categories;
       if (_categories.length > 0) {
         let data = {};
@@ -57,7 +57,7 @@ function ProductForm(props) {
   }, [axiosPrivate, form]);
 
   useEffect(() => {
-    axiosPrivate.get("/tags").then((response) => {
+    axiosPrivate.get("tags").then((response) => {
       let _tags = response.data.tags;
       if (_tags.length > 0) {
         let data = {};

@@ -8,11 +8,11 @@ import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import { NumericFormat } from "react-number-format";
 import { Layout, Card, Table, Input, Button, Menu } from "antd";
 import { EyeOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 
 // import components
 import HeaderCms from "../../../../components/global/navbar/HeaderCms";
 import Loading from "../../../../components/cms/utils/Loading";
-import { toast } from "react-toastify";
 
 // import utils
 import AvatarStatus from "../../../../components/cms/utils/AvatarStatus";
@@ -51,9 +51,9 @@ function ProductList({ options }) {
       let data = response.data.results;
       setCount(response.data.count);
       setProducts(data);
+      console.log(data);
     } catch (error) {
-      toast.error("Unable to get products right now... Please try again later"); // the error will trigger if backend is down
-      setLoading(false);
+      console.log(error);
     }
   };
 
@@ -65,6 +65,7 @@ function ProductList({ options }) {
   // ====================================================================
 
   const navigate = useNavigate();
+  const [setList] = useState(ProductListData);
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -108,14 +109,14 @@ function ProductList({ options }) {
       selectedRows.forEach((elm) => {
         const objKey = "id";
         let data = axiosPrivate.delete(objKey, elm);
-        setProducts(data);
+        setList(data);
         setSelectedRows([]);
         axiosPrivate
           .delete(
             "/products/bulk_delete/", // bulk delete API
             (data = selectedRows.map((i) => i.id))
           )
-          .then(() => {
+          .then((response) => {
             getProductList();
           });
       });
@@ -177,9 +178,11 @@ function ProductList({ options }) {
       title: "Action",
       key: "action",
       render: (_, elm) => (
-        <div className="text-right">
-          <EllipsisDropdown menu={dropdownMenu(elm)} />
-        </div>
+        <Tooltip placement="left" title="Action">
+          <div className="text-right">
+            <EllipsisDropdown menu={dropdownMenu(elm)} />
+          </div>
+        </Tooltip>
       ),
     },
   ];
@@ -189,7 +192,9 @@ function ProductList({ options }) {
     setCurrentPage(e);
   };
 
-  const onTableChange = (sorter) => {
+  const onTableChange = (paginationConfig, filters, sorter) => {
+    console.log(paginationConfig, filters, sorter);
+
     const order = sorter.order !== "ascend" ? "-" : "";
     const column = sorter.field;
     setOrderField(`${order}${column}`);
@@ -244,6 +249,7 @@ function ProductList({ options }) {
                           // confirm prior deletion
                           "Are you sure you want to delete selected products?"
                         );
+                        console.log({ response });
                         if (response) {
                           axiosPrivate
                             .delete("/products/bulk_delete/", {

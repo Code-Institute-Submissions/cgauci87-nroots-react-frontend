@@ -21,6 +21,7 @@ EllipsisDropdown.propTypes = {
 EllipsisDropdown.defaultProps = {
 	trigger: 'click',
 	placement: 'bottomRight',
+	width: 5,
 	menu: <Menu/>
 };
 

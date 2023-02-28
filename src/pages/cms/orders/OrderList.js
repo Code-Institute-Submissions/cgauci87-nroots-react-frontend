@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
+import { Tooltip } from "antd";
 
 // import hooks
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -16,7 +17,6 @@ import HeaderCms from "../../../components/global/navbar/HeaderCms";
 import EllipsisDropdown from "../../../components/cms/utils/EllipsisDropdown";
 import Flex from "../../../components/cms/utils/Flex";
 import Loading from "../../../components/cms/utils/Loading";
-import { toast } from "react-toastify";
 
 const { Content } = Layout;
 
@@ -41,23 +41,23 @@ function OrderList({ options }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [orderField, setOrderField] = useState("&orderField=-created_at");
 
+  const getOrderList = async () => {
+    try {
+      const response = await axiosPrivate.get(
+        `/order/?page=${currentPage}&search=${searchTerm}&ordering=${orderField}`
+      ); // API
+      let data = response.data.results;
+      setCount(response.data.count);
+      setOrders(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getOrderList = async () => {
-      try {
-        const response = await axiosPrivate.get(
-          `/order/?page=${currentPage}&search=${searchTerm}&ordering=${orderField}`
-        ); // API
-        let data = response.data.results;
-        setCount(response.data.count);
-        setOrders(data);
-      } catch (error) {
-        toast.error(
-          "Unable to get products right now... Please try again later"
-        ); // the error will trigger if backend is down
-      }
-    };
     getOrderList(); // Get list upon update
-  }, [axiosPrivate, currentPage, searchTerm, orderField]);
+    // eslint-disable-next-line
+  }, [currentPage, searchTerm, orderField]);
 
   // ==========================================================================
 
@@ -115,12 +115,14 @@ function OrderList({ options }) {
       sorter: true,
     },
     {
-      title: "",
+      title: "Action",
       dataIndex: "actions",
       render: (_, elm) => (
-        <div className="text-right">
-          <EllipsisDropdown menu={dropdownMenu(elm)} />
-        </div>
+        <Tooltip placement="left" title="Action">
+          <div className="text-right">
+            <EllipsisDropdown menu={dropdownMenu(elm)} />
+          </div>
+        </Tooltip>
       ),
     },
   ];
@@ -138,7 +140,9 @@ function OrderList({ options }) {
   const onPaginationChange = (e) => {
     setCurrentPage(e);
   };
-  const onTableChange = (sorter) => {
+  const onTableChange = (paginationConfig, filters, sorter) => {
+    console.log(paginationConfig, filters, sorter);
+
     const order = sorter.order !== "ascend" ? "-" : "";
     const column = sorter.field;
     setOrderField(`${order}${column}`);
