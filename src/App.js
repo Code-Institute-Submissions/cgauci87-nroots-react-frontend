@@ -44,14 +44,18 @@ import OrderDetails from "./pages/cms/orders/OrderDetails";
 import useAxiosPrivate from "./hooks/useAxiosPrivate";
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { user, setUser } = useAuth();
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     async function getUser() {
-      const { data } = await axiosPrivate.get("auth/user");
-      setUser(data);
+      try {
+        const { data } = await axiosPrivate.get("auth/user");
+        setUser(data);
+      } catch(e) {
+        console.error(e)
+      }
       setLoading(false)
     }
 
