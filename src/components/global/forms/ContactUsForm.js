@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 // import axios
 import { jsonAxios } from "../../../api/axiosDefaults";
@@ -52,14 +53,22 @@ function ContactUsForm() {
   const [form] = Form.useForm(); // built-in useForm method of ant design for validation
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const [data, setData] = useState({
+  const { user } = useAuth();
+  console.log("contact", user);
+  const initial = {
     // saving input values inside of state
     full_name: "",
     email: "",
     subject: "",
     message: "",
-  });
+  };
+
+  if (user && user.email) {
+    form.setFieldValue("full_name", `${user.first_name} ${user.last_name}`);
+    form.setFieldValue("email", user.email);
+  }
+
+  const [data, setData] = useState(initial);
 
   const updateData = (cfData) => {
     setData(cfData);
@@ -104,28 +113,11 @@ function ContactUsForm() {
           label="Name"
           rules={rules.full_name}
           hasFeedback
-          value={data.full_name}
-          onChange={(e) => {
-            let cfData = { ...data };
-            cfData.full_name = e.target.value;
-            updateData(cfData); // saving an input value inside of state
-          }}
         >
           <Input prefix={<UserOutlined className="text-primary" />} />
         </Form.Item>
 
-        <Form.Item
-          name="email"
-          label="Email"
-          rules={rules.email}
-          hasFeedback
-          value={data.email}
-          onChange={(e) => {
-            let cfData = { ...data };
-            cfData.email = e.target.value;
-            updateData(cfData); // saving an input value inside of state
-          }}
-        >
+        <Form.Item name="email" label="Email" rules={rules.email} hasFeedback>
           <Input prefix={<MailOutlined className="text-primary" />} />
         </Form.Item>
         <div className="fullwidth">
@@ -149,7 +141,7 @@ function ContactUsForm() {
           <Form.Item
             name="message"
             label="Message"
-            rules={rules.message} 
+            rules={rules.message}
             hasFeedback
             value={data.message}
             onChange={(e) => {

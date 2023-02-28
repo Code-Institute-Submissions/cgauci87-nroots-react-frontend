@@ -42,9 +42,6 @@ function ProductDetails({ options }) {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
   }, []);
 
   useEffect(() => {
@@ -110,142 +107,143 @@ function ProductDetails({ options }) {
 
   // ============================================================================================================
   if (loading) {
-    <div>
+    return (<div>
       <Loading />
-    </div>;
-  } else
-    return (
-      <Fragment>
-        <HeaderShop options={options} />
+    </div>);
+  }
 
-        <PageTitle name={item.title} previouspage="Shop" />
+  return (
+    <Fragment>
+      <HeaderShop options={options} />
 
-        {/* start shop-single-section */}
+      <PageTitle name={item.title} previouspage="Shop" />
 
-        <section className="shop-single-section section-padding">
-          <div className="container-1410">
-            <div className="row">
-              <div className="col col-md-6">
-                <div className="shop-single-slider slider-thumbnail">
-                  {/* Wrap Carousel inside LazyLoad to defer loading content in predictable way */}
-                  <LazyLoad>
-                    <Carousel autoplay>
-                      <img src={item.uploadedImg} alt="carousel-img-1" />
-                      <img src={item.uploadedImg} alt="carousel-img-2" />
-                      <img src={item.uploadedImg} alt="carousel-img-3" />
-                    </Carousel>
-                  </LazyLoad>
+      {/* start shop-single-section */}
 
-                  <div className="slider-nav"></div>
-                </div>
+      <section className="shop-single-section section-padding">
+        <div className="container-1410">
+          <div className="row">
+            <div className="col col-md-6">
+              <div className="shop-single-slider slider-thumbnail">
+                {/* Wrap Carousel inside LazyLoad to defer loading content in predictable way */}
+                <LazyLoad>
+                  <Carousel autoplay>
+                    <img src={item.uploadedImg} alt="carousel-img-1" />
+                    <img src={item.uploadedImg} alt="carousel-img-2" />
+                    <img src={item.uploadedImg} alt="carousel-img-3" />
+                  </Carousel>
+                </LazyLoad>
+
+                <div className="slider-nav"></div>
               </div>
+            </div>
 
-              <div className="col col-md-6">
-                <div className="product-details">
-                  <h2>{item.title}</h2>
-                  <div className="price">
-                    <span className="current"> € {item.price}</span>
-                    {showOldPrice}
-                  </div>
-                  <p>{item.description}</p>
-                  <div>
-                    <p style={{ fontWeight: "bold", color: "green" }}>
-                      {item.additional_details}
-                    </p>
-                  </div>
-                  <div className="product-option">
-                    <div className="product-row">
-                      <div className="touchspin-wrap"></div>
+            <div className="col col-md-6">
+              <div className="product-details">
+                <h2>{item.title}</h2>
+                <div className="price">
+                  <span className="current"> € {item.price}</span>
+                  {showOldPrice}
+                </div>
+                <p>{item.description}</p>
+                <div>
+                  <p style={{ fontWeight: "bold", color: "green" }}>
+                    {item.additional_details}
+                  </p>
+                </div>
+                <div className="product-option">
+                  <div className="product-row">
+                    <div className="touchspin-wrap"></div>
 
-                      <div className="product-qty">
-                        {cart.some((p) => p.id === item.id) ? (
-                          <>
-                            <Tooltip title="Change Qty" placement="top">
-                              <span>
-                                <b>Quantity</b>
-                              </span>
+                    <div className="product-qty">
+                      {cart.some((p) => p.id === item.id) ? (
+                        <>
+                          <Tooltip title="Change Qty" placement="top">
+                            <span>
+                              <b>Quantity</b>
+                            </span>
 
-                              <select
-                                style={{
-                                  width: "40px",
-                                  textAlign: "center",
-                                }}
-                                value={item.qty}
-                                onChange={(e) => {
-                                  dispatch({
-                                    type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
-                                    payload: {
-                                      id: item.id,
-                                      qty: e.target.value,
-                                    },
-                                  });
-                                  toast.info("Item quantity has been updated"); // toast message upon change of qty
-                                }}
-                              >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                            </Tooltip>
-                            <button
-                              onClick={() =>
-                                // on click remove from cart
-                                dispatch(
-                                  {
-                                    type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
-                                    payload: item,
+                            <select
+                              style={{
+                                width: "40px",
+                                textAlign: "center",
+                              }}
+                              value={item.qty}
+                              onChange={(e) => {
+                                dispatch({
+                                  type: "CHANGE_CART_QTY", // case is defined in CartReducer.js
+                                  payload: {
+                                    id: item.id,
+                                    qty: e.target.value,
                                   },
-                                  toast.info(
-                                    "Item has been removed from the cart" // toast message upon removal of item in the cart
-                                  )
-                                )
-                              }
+                                });
+                                toast.info("Item quantity has been updated"); // toast message upon change of qty
+                              }}
                             >
-                              Remove from cart
-                            </button>
-                          </>
-                        ) : (
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                            </select>
+                          </Tooltip>
                           <button
                             onClick={() =>
+                              // on click remove from cart
                               dispatch(
-                                { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
-                                toast.info("Item has been added to the cart") // toast message upon adding an item in the cart
+                                {
+                                  type: "REMOVE_FROM_CART", // case is defined in CartReducer.js
+                                  payload: item,
+                                },
+                                toast.info(
+                                  "Item has been removed from the cart" // toast message upon removal of item in the cart
+                                )
                               )
                             }
                           >
-                            Add to cart
+                            Remove from cart
                           </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="thb-product-meta-before">
-                    <div className="product_meta">
-                      <div className="cloud">{showCategory}</div>
-
-                      <div className="cloud">{showTag}</div>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            dispatch(
+                              { type: "ADD_TO_CART", payload: item }, // case is defined in CartReducer.js
+                              toast.info("Item has been added to the cart") // toast message upon adding an item in the cart
+                            )
+                          }
+                        >
+                          Add to cart
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
+                <div className="thb-product-meta-before">
+                  <div className="product_meta">
+                    <div className="cloud">{showCategory}</div>
+
+                    <div className="cloud">{showTag}</div>
+                  </div>
+                </div>
               </div>
-              {/* end col */}
             </div>
-            {/* end row */}
-            <div className="row">
-              <div className="col col-md-8 col-md-offset-2">
-                {/* <ProductInfoTabs /> */}
-              </div>
-            </div>
-            {/* end row */}
+            {/* end col */}
           </div>
-          {/* end of container */}
-        </section>
-        {/* end of shop-single-section */}
-        <Footer />
-      </Fragment>
-    );
+          {/* end row */}
+          <div className="row">
+            <div className="col col-md-8 col-md-offset-2">
+              {/* <ProductInfoTabs /> */}
+            </div>
+          </div>
+          {/* end row */}
+        </div>
+        {/* end of container */}
+      </section>
+      {/* end of shop-single-section */}
+      <Footer />
+    </Fragment>
+  );
 }
 
 export default ProductDetails;

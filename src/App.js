@@ -41,15 +41,23 @@ import AddProduct from "./pages/cms/products/addProduct/AddProduct";
 import EditProduct from "./pages/cms/products/editProduct/EditProduct";
 import OrderList from "./pages/cms/orders/OrderList";
 import OrderDetails from "./pages/cms/orders/OrderDetails";
+import useAxiosPrivate from "./hooks/useAxiosPrivate";
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const { user, setUser } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
+    async function getUser() {
+      const { data } = await axiosPrivate.get("auth/user");
+      setUser(data);
+      setLoading(false)
+    }
+
+    getUser(); // Get user to perform conditional rendering
+  }, [axiosPrivate, setUser]);
+
 
   /**
    * mini cart state
@@ -134,13 +142,13 @@ function App() {
 
   // ====================================================================================
   // get user from useAuth function
-  const { user } = useAuth();
+  
 
   let adminRoutes = <Route></Route>; // restrict admin routes access to admin/is_staff
   if (user.is_staff) {
     adminRoutes = (
       <React.Fragment>
-        <Route path="/cms">
+        
           {/* products pages */}
           <Route path="products">
             <Route
@@ -167,7 +175,7 @@ function App() {
               element={<OrderDetails options={options} />}
             />
           </Route>
-        </Route>
+        
       </React.Fragment>
     );
 
@@ -239,8 +247,11 @@ function App() {
                 path="/shop/product-details/:id"
                 element={<ProductDetails options={options} />}
               />
+              <Route path="/cms">
+                {adminRoutes}
+              </Route>
               <Route path="*" element={<NotFound options={options} />} />
-              {adminRoutes}
+              
             </Route>
           </Routes>
         </Router>

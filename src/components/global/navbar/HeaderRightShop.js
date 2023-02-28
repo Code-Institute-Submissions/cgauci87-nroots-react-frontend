@@ -8,22 +8,10 @@ import { Tooltip } from "antd";
 // hooks
 import useLogout from "../../../hooks/useLogout";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // HeaderRightShop Component
 function HeaderRightShop({ options }) {
-  const { user, setUser } = useAuth();
-  const axiosPrivate = useAxiosPrivate();
-
-  useEffect(() => {
-    async function getUser() {
-      const { data } = await axiosPrivate.get("auth/user");
-      setUser(data);
-    }
-
-    getUser(); // Get user to perform conditional rendering
-  }, [axiosPrivate, setUser]);
-
+  const { user } = useAuth();
   // ============================================================================================
   let timeOfDay; /* Greeting to be displayed according the time of the day */
   const date = new Date();

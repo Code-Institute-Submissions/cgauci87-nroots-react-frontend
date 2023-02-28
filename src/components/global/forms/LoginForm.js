@@ -65,6 +65,7 @@ function LoginForm() {
         setCSRFToken(response.headers["x-csrftoken"]); // set csrftoken
         toast.success("You are now logged in."); // display toast message
         navigate("/home"); // navigate to home
+        window.location.reload()
       }, 1500);
     } catch (error) {
       if (error.response.status === 401) {
