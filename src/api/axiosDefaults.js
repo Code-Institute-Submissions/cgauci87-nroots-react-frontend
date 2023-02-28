@@ -1,7 +1,6 @@
 import axios  from "axios";
 
 let baseUrl = "https://nroots-drf-api.herokuapp.com/"; // DRF API PRODUCTION
-// let baseUrl = "https://8080-cgauci87-nrootsdrfapi-6m4oduklif1.ws-eu88.gitpod.io/";
 axios.defaults.baseURL = baseUrl;
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";

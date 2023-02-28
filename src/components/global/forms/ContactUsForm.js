@@ -54,7 +54,6 @@ function ContactUsForm() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
-  console.log("contact", user);
   const initial = {
     // saving input values inside of state
     full_name: "",

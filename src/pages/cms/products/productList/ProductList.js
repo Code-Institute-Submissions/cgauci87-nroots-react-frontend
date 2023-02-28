@@ -51,9 +51,8 @@ function ProductList({ options }) {
       let data = response.data.results;
       setCount(response.data.count);
       setProducts(data);
-      console.log(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -192,9 +191,7 @@ function ProductList({ options }) {
     setCurrentPage(e);
   };
 
-  const onTableChange = (paginationConfig, filters, sorter) => {
-    console.log(paginationConfig, filters, sorter);
-
+  const onTableChange = (sorter) => {
     const order = sorter.order !== "ascend" ? "-" : "";
     const column = sorter.field;
     setOrderField(`${order}${column}`);

@@ -50,7 +50,7 @@ function OrderList({ options }) {
       setCount(response.data.count);
       setOrders(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -140,9 +140,7 @@ function OrderList({ options }) {
   const onPaginationChange = (e) => {
     setCurrentPage(e);
   };
-  const onTableChange = (paginationConfig, filters, sorter) => {
-    console.log(paginationConfig, filters, sorter);
-
+  const onTableChange = (sorter) => {
     const order = sorter.order !== "ascend" ? "-" : "";
     const column = sorter.field;
     setOrderField(`${order}${column}`);
